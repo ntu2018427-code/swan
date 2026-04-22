@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ひかりテーマ | ライトワークSWAN</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600;700;800&family=Klee+One:wght@400;600&family=Zen+Old+Mincho:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  :root {
+    --bg-main: #faf4ea;
+    --bg-soft: #f5ebe0;
+    --peach: #fbc9ae;
+    --rose: #ee9d8e;
+    --gold: #d4a858;
+    --gold-deep: #a87a32;
+    --text-main: #5a4530;
+    --text-sub: #8a7560;
+    --text-muted: #b5a590;
+    --border-soft: #ebe0d0;
+  }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: "Shippori Mincho", "Hiragino Mincho ProN", serif;
+    background: var(--bg-main);
+    color: var(--text-main);
+    line-height: 1.95;
+    overflow-x: hidden;
+  }
+
+  .theme-label {
+    position: fixed; top: 14px; left: 14px; z-index: 50;
+    background: rgba(255,255,255,0.92);
+    padding: 8px 18px; border-radius: 50px;
+    font-size: 13px; font-weight: 700; color: var(--gold-deep);
+    letter-spacing: 3px; font-family: "Klee One",serif;
+    box-shadow: 0 4px 14px rgba(168, 122, 50, 0.15);
+  }
+
+  /* ========= Nav ========= */
+  .nav {
+    position: fixed; top:0; left:0; right:0; z-index:100;
+    background: rgba(250, 244, 234, 0.92);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border-soft);
+    padding: 14px 24px;
+  }
+  .nav-inner { max-width:1100px; margin:0 auto; display:flex; align-items:center; justify-content:space-between; }
+  .nav-logo {
+    font-family: "Shippori Mincho", serif;
+    font-size: 17px; font-weight: 700;
+    color: var(--gold-deep); letter-spacing: 3px;
+  }
+  .nav-logo .swan-ico { margin-right:6px; filter:sepia(0.4); }
+  .nav-logo .brand { color: var(--rose); }
+  .nav-menu { display:flex; gap:28px; list-style:none; }
+  .nav-menu a {
+    color: var(--text-sub); text-decoration:none;
+    font-size: 13px; letter-spacing:2px; transition: color 0.2s;
+    font-family: "Zen Old Mincho", serif;
+  }
+  .nav-menu a:hover { color: var(--rose); }
+  @media (max-width: 768px) { .nav-menu { display:none; } }
+
+  /* ========= Hero ========= */
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex; align-items: center; justify-content: center;
+    padding: 140px 20px 80px;
+    overflow: hidden;
+    background:
+      radial-gradient(ellipse 60% 50% at 50% 42%, rgba(255, 220, 180, 0.7), transparent 70%),
+      radial-gradient(ellipse 80% 60% at 30% 70%, rgba(255, 200, 220, 0.5), transparent 65%),
+      radial-gradient(ellipse 70% 60% at 75% 55%, rgba(220, 235, 200, 0.5), transparent 65%),
+      radial-gradient(ellipse 60% 50% at 65% 30%, rgba(200, 220, 255, 0.45), transparent 65%),
+      linear-gradient(180deg, #fdf5e8 0%, #faf4ea 45%, #f5ebe0 100%);
+  }
+  /* ふわふわ粒子 */
+  .hero::before {
+    content:""; position:absolute; inset:0;
+    background:
+      radial-gradient(circle at 22% 30%, rgba(255,255,255,0.5) 1px, transparent 2px),
+      radial-gradient(circle at 78% 40%, rgba(255,255,255,0.5) 1.2px, transparent 2px),
+      radial-gradient(circle at 45% 75%, rgba(255,255,255,0.55) 1.4px, transparent 2.5px),
+      radial-gradient(circle at 85% 80%, rgba(255,255,255,0.45) 1px, transparent 2px),
+      radial-gradient(circle at 15% 65%, rgba(255,255,255,0.5) 1.2px, transparent 2.5px);
+    pointer-events: none;
+  }
+  .hero-inner {
+    position:relative; z-index:2; max-width:900px; width:100%;
+    text-align:center;
+  }
+
+  /* 手のひらと光 */
+  .hands-wrap {
+    position: relative;
+    margin: 0 auto 32px;
+    width: 260px; height: 260px;
+  }
+  .hands-wrap .halo {
+    position: absolute;
+    inset: -30px;
+    border-radius: 50%;
+    background:
+      radial-gradient(circle, rgba(255, 240, 200, 0.95) 0%, rgba(255, 220, 180, 0.55) 35%, transparent 70%);
+    filter: blur(8px);
+    animation: pulse 4s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); opacity: 0.9; }
+    50% { transform: scale(1.08); opacity: 1; }
+  }
+  .hands-wrap .sparkle {
+    position: absolute; top: 20%; left: 50%; transform: translateX(-50%);
+    width: 60px; height: 60px;
+    z-index: 3; filter: drop-shadow(0 0 12px rgba(255,240,200,0.9));
+    animation: twinkle 3s ease-in-out infinite;
+  }
+  @keyframes twinkle {
+    0%, 100% { opacity: 0.85; transform: translateX(-50%) scale(1) rotate(0deg); }
+    50% { opacity: 1; transform: translateX(-50%) scale(1.15) rotate(20deg); }
+  }
+  .hands-wrap .hands {
+    position: absolute; inset: 0;
+    font-size: 180px; line-height: 260px;
+    text-align: center;
+    z-index: 2;
+    filter: drop-shadow(0 8px 18px rgba(190, 140, 80, 0.25));
+  }
+
+  .hero-tag {
+    display: inline-block;
+    font-family: "Klee One", serif;
+    font-size: 14px;
+    color: var(--rose);
+    letter-spacing: 6px;
+    margin-bottom: 20px;
+    text-shadow: 0 2px 10px rgba(255,255,255,0.95);
+  }
+  .hero-tag::before, .hero-tag::after {
+    content: "✦"; color: var(--gold); margin: 0 12px;
+  }
+  .hero-title {
+    font-family: "Shippori Mincho", serif;
+    font-size: clamp(32px, 6.5vw, 54px);
+    font-weight: 700; color: var(--text-main);
+    letter-spacing: 8px; line-height: 1.3;
+    margin-bottom: 10px;
+    text-shadow: 0 2px 10px rgba(255,255,255,0.8);
+  }
+  .hero-title .small { font-size: 0.55em; color: var(--gold-deep); letter-spacing: 6px; }
+  .hero-sub-en {
+    font-family: "Klee One", serif;
+    font-size: clamp(12px, 2vw, 15px);
+    letter-spacing: 8px; color: var(--text-sub);
+    margin-bottom: 30px;
+  }
+
+  .hero-divider {
+    display:flex; align-items:center; justify-content:center;
+    gap:14px; margin:0 auto 28px; max-width:280px; color: var(--gold);
+  }
+  .hero-divider .line {
+    flex:1; height:1px;
+    background: linear-gradient(90deg, transparent, rgba(212, 168, 88, 0.6), transparent);
+  }
+  .hero-divider .star { font-size: 14px; }
+
+  .hero-copy {
+    font-family: "Shippori Mincho", serif;
+    font-size: clamp(17px, 3vw, 23px);
+    font-weight: 500; color: var(--text-main);
+    letter-spacing: 5px; line-height: 2;
+    margin-bottom: 40px;
+    text-shadow: 0 2px 10px rgba(255,255,255,0.85);
+  }
+  .hero-copy .em {
+    color: var(--rose); position: relative; font-weight: 700;
+  }
+  .hero-copy .em::after {
+    content:""; position:absolute; left:-2px; right:-2px; bottom:4px;
+    height:8px; background:rgba(255, 215, 140, 0.6); z-index:-1; border-radius:2px;
+  }
+  .hero-cta {
+    display:inline-block;
+    background: linear-gradient(135deg, var(--rose), var(--peach));
+    color: white; padding: 16px 44px;
+    border-radius: 50px; text-decoration: none;
+    font-family: "Shippori Mincho", serif;
+    font-size: 15px; font-weight: 600; letter-spacing: 4px;
+    box-shadow: 0 8px 24px rgba(238, 157, 142, 0.38);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .hero-cta:hover { transform: translateY(-2px); box-shadow: 0 12px 30px rgba(238, 157, 142, 0.48); }
+
+  /* ========= Section ========= */
+  .section { padding: 100px 24px; }
+  .section-inner { max-width: 900px; margin: 0 auto; }
+  .section-head { text-align: center; margin-bottom: 60px; }
+  .section-label {
+    font-family: "Klee One", serif;
+    font-size: 12px; letter-spacing: 8px;
+    color: var(--gold-deep); margin-bottom: 12px;
+  }
+  .section-title {
+    font-family: "Shippori Mincho", serif;
+    font-size: clamp(26px, 5vw, 34px);
+    font-weight: 700; color: var(--text-main);
+    letter-spacing: 6px; line-height: 1.6; margin-bottom: 14px;
+  }
+  .section-title .ac {
+    color: var(--rose); position: relative;
+  }
+  .section-title .ac::after {
+    content:""; position:absolute; left:-4px; right:-4px; bottom:4px;
+    height:10px; background:rgba(255, 215, 140, 0.55); z-index:-1; border-radius:3px;
+  }
+  .section-desc {
+    font-family: "Zen Old Mincho", serif;
+    font-size: 14px; color: var(--text-sub); line-height: 2.1;
+  }
+
+  /* About */
+  .about { background: linear-gradient(180deg, var(--bg-main) 0%, #fdf7ed 100%); }
+  .about-msg {
+    background: rgba(255, 255, 255, 0.75);
+    backdrop-filter: blur(4px);
+    border-radius: 24px;
+    padding: 54px 44px;
+    box-shadow: 0 16px 50px rgba(168, 122, 50, 0.1);
+    border: 1px solid var(--border-soft);
+    text-align: center;
+  }
+  .about-msg p {
+    font-family: "Shippori Mincho", serif;
+    font-size: 15px; line-height: 2.3;
+    color: var(--text-main); margin-bottom: 18px;
+  }
+  .about-msg .lead {
+    font-family: "Klee One", serif;
+    font-size: 20px; color: var(--gold-deep);
+    font-weight: 600; letter-spacing: 3px;
+  }
+  .about-badges { display:flex; justify-content:center; gap:16px; margin-top:36px; flex-wrap:wrap; }
+  .badge {
+    background: linear-gradient(135deg, #fff4dc, #f5d8a0 70%, #e8b870);
+    padding: 12px 22px; border-radius: 50px;
+    font-family: "Klee One", serif;
+    font-size: 13px; color: #6a4818;
+    font-weight: 700; letter-spacing: 2px;
+    box-shadow: 0 4px 14px rgba(200, 150, 70, 0.25);
+    border: 2px solid white;
+  }
+
+  /* Services */
+  .services { background: var(--bg-main); }
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 24px;
+  }
+  .service-card {
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 20px;
+    padding: 36px 26px;
+    box-shadow: 0 10px 30px rgba(168, 122, 50, 0.1);
+    border: 1px solid var(--border-soft);
+    text-align: center;
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  .service-card:hover { transform: translateY(-6px); box-shadow: 0 18px 40px rgba(168, 122, 50, 0.18); }
+  .service-icon { font-size: 40px; margin-bottom: 14px; filter: drop-shadow(0 4px 10px rgba(200, 150, 70, 0.25)); }
+  .service-name {
+    font-family: "Shippori Mincho", serif;
+    font-size: 18px; font-weight: 700; color: var(--text-main);
+    letter-spacing: 3px; margin-bottom: 10px;
+  }
+  .service-en {
+    font-family: "Klee One", serif;
+    font-size: 11px; letter-spacing: 4px; color: var(--gold);
+    margin-bottom: 16px;
+  }
+  .service-body {
+    font-family: "Zen Old Mincho", serif;
+    font-size: 13px; color: var(--text-sub); line-height: 2.1;
+  }
+
+  /* Footer */
+  .footer { background: #4a3520; color: #e8d8c0; padding: 50px 24px 30px; text-align: center; }
+  .footer-logo { font-family: "Shippori Mincho", serif; font-size: 18px; color: white; letter-spacing: 5px; margin-bottom: 8px; }
+  .footer-en { font-family: "Klee One", serif; font-size: 11px; letter-spacing: 5px; color: #c8b898; margin-bottom: 20px; }
+  .footer-copy { font-size: 11px; color: #a89878; letter-spacing: 2px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1); }
+</style>
+</head>
+<body>
+
+<div class="theme-label">🌅 ひかり</div>
+
+<!-- Nav -->
+<nav class="nav">
+  <div class="nav-inner">
+    <div class="nav-logo"><span class="swan-ico">🤲</span>ライトワーク<span class="brand">SWAN</span></div>
+    <ul class="nav-menu">
+      <li><a href="#about">わたしについて</a></li>
+      <li><a href="#services">鑑定メニュー</a></li>
+      <li><a href="#contact">お問い合わせ</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hands-wrap">
+      <div class="halo"></div>
+      <svg class="sparkle" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="sparkGrad" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#fff8e0"/>
+            <stop offset="50%" stop-color="#ffd890"/>
+            <stop offset="100%" stop-color="#e8a860"/>
+          </linearGradient>
+        </defs>
+        <path d="M30 0 L34 26 L60 30 L34 34 L30 60 L26 34 L0 30 L26 26 Z" fill="url(#sparkGrad)"/>
+      </svg>
+      <div class="hands">🤲</div>
+    </div>
+
+    <div class="hero-tag">そっと、光を灯します</div>
+    <h1 class="hero-title">ライトワーク<br><span class="small">SWAN</span></h1>
+    <div class="hero-sub-en">LIGHTWORK SWAN</div>
+    <div class="hero-divider"><span class="line"></span><span class="star">✦</span><span class="line"></span></div>
+    <p class="hero-copy">
+      あなたの心に<span class="em">あたたかな光</span>を<br>
+      そっと灯す時間を
+    </p>
+    <a href="#contact" class="hero-cta">鑑定のお申し込み ▸</a>
+  </div>
+</section>
+
+<!-- About -->
+<section class="section about" id="about">
+  <div class="section-inner">
+    <div class="section-head">
+      <div class="section-label">A B O U T</div>
+      <h2 class="section-title">やさしく、<span class="ac">照らす</span>鑑定を</h2>
+      <p class="section-desc">算命学 × 数秘術 × 過去世リーディングで<br>あなたの光をお伝えします</p>
+    </div>
+    <div class="about-msg">
+      <p class="lead">はじめまして、ライトワークSWANです。</p>
+      <p>
+        「このままでいいのかな」「自分の本当の気持ちがわからない」<br>
+        そんな心のざわめきに、そっと耳を傾け、<br>
+        導かれるままに15年、占いをしてきました。
+      </p>
+      <p>
+        算命学と数秘術、そして過去世からのメッセージを通して、<br>
+        <strong>未消化な感情を浄化する</strong>お手伝いをします。
+      </p>
+      <div class="about-badges">
+        <div class="badge">鑑定歴 15年</div>
+        <div class="badge">口コミで広がるご縁</div>
+        <div class="badge">完全個別対応</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Services -->
+<section class="section services" id="services">
+  <div class="section-inner">
+    <div class="section-head">
+      <div class="section-label">S E R V I C E S</div>
+      <h2 class="section-title">鑑定<span class="ac">メニュー</span></h2>
+    </div>
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-icon">☀️</div>
+        <div class="service-name">総合鑑定</div>
+        <div class="service-en">TOTAL READING</div>
+        <p class="service-body">算命学・数秘術・過去世を<br>すべて使って、あなたの本質を<br>総合的にひもときます。</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">✨</div>
+        <div class="service-name">お悩み相談</div>
+        <div class="service-en">COUNSELING</div>
+        <p class="service-body">恋愛・人間関係・仕事など<br>いま抱えているお悩みに<br>具体的なアドバイスを。</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🌿</div>
+        <div class="service-name">過去世リーディング</div>
+        <div class="service-en">PAST LIFE</div>
+        <p class="service-body">前世からの縁や課題を読み解き<br>いまを生きるヒントを<br>お伝えします。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer" id="contact">
+  <div class="footer-logo">🤲 ライトワークSWAN</div>
+  <div class="footer-en">LIGHTWORK SWAN ( スワン )</div>
+  <p style="font-size:12px;margin:18px 0;color:#d0c0a0;">これはデザインテーマのプレビューです</p>
+  <div class="footer-copy">© ライトワークSWAN. All rights reserved.</div>
+</footer>
+
+</body>
+</html>

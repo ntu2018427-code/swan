@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>もりテーマ | ライトワークSWAN</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600;700;800&family=Klee+One:wght@400;600&family=Zen+Old+Mincho:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  :root {
+    --bg-main: #f4ebd8;
+    --bg-soft: #ece0c6;
+    --sage: #a8c5a0;
+    --sage-deep: #6a8a60;
+    --forest: #3a5028;
+    --brown: #7a6a4a;
+    --gold: #c9a560;
+    --gold-deep: #8a6a30;
+    --text-main: #3a3020;
+    --text-sub: #6a5a40;
+    --text-muted: #9a8a70;
+    --border-soft: #d8c8a8;
+  }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: "Zen Old Mincho", "Shippori Mincho", "Hiragino Mincho ProN", serif;
+    background: var(--bg-main);
+    color: var(--text-main);
+    line-height: 1.95;
+    overflow-x: hidden;
+  }
+
+  .theme-label {
+    position: fixed; top: 14px; left: 14px; z-index: 50;
+    background: rgba(255,255,255,0.9);
+    padding: 8px 18px; border-radius: 50px;
+    font-size: 13px; font-weight: 700; color: var(--sage-deep);
+    letter-spacing: 3px; font-family: "Klee One",serif;
+    box-shadow: 0 4px 14px rgba(106, 138, 96, 0.18);
+  }
+
+  .nav {
+    position: fixed; top:0; left:0; right:0; z-index:100;
+    background: rgba(244, 235, 216, 0.92);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border-soft);
+    padding: 14px 24px;
+  }
+  .nav-inner { max-width:1100px; margin:0 auto; display:flex; align-items:center; justify-content:space-between; }
+  .nav-logo {
+    font-family: "Zen Old Mincho", serif;
+    font-size: 17px; font-weight: 700;
+    color: var(--forest); letter-spacing: 3px;
+  }
+  .nav-logo .swan-ico { margin-right:6px; }
+  .nav-logo .brand { color: var(--gold-deep); }
+  .nav-menu { display:flex; gap:28px; list-style:none; }
+  .nav-menu a {
+    color: var(--text-sub); text-decoration:none;
+    font-size: 13px; letter-spacing:2px; transition: color 0.2s;
+  }
+  .nav-menu a:hover { color: var(--forest); }
+  @media (max-width: 768px) { .nav-menu { display:none; } }
+
+  /* ========= Hero ========= */
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex; align-items: center; justify-content: center;
+    padding: 140px 20px 80px;
+    overflow: hidden;
+    background:
+      radial-gradient(ellipse 70% 50% at 50% 80%, rgba(168, 197, 160, 0.4), transparent 70%),
+      radial-gradient(ellipse 60% 40% at 15% 30%, rgba(220, 230, 200, 0.6), transparent 70%),
+      radial-gradient(ellipse 60% 40% at 85% 20%, rgba(230, 215, 180, 0.6), transparent 70%),
+      linear-gradient(180deg, #faf3e2 0%, #f4ebd8 50%, #ece0c0 100%);
+  }
+  /* 葉っぱシルエット */
+  .leaf-deco {
+    position: absolute;
+    opacity: 0.4;
+    z-index: 1;
+    pointer-events: none;
+  }
+  .leaf-deco.l1 { top: 8%; left: 6%; width: 110px; transform: rotate(-20deg); }
+  .leaf-deco.l2 { top: 15%; right: 5%; width: 90px; transform: rotate(30deg); }
+  .leaf-deco.l3 { bottom: 10%; left: 8%; width: 80px; transform: rotate(70deg); opacity: 0.3; }
+  .leaf-deco.l4 { bottom: 15%; right: 8%; width: 100px; transform: rotate(-45deg); opacity: 0.35; }
+
+  .hero-inner {
+    position:relative; z-index:2; max-width:900px; width:100%;
+    text-align:center;
+  }
+
+  /* 中央の白鳥＋森 */
+  .center-emblem {
+    position: relative;
+    width: 210px; height: 210px;
+    margin: 0 auto 30px;
+    border-radius: 50%;
+    background:
+      radial-gradient(circle at 50% 40%, #fefaed 0%, #f4ebd8 50%, #e0d0ac 100%);
+    box-shadow:
+      0 10px 30px rgba(106, 138, 96, 0.2),
+      inset 0 -6px 18px rgba(168, 130, 60, 0.15);
+    border: 3px solid rgba(255, 255, 255, 0.85);
+    overflow: hidden;
+  }
+  .center-emblem::before {
+    content:""; position:absolute; inset:0; border-radius:50%;
+    background:
+      radial-gradient(circle at 30% 25%, rgba(255,255,255,0.4), transparent 50%);
+  }
+  .center-emblem .swan-icon {
+    position: absolute;
+    inset: 0; display: flex; align-items: center; justify-content: center;
+    font-size: 80px; line-height: 1;
+    filter: drop-shadow(0 4px 10px rgba(106, 138, 96, 0.25));
+  }
+  .center-emblem .leaves {
+    position: absolute;
+    bottom: 10px;
+    left: 50%; transform: translateX(-50%);
+    font-size: 22px;
+    letter-spacing: 6px;
+    color: var(--sage-deep);
+  }
+
+  .hero-tag {
+    display: inline-block;
+    font-family: "Klee One", serif;
+    font-size: 14px;
+    color: var(--sage-deep);
+    letter-spacing: 6px;
+    margin-bottom: 20px;
+  }
+  .hero-tag::before, .hero-tag::after {
+    content: "❦"; color: var(--gold); margin: 0 12px;
+  }
+  .hero-title {
+    font-family: "Zen Old Mincho", "Shippori Mincho", serif;
+    font-size: clamp(32px, 6.5vw, 54px);
+    font-weight: 700; color: var(--forest);
+    letter-spacing: 10px; line-height: 1.3;
+    margin-bottom: 10px;
+  }
+  .hero-title .small { font-size: 0.55em; color: var(--gold-deep); letter-spacing: 8px; }
+  .hero-sub-en {
+    font-family: "Klee One", serif;
+    font-size: clamp(12px, 2vw, 15px);
+    letter-spacing: 8px; color: var(--sage-deep);
+    margin-bottom: 30px;
+  }
+  .hero-divider {
+    display:flex; align-items:center; justify-content:center;
+    gap:14px; margin:0 auto 28px; max-width:320px; color: var(--gold);
+  }
+  .hero-divider .line {
+    flex:1; height:1px;
+    background: linear-gradient(90deg, transparent, rgba(201, 165, 96, 0.6), transparent);
+  }
+  .hero-divider .leaf { font-size: 16px; }
+
+  .hero-copy {
+    font-family: "Shippori Mincho", serif;
+    font-size: clamp(18px, 3vw, 24px);
+    font-weight: 500; color: var(--text-main);
+    letter-spacing: 6px; line-height: 2;
+    margin-bottom: 40px;
+  }
+  .hero-copy .em {
+    color: var(--forest); position: relative; font-weight: 700;
+  }
+  .hero-copy .em::after {
+    content:""; position:absolute; left:-2px; right:-2px; bottom:4px;
+    height:10px; background:rgba(201, 165, 96, 0.45); z-index:-1; border-radius:3px;
+  }
+
+  .hero-cta {
+    display:inline-block;
+    background: linear-gradient(135deg, var(--forest), var(--sage-deep));
+    color: white; padding: 16px 44px;
+    border-radius: 50px; text-decoration: none;
+    font-family: "Zen Old Mincho", serif;
+    font-size: 15px; font-weight: 600; letter-spacing: 4px;
+    box-shadow: 0 8px 24px rgba(58, 80, 40, 0.3);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .hero-cta:hover { transform: translateY(-2px); box-shadow: 0 12px 30px rgba(58, 80, 40, 0.42); }
+
+  /* ========= Section ========= */
+  .section { padding: 100px 24px; }
+  .section-inner { max-width: 900px; margin: 0 auto; }
+  .section-head { text-align: center; margin-bottom: 60px; }
+  .section-label {
+    font-family: "Klee One", serif;
+    font-size: 12px; letter-spacing: 8px;
+    color: var(--gold-deep); margin-bottom: 12px;
+  }
+  .section-title {
+    font-family: "Zen Old Mincho", "Shippori Mincho", serif;
+    font-size: clamp(26px, 5vw, 34px);
+    font-weight: 700; color: var(--forest);
+    letter-spacing: 8px; line-height: 1.6; margin-bottom: 14px;
+  }
+  .section-title .ac {
+    color: var(--gold-deep); position: relative;
+  }
+  .section-title .ac::after {
+    content:""; position:absolute; left:-4px; right:-4px; bottom:4px;
+    height:10px; background:rgba(201, 165, 96, 0.4); z-index:-1; border-radius:3px;
+  }
+  .section-desc { font-size: 14px; color: var(--text-sub); line-height: 2.1; }
+
+  /* About */
+  .about { background: linear-gradient(180deg, var(--bg-main) 0%, #eddfc0 100%); }
+  .about-msg {
+    background: rgba(255, 253, 244, 0.9);
+    border-radius: 4px;
+    padding: 54px 44px;
+    box-shadow: 0 16px 50px rgba(106, 138, 96, 0.15);
+    border: 1px solid var(--border-soft);
+    text-align: center;
+    position: relative;
+  }
+  /* 和紙風の角 */
+  .about-msg::before, .about-msg::after {
+    content:""; position:absolute; width:24px; height:24px;
+    border: 2px solid var(--gold);
+  }
+  .about-msg::before { top:-1px; left:-1px; border-right: none; border-bottom: none; }
+  .about-msg::after { bottom:-1px; right:-1px; border-left: none; border-top: none; }
+  .about-msg p {
+    font-size: 15px; line-height: 2.3;
+    color: var(--text-main); margin-bottom: 18px;
+  }
+  .about-msg .lead {
+    font-family: "Klee One", serif;
+    font-size: 20px; color: var(--forest);
+    font-weight: 600; letter-spacing: 3px;
+  }
+  .about-badges { display:flex; justify-content:center; gap:16px; margin-top:36px; flex-wrap:wrap; }
+  .badge {
+    background: linear-gradient(135deg, #fff4dc, #f5d8a0 70%, #e8b870);
+    padding: 12px 22px; border-radius: 6px;
+    font-size: 13px; color: #6a4818;
+    font-weight: 700; letter-spacing: 2px;
+    box-shadow: 0 4px 14px rgba(200, 150, 70, 0.25);
+    border: 2px solid white;
+  }
+
+  /* Services */
+  .services { background: var(--bg-main); }
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 24px;
+  }
+  .service-card {
+    background: rgba(255, 253, 244, 0.9);
+    border-radius: 6px;
+    padding: 36px 26px;
+    box-shadow: 0 10px 30px rgba(106, 138, 96, 0.12);
+    border: 1px solid var(--border-soft);
+    text-align: center;
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  .service-card:hover { transform: translateY(-6px); box-shadow: 0 18px 40px rgba(106, 138, 96, 0.22); }
+  .service-icon { font-size: 40px; margin-bottom: 14px; }
+  .service-name {
+    font-family: "Zen Old Mincho", serif;
+    font-size: 18px; font-weight: 700; color: var(--forest);
+    letter-spacing: 3px; margin-bottom: 10px;
+  }
+  .service-en { font-family: "Klee One",serif; font-size: 11px; letter-spacing: 4px; color: var(--gold-deep); margin-bottom: 16px; }
+  .service-body { font-size: 13px; color: var(--text-sub); line-height: 2.1; }
+
+  /* Footer */
+  .footer { background: var(--forest); color: #d8e0c8; padding: 50px 24px 30px; text-align: center; }
+  .footer-logo { font-family: "Zen Old Mincho", serif; font-size: 18px; color: white; letter-spacing: 5px; margin-bottom: 8px; }
+  .footer-en { font-family: "Klee One", serif; font-size: 11px; letter-spacing: 5px; color: #b8c8a8; margin-bottom: 20px; }
+  .footer-copy { font-size: 11px; color: #98a888; letter-spacing: 2px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1); }
+</style>
+</head>
+<body>
+
+<div class="theme-label">🌿 もり</div>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <div class="nav-logo"><span class="swan-ico">🌿</span>ライトワーク<span class="brand">SWAN</span></div>
+    <ul class="nav-menu">
+      <li><a href="#about">わたしについて</a></li>
+      <li><a href="#services">鑑定メニュー</a></li>
+      <li><a href="#contact">お問い合わせ</a></li>
+    </ul>
+  </div>
+</nav>
+
+<section class="hero">
+  <svg class="leaf-deco l1" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+    <path d="M 50 10 C 75 20, 85 55, 70 85 C 55 70, 35 60, 25 35 C 30 25, 40 15, 50 10 Z" fill="#a8c5a0"/>
+    <path d="M 50 10 Q 50 50, 50 85" stroke="#6a8a60" stroke-width="1" fill="none"/>
+  </svg>
+  <svg class="leaf-deco l2" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+    <path d="M 50 10 C 75 20, 85 55, 70 85 C 55 70, 35 60, 25 35 C 30 25, 40 15, 50 10 Z" fill="#c9a560"/>
+  </svg>
+  <svg class="leaf-deco l3" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+    <path d="M 50 10 C 75 20, 85 55, 70 85 C 55 70, 35 60, 25 35 C 30 25, 40 15, 50 10 Z" fill="#7a6a4a"/>
+  </svg>
+  <svg class="leaf-deco l4" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+    <path d="M 50 10 C 75 20, 85 55, 70 85 C 55 70, 35 60, 25 35 C 30 25, 40 15, 50 10 Z" fill="#a8c5a0"/>
+  </svg>
+
+  <div class="hero-inner">
+    <div class="center-emblem">
+      <div class="swan-icon">🦢</div>
+      <div class="leaves">🌿 🍃 🌿</div>
+    </div>
+
+    <div class="hero-tag">森のような静かさで</div>
+    <h1 class="hero-title">ライトワーク<br><span class="small">SWAN</span></h1>
+    <div class="hero-sub-en">LIGHTWORK SWAN</div>
+    <div class="hero-divider"><span class="line"></span><span class="leaf">🍃</span><span class="line"></span></div>
+    <p class="hero-copy">
+      心の根っこに<span class="em">静けさ</span>を<br>
+      取り戻す時間を
+    </p>
+    <a href="#contact" class="hero-cta">鑑定のお申し込み ▸</a>
+  </div>
+</section>
+
+<section class="section about" id="about">
+  <div class="section-inner">
+    <div class="section-head">
+      <div class="section-label">A B O U T</div>
+      <h2 class="section-title">根を下ろす、<span class="ac">静けさ</span>の鑑定を</h2>
+      <p class="section-desc">算命学 × 数秘術 × 過去世リーディングで<br>あなたの本質と、これからの歩み方をお伝えします</p>
+    </div>
+    <div class="about-msg">
+      <p class="lead">はじめまして、ライトワークSWANです。</p>
+      <p>
+        「このままでいいのかな」「自分の本当の気持ちがわからない」<br>
+        そんな心のざわめきに、そっと耳を傾け、<br>
+        導かれるままに15年、占いをしてきました。
+      </p>
+      <p>
+        算命学と数秘術、そして過去世からのメッセージを通して、<br>
+        <strong>未消化な感情を浄化する</strong>お手伝いをします。
+      </p>
+      <div class="about-badges">
+        <div class="badge">鑑定歴 15年</div>
+        <div class="badge">口コミで広がるご縁</div>
+        <div class="badge">完全個別対応</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section services" id="services">
+  <div class="section-inner">
+    <div class="section-head">
+      <div class="section-label">S E R V I C E S</div>
+      <h2 class="section-title">鑑定<span class="ac">メニュー</span></h2>
+    </div>
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-icon">🌳</div>
+        <div class="service-name">総合鑑定</div>
+        <div class="service-en">TOTAL READING</div>
+        <p class="service-body">算命学・数秘術・過去世を<br>すべて使って、あなたの本質を<br>総合的にひもときます。</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🍃</div>
+        <div class="service-name">お悩み相談</div>
+        <div class="service-en">COUNSELING</div>
+        <p class="service-body">恋愛・人間関係・仕事など<br>いま抱えているお悩みに<br>具体的なアドバイスを。</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🌿</div>
+        <div class="service-name">過去世リーディング</div>
+        <div class="service-en">PAST LIFE</div>
+        <p class="service-body">前世からの縁や課題を読み解き<br>いまを生きるヒントを<br>お伝えします。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer" id="contact">
+  <div class="footer-logo">🌿 ライトワークSWAN</div>
+  <div class="footer-en">LIGHTWORK SWAN ( スワン )</div>
+  <p style="font-size:12px;margin:18px 0;color:#c8d8b8;">これはデザインテーマのプレビューです</p>
+  <div class="footer-copy">© ライトワークSWAN. All rights reserved.</div>
+</footer>
+
+</body>
+</html>
