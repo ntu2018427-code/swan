@@ -649,6 +649,69 @@
   }
   .form-status.ok { color: #5a9a6a; }
 
+  /* ========= ココナラボタン ========= */
+  .or-divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    margin: 36px auto 24px;
+    max-width: 620px;
+  }
+  .or-divider::before,
+  .or-divider::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(170, 150, 200, 0.35), transparent);
+  }
+  .or-divider span {
+    font-size: 12px;
+    color: var(--text-muted);
+    letter-spacing: 4px;
+    font-family: "Klee One", serif;
+  }
+  .coconala-wrap {
+    max-width: 620px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .coconala-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    background: linear-gradient(135deg, #ffab8a, #ff8566);
+    color: white;
+    padding: 15px 34px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    box-shadow: 0 8px 22px rgba(255, 133, 102, 0.28);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .coconala-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 28px rgba(255, 133, 102, 0.38);
+  }
+  .coconala-btn .badge {
+    background: white;
+    color: #ff7a5a;
+    font-size: 11px;
+    padding: 3px 10px;
+    border-radius: 20px;
+    letter-spacing: 1px;
+    font-weight: 800;
+  }
+  .coconala-note {
+    font-size: 12px;
+    color: var(--text-sub);
+    margin-top: 14px;
+    line-height: 1.9;
+  }
+
   /* ========= フッター ========= */
   .footer {
     background: #2a2060;
@@ -956,6 +1019,18 @@
       <p class="contact-note">
         ※ 送信ボタンを押すと、お使いのメールアプリが起動し、入力内容が自動で反映されます。<br>
         そのまま送信していただければ、鑑定士のもとに届きます。
+      </p>
+    </div>
+
+    <div class="or-divider"><span>または</span></div>
+
+    <div class="coconala-wrap">
+      <a href="https://coconala.com/users/4436868" target="_blank" rel="noopener" class="coconala-btn">
+        <span class="badge">ココナラ</span>
+        <span>ココナラから依頼する ▸</span>
+      </a>
+      <p class="coconala-note">
+        ココナラのアカウントをお持ちの方、匿名でのご相談をご希望の方はこちらも便利です
       </p>
     </div>
   </div>
