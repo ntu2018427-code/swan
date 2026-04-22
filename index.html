@@ -889,13 +889,28 @@
         </div>
 
         <div class="field">
-          <label for="cf-dob">生年月日 <span class="optional">任意（鑑定時にお伺いします）</span></label>
-          <input id="cf-dob" name="dob" type="text" placeholder="例: 1970年3月15日">
+          <label for="cf-dob">生年月日 <span class="required">必須</span></label>
+          <input id="cf-dob" name="dob" type="text" required placeholder="例: 1970年3月15日">
         </div>
 
         <div class="field">
-          <label for="cf-pref">お住まいの都道府県 <span class="optional">任意</span></label>
-          <select id="cf-pref" name="pref">
+          <label for="cf-age">ご年齢 <span class="optional">任意</span></label>
+          <select id="cf-age" name="age">
+            <option value="">— 選択してください —</option>
+            <option>10代</option>
+            <option>20代</option>
+            <option>30代</option>
+            <option>40代</option>
+            <option>50代</option>
+            <option>60代</option>
+            <option>70代</option>
+            <option>80代以上</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="cf-pref">お住まいの都道府県 <span class="required">必須</span></label>
+          <select id="cf-pref" name="pref" required>
             <option value="">— 選択してください —</option>
             <option>北海道</option><option>青森県</option><option>岩手県</option><option>宮城県</option><option>秋田県</option><option>山形県</option><option>福島県</option>
             <option>茨城県</option><option>栃木県</option><option>群馬県</option><option>埼玉県</option><option>千葉県</option><option>東京都</option><option>神奈川県</option>
@@ -910,8 +925,8 @@
         </div>
 
         <div class="field">
-          <label for="cf-menu">ご希望の鑑定 <span class="optional">任意</span></label>
-          <select id="cf-menu" name="menu">
+          <label for="cf-menu">ご希望の鑑定 <span class="required">必須</span></label>
+          <select id="cf-menu" name="menu" required>
             <option value="">— 選択してください —</option>
             <option value="総合鑑定">総合鑑定</option>
             <option value="お悩み相談">お悩み相談</option>
@@ -976,12 +991,13 @@
         const kana = (fd.get('kana') || '').trim();
         const email = (fd.get('email') || '').trim();
         const dob = (fd.get('dob') || '').trim();
+        const age = (fd.get('age') || '').trim();
         const pref = (fd.get('pref') || '').trim();
         const mnu = (fd.get('menu') || '').trim();
         const msg = (fd.get('message') || '').trim();
 
-        if (!name || !kana || !email || !msg) {
-          status.textContent = '⚠ 必須項目（お名前・ふりがな・メール・ご相談内容）を入力してください。';
+        if (!name || !kana || !email || !dob || !pref || !mnu || !msg) {
+          status.textContent = '⚠ すべての項目を入力してください。';
           status.className = 'form-status';
           return;
         }
@@ -1002,13 +1018,16 @@ ${kana}
 ${email}
 
 ■ 生年月日
-${dob || '—'}
+${dob}
+
+■ ご年齢
+${age || '—'}
 
 ■ お住まいの都道府県
-${pref || '—'}
+${pref}
 
 ■ ご希望の鑑定
-${mnu || '—'}
+${mnu}
 
 ■ ご相談内容
 ${msg}
