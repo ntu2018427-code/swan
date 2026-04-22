@@ -545,6 +545,103 @@
     text-shadow: 0 1px 6px rgba(255,255,255,0.85);
   }
 
+  /* ========= 問い合わせフォーム ========= */
+  .contact-form-wrap {
+    max-width: 620px;
+    margin: 0 auto;
+    background: white;
+    border-radius: 24px;
+    padding: 40px 36px;
+    box-shadow: 0 16px 50px rgba(150, 130, 180, 0.18);
+    border: 1px solid var(--border-soft);
+    text-align: left;
+  }
+  .contact-form .field {
+    margin-bottom: 20px;
+  }
+  .contact-form label {
+    display: block;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--text-main);
+    margin-bottom: 8px;
+    letter-spacing: 1px;
+  }
+  .contact-form label .required {
+    color: var(--pink-deep);
+    font-size: 11px;
+    margin-left: 6px;
+    font-weight: 500;
+  }
+  .contact-form label .optional {
+    color: var(--text-muted);
+    font-size: 11px;
+    margin-left: 6px;
+    font-weight: 500;
+  }
+  .contact-form input,
+  .contact-form select,
+  .contact-form textarea {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1.5px solid var(--border-soft);
+    border-radius: 10px;
+    font-size: 14px;
+    font-family: inherit;
+    color: var(--text-main);
+    background: #fafaff;
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .contact-form input:focus,
+  .contact-form select:focus,
+  .contact-form textarea:focus {
+    outline: none;
+    border-color: var(--purple-light);
+    background: white;
+  }
+  .contact-form textarea {
+    resize: vertical;
+    min-height: 130px;
+    line-height: 1.8;
+  }
+  .contact-form .submit-row {
+    text-align: center;
+    margin-top: 8px;
+  }
+  .contact-form .submit-btn {
+    background: linear-gradient(135deg, #8a7cc8, #b0a0d8);
+    color: white;
+    padding: 16px 44px;
+    border-radius: 50px;
+    border: none;
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    font-family: inherit;
+    cursor: pointer;
+    box-shadow: 0 8px 24px rgba(130, 115, 190, 0.32);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .contact-form .submit-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 30px rgba(130, 115, 190, 0.42);
+  }
+  .contact-note {
+    font-size: 12px;
+    color: var(--text-sub);
+    text-align: center;
+    margin-top: 18px;
+    line-height: 1.9;
+  }
+  .form-status {
+    font-size: 13px;
+    text-align: center;
+    margin-top: 14px;
+    min-height: 20px;
+    color: var(--text-sub);
+  }
+  .form-status.ok { color: #5a9a6a; }
+
   /* ========= フッター ========= */
   .footer {
     background: #2a2060;
@@ -763,7 +860,7 @@
   </div>
 </section>
 
-<!-- CTA -->
+<!-- Contact -->
 <section class="cta-section" id="contact">
   <div class="cta-inner">
     <h2 class="cta-title">
@@ -773,7 +870,51 @@
       はじめての方も、どうぞ肩の力を抜いて。<br>
       ご相談内容は、完全に秘密をお守りします。
     </p>
-    <a href="mailto:info@example.com" class="hero-cta">メールでお問い合わせ ▸</a>
+
+    <div class="contact-form-wrap">
+      <form class="contact-form" id="contactForm" novalidate>
+        <div class="field">
+          <label for="cf-name">お名前 <span class="required">必須</span></label>
+          <input id="cf-name" name="name" type="text" required placeholder="例: 山田 花子">
+        </div>
+
+        <div class="field">
+          <label for="cf-email">メールアドレス <span class="required">必須</span></label>
+          <input id="cf-email" name="email" type="email" required placeholder="例: hanako@example.com">
+        </div>
+
+        <div class="field">
+          <label for="cf-dob">生年月日 <span class="optional">任意（鑑定時にお伺いします）</span></label>
+          <input id="cf-dob" name="dob" type="text" placeholder="例: 1970年3月15日">
+        </div>
+
+        <div class="field">
+          <label for="cf-menu">ご希望の鑑定 <span class="optional">任意</span></label>
+          <select id="cf-menu" name="menu">
+            <option value="">— 選択してください —</option>
+            <option value="総合鑑定">総合鑑定</option>
+            <option value="お悩み相談">お悩み相談</option>
+            <option value="過去世リーディング">過去世リーディング</option>
+            <option value="まだ決まっていない / 相談したい">まだ決まっていない / 相談したい</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="cf-message">ご相談内容 <span class="required">必須</span></label>
+          <textarea id="cf-message" name="message" required placeholder="気になっていること、ご質問など、どうぞ気軽にお書きください。"></textarea>
+        </div>
+
+        <div class="submit-row">
+          <button type="submit" class="submit-btn">入力内容を確認して送信 ▸</button>
+        </div>
+        <div class="form-status" id="formStatus"></div>
+      </form>
+
+      <p class="contact-note">
+        ※ 送信ボタンを押すと、お使いのメールアプリが起動し、入力内容が自動で反映されます。<br>
+        そのまま送信していただければ、鑑定士のもとに届きます。
+      </p>
+    </div>
   </div>
 </section>
 
@@ -785,20 +926,72 @@
 </footer>
 
 <script>
+  // ▼ 送信先メールアドレス（お母さまのアドレスに変更してください）
+  const CONTACT_EMAIL = 'info@example.com';
+
   (function(){
     const toggle = document.getElementById('navToggle');
     const menu = document.getElementById('navMenu');
-    if (!toggle || !menu) return;
-    toggle.addEventListener('click', () => {
-      toggle.classList.toggle('open');
-      menu.classList.toggle('open');
-    });
-    menu.querySelectorAll('a').forEach(a => {
-      a.addEventListener('click', () => {
-        toggle.classList.remove('open');
-        menu.classList.remove('open');
+    if (toggle && menu) {
+      toggle.addEventListener('click', () => {
+        toggle.classList.toggle('open');
+        menu.classList.toggle('open');
       });
-    });
+      menu.querySelectorAll('a').forEach(a => {
+        a.addEventListener('click', () => {
+          toggle.classList.remove('open');
+          menu.classList.remove('open');
+        });
+      });
+    }
+
+    const form = document.getElementById('contactForm');
+    const status = document.getElementById('formStatus');
+    if (form) {
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const fd = new FormData(form);
+        const name = (fd.get('name') || '').trim();
+        const email = (fd.get('email') || '').trim();
+        const dob = (fd.get('dob') || '').trim();
+        const mnu = (fd.get('menu') || '').trim();
+        const msg = (fd.get('message') || '').trim();
+
+        if (!name || !email || !msg) {
+          status.textContent = '⚠ 必須項目（お名前・メール・ご相談内容）を入力してください。';
+          status.className = 'form-status';
+          return;
+        }
+
+        const subject = `【鑑定のお問い合わせ】${name} 様`;
+        const body =
+`━━━━━━━━━━━━━━━━━━━━
+ライトワークSWAN HP からのお問い合わせ
+━━━━━━━━━━━━━━━━━━━━
+
+■ お名前
+${name}
+
+■ メールアドレス
+${email}
+
+■ 生年月日
+${dob || '—'}
+
+■ ご希望の鑑定
+${mnu || '—'}
+
+■ ご相談内容
+${msg}
+
+━━━━━━━━━━━━━━━━━━━━`;
+
+        const mailto = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+        status.textContent = '✓ メールアプリを起動しています…';
+        status.className = 'form-status ok';
+        window.location.href = mailto;
+      });
+    }
   })();
 </script>
 
