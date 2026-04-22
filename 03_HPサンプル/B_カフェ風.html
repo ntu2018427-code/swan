@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ライトワークSWAN | ほっとひと息、心のお茶会</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --bg: #fdf6ed;
+    --bg-warm: #f8ead4;
+    --card: #ffffff;
+    --text: #4a3728;
+    --text-soft: #8c7560;
+    --accent: #d9a679;
+    --accent-deep: #b87d4f;
+    --pink: #edb8b8;
+    --mint: #a8cfb0;
+  }
+
+  body {
+    font-family: "Zen Maru Gothic", "Hiragino Maru Gothic ProN", sans-serif;
+    color: var(--text);
+    line-height: 1.9;
+    background: var(--bg);
+    overflow-x: hidden;
+  }
+
+  /* 暖かみのあるドットパターン */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    background-image:
+      radial-gradient(circle at 15% 20%, rgba(217, 166, 121, 0.08) 0%, transparent 30%),
+      radial-gradient(circle at 85% 70%, rgba(237, 184, 184, 0.08) 0%, transparent 30%),
+      radial-gradient(circle at 50% 50%, rgba(168, 207, 176, 0.05) 0%, transparent 40%);
+    z-index: 0;
+  }
+
+  main { position: relative; z-index: 1; }
+
+  /* ========== Hero ========== */
+  .hero {
+    padding: 100px 20px 80px;
+    text-align: center;
+    position: relative;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  .hero-tag {
+    display: inline-block;
+    background: var(--bg-warm);
+    color: var(--accent-deep);
+    font-size: 13px;
+    padding: 6px 20px;
+    border-radius: 50px;
+    letter-spacing: 3px;
+    font-weight: 500;
+    margin-bottom: 30px;
+  }
+  .hero-swans {
+    position: relative;
+    display: inline-block;
+    margin-bottom: 30px;
+  }
+  .hero-swans .bubble {
+    position: absolute;
+    background: white;
+    padding: 14px 24px;
+    border-radius: 30px;
+    font-size: 15px;
+    color: var(--accent-deep);
+    font-weight: 500;
+    box-shadow: 0 4px 16px rgba(184, 125, 79, 0.15);
+    white-space: nowrap;
+  }
+  .hero-swans .bubble-left {
+    top: 20px;
+    left: -140px;
+    transform: rotate(-5deg);
+  }
+  .hero-swans .bubble-left::after {
+    content: "";
+    position: absolute;
+    right: -10px;
+    top: 50%;
+    transform: translateY(-50%);
+    border: 10px solid transparent;
+    border-left-color: white;
+  }
+  .hero-swans .bubble-right {
+    top: 20px;
+    right: -140px;
+    transform: rotate(5deg);
+  }
+  .hero-swans .bubble-right::after {
+    content: "";
+    position: absolute;
+    left: -10px;
+    top: 50%;
+    transform: translateY(-50%);
+    border: 10px solid transparent;
+    border-right-color: white;
+  }
+  .hero-swans .swans {
+    font-size: 110px;
+    filter: drop-shadow(0 6px 20px rgba(184, 125, 79, 0.2));
+  }
+  .hero-swans .swan-left { display: inline-block; transform: scaleX(-1); }
+  .hero-swans .swan-right { display: inline-block; }
+
+  .hero h1 {
+    font-size: 42px;
+    color: var(--text);
+    font-weight: 700;
+    letter-spacing: 3px;
+    margin-bottom: 20px;
+    line-height: 1.5;
+  }
+  .hero h1 .wavy {
+    background: linear-gradient(transparent 65%, var(--pink) 65%);
+    padding: 0 4px;
+  }
+  .hero-sub {
+    font-size: 17px;
+    color: var(--text-soft);
+    line-height: 2;
+  }
+
+  /* 波の装飾 */
+  .wave-divider {
+    display: block;
+    margin: 0 auto;
+    width: 80px;
+    text-align: center;
+    font-size: 24px;
+    color: var(--accent);
+    letter-spacing: 8px;
+  }
+
+  /* ========== Self Intro ========== */
+  .intro {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 60px 20px;
+  }
+  .intro-label {
+    text-align: center;
+    font-size: 13px;
+    color: var(--accent);
+    letter-spacing: 6px;
+    margin-bottom: 10px;
+    font-weight: 500;
+  }
+  .intro-title {
+    text-align: center;
+    font-size: 28px;
+    color: var(--text);
+    font-weight: 700;
+    margin-bottom: 50px;
+    letter-spacing: 3px;
+  }
+  .intro-box {
+    background: var(--card);
+    border-radius: 28px;
+    padding: 50px 50px;
+    box-shadow: 0 6px 30px rgba(184, 125, 79, 0.08);
+    position: relative;
+  }
+  .intro-box::before {
+    content: "🦢";
+    position: absolute;
+    top: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--card);
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 36px;
+    box-shadow: 0 4px 16px rgba(184, 125, 79, 0.12);
+  }
+  .intro-box p {
+    font-size: 15px;
+    margin-bottom: 18px;
+    color: var(--text);
+    line-height: 2.1;
+  }
+  .intro-box p:first-of-type {
+    margin-top: 30px;
+  }
+  .intro-box .highlight {
+    background: linear-gradient(transparent 60%, #ffe6e6 60%);
+    padding: 0 4px;
+    font-weight: 500;
+  }
+  .intro-sig {
+    text-align: right;
+    margin-top: 30px;
+    color: var(--accent-deep);
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: 2px;
+  }
+
+  /* ========== For You (悩み) ========== */
+  .troubles {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 60px 20px;
+  }
+  .troubles-intro {
+    text-align: center;
+    font-size: 17px;
+    color: var(--text);
+    margin-bottom: 40px;
+    line-height: 2;
+  }
+  .troubles-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+  .trouble {
+    background: var(--card);
+    padding: 20px 24px;
+    border-radius: 16px;
+    display: flex;
+    gap: 14px;
+    align-items: center;
+    box-shadow: 0 3px 14px rgba(184, 125, 79, 0.06);
+    font-size: 14px;
+  }
+  .trouble-swan {
+    flex-shrink: 0;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: var(--bg-warm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+  }
+
+  /* ========== Service ========== */
+  .services {
+    background: linear-gradient(180deg, var(--bg) 0%, var(--bg-warm) 100%);
+    padding: 80px 20px;
+    margin-top: 60px;
+  }
+  .services-inner {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  .service-cards {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+    margin-top: 40px;
+  }
+  .svc {
+    background: var(--card);
+    border-radius: 24px;
+    padding: 36px 28px;
+    text-align: center;
+    box-shadow: 0 6px 24px rgba(184, 125, 79, 0.1);
+    position: relative;
+    overflow: hidden;
+  }
+  .svc-swan-wrap {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 16px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #fef0e0, #ffe8e8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 40px;
+  }
+  .svc-label {
+    display: inline-block;
+    background: var(--bg-warm);
+    color: var(--accent-deep);
+    font-size: 11px;
+    padding: 3px 14px;
+    border-radius: 20px;
+    letter-spacing: 2px;
+    margin-bottom: 12px;
+    font-weight: 500;
+  }
+  .svc-name {
+    font-size: 18px;
+    color: var(--text);
+    font-weight: 700;
+    margin-bottom: 12px;
+    letter-spacing: 1px;
+  }
+  .svc-desc {
+    font-size: 13px;
+    color: var(--text-soft);
+    line-height: 1.9;
+    text-align: left;
+  }
+
+  /* ========== Flow ========== */
+  .flow {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 80px 20px;
+  }
+  .flow-step {
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    gap: 30px;
+    align-items: center;
+    margin-bottom: 24px;
+    padding: 28px;
+    background: var(--card);
+    border-radius: 20px;
+    box-shadow: 0 4px 18px rgba(184, 125, 79, 0.06);
+    transition: transform 0.2s;
+  }
+  .flow-step:hover { transform: translateX(4px); }
+  .flow-swan-num {
+    position: relative;
+    width: 80px;
+    height: 80px;
+  }
+  .flow-swan-num .swan-bg {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 56px;
+    opacity: 0.3;
+  }
+  .flow-swan-num .num {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--accent-deep);
+  }
+  .flow-content h4 {
+    font-size: 17px;
+    color: var(--text);
+    margin-bottom: 6px;
+    font-weight: 700;
+  }
+  .flow-content p {
+    font-size: 14px;
+    color: var(--text-soft);
+    line-height: 1.8;
+  }
+
+  /* ========== Schedule ========== */
+  .schedule {
+    background: linear-gradient(135deg, #fef0e8 0%, #fbe4d2 100%);
+    padding: 80px 20px;
+  }
+  .schedule-inner {
+    max-width: 640px;
+    margin: 0 auto;
+    background: var(--card);
+    border-radius: 28px;
+    padding: 50px 40px;
+    text-align: center;
+    box-shadow: 0 10px 40px rgba(184, 125, 79, 0.12);
+    position: relative;
+  }
+  .schedule-inner::before {
+    content: "";
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50px;
+    height: 50px;
+    background: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(184, 125, 79, 0.15);
+  }
+  .schedule-inner::after {
+    content: "🦢";
+    position: absolute;
+    top: -18px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 28px;
+  }
+  .schedule-head {
+    font-size: 16px;
+    color: var(--accent-deep);
+    margin: 20px 0 20px;
+    font-weight: 500;
+  }
+  .schedule-time {
+    font-size: 22px;
+    color: var(--text);
+    margin: 10px 0;
+    font-weight: 700;
+    letter-spacing: 2px;
+  }
+  .schedule-note {
+    font-size: 13px;
+    color: var(--text-soft);
+    margin-top: 24px;
+    line-height: 1.9;
+  }
+  .price-tag {
+    margin-top: 28px;
+    display: inline-block;
+    background: linear-gradient(135deg, var(--accent), var(--accent-deep));
+    color: white;
+    padding: 16px 40px;
+    border-radius: 50px;
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    box-shadow: 0 6px 20px rgba(184, 125, 79, 0.3);
+  }
+  .price-tag small { font-size: 16px; }
+
+  /* ========== CTA ========== */
+  .cta {
+    padding: 80px 20px;
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto;
+  }
+  .cta-swans {
+    font-size: 80px;
+    margin-bottom: 20px;
+    filter: drop-shadow(0 4px 12px rgba(184, 125, 79, 0.2));
+  }
+  .cta-swans .swan-left { display: inline-block; transform: scaleX(-1); }
+  .cta-swans .swan-right { display: inline-block; }
+  .cta h2 {
+    font-size: 28px;
+    color: var(--text);
+    margin-bottom: 16px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    line-height: 1.6;
+  }
+  .cta p {
+    font-size: 15px;
+    color: var(--text-soft);
+    margin-bottom: 36px;
+    line-height: 2;
+  }
+  .cta-btn {
+    display: inline-block;
+    background: linear-gradient(135deg, var(--accent), var(--accent-deep));
+    color: white;
+    padding: 20px 56px;
+    border-radius: 60px;
+    font-size: 17px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-decoration: none;
+    box-shadow: 0 10px 30px rgba(184, 125, 79, 0.35);
+    transition: transform 0.2s;
+  }
+  .cta-btn:hover { transform: translateY(-3px); }
+
+  /* ========== Footer ========== */
+  footer {
+    background: var(--text);
+    color: rgba(255,255,255,0.7);
+    text-align: center;
+    padding: 40px 20px;
+    font-size: 13px;
+  }
+  footer .swans {
+    font-size: 32px;
+    margin-bottom: 12px;
+  }
+  footer .swan-left { display: inline-block; transform: scaleX(-1); }
+  footer .swan-right { display: inline-block; }
+
+  @media (max-width: 720px) {
+    .hero h1 { font-size: 28px; letter-spacing: 2px; }
+    .hero-swans .swans { font-size: 80px; }
+    .hero-swans .bubble-left { top: -20px; left: -20px; }
+    .hero-swans .bubble-right { top: -20px; right: -20px; }
+    .hero-swans .bubble-left::after, .hero-swans .bubble-right::after { display: none; }
+    .intro-box { padding: 40px 24px; }
+    .intro-title { font-size: 22px; }
+    .troubles-grid { grid-template-columns: 1fr; }
+    .service-cards { grid-template-columns: 1fr; }
+    .flow-step { grid-template-columns: 64px 1fr; gap: 16px; padding: 20px; }
+    .flow-swan-num { width: 64px; height: 64px; }
+    .flow-swan-num .swan-bg { font-size: 42px; }
+    .flow-swan-num .num { font-size: 24px; }
+  }
+</style>
+</head>
+<body>
+
+<main>
+
+<!-- Hero -->
+<div class="hero">
+  <div class="hero-tag">ひとりで抱えこまなくて、いいんです</div>
+  <div class="hero-swans">
+    <div class="bubble bubble-left">話してみる？</div>
+    <div class="bubble bubble-right">うん、大丈夫。</div>
+    <div class="swans">
+      <span class="swan-left">🦢</span><span class="swan-right">🦢</span>
+    </div>
+  </div>
+  <h1>ほっとひと息、<br><span class="wavy">心のお茶会</span>へ。</h1>
+  <p class="hero-sub">
+    算命学 × 深層心理 × 過去世リーディングで、<br>
+    あなたの"本当の気持ち"と"宿命"に寄り添います。
+  </p>
+</div>
+
+<div class="wave-divider">• • •</div>
+
+<!-- Self Intro -->
+<section class="intro">
+  <p class="intro-label">ABOUT ME</p>
+  <h2 class="intro-title">はじめまして</h2>
+  <div class="intro-box">
+    <p>
+      このページにたどり着いてくださって、ありがとうございます。<br>
+      ライトワークSWANと申します。
+    </p>
+    <p>
+      スピリチュアルリーディングと、古代中国から伝わる
+      <span class="highlight">算命学</span>を用いて、
+      あなたの宿命・天命をひもとくお手伝いをしています。
+    </p>
+    <p>
+      わたしは長いあいだ、自分の気持ちにうまく向き合えず、
+      いつも<span class="highlight">心のどこかにモヤモヤ</span>を抱えて過ごしていました。
+    </p>
+    <p>
+      ある時、スピリチュアルな学びと出会い、
+      自分の深層心理や過去世に触れたことで、
+      <span class="highlight">ふっと心が軽くなる体験</span>をしたんです。
+    </p>
+    <p>
+      「あのときのわたしみたいに、ひとりで苦しんでいる誰かの、
+      小さな拠り所になりたい」——
+      そんな想いで、この活動を始めました。
+    </p>
+    <p>
+      うまく話せなくて大丈夫。<br>
+      泣いても、黙っても、大丈夫。<br>
+      白鳥がそっと寄り添うように、一緒にお話ししましょう。
+    </p>
+    <p class="intro-sig">— ライトワーク SWAN</p>
+  </div>
+</section>
+
+<!-- Troubles -->
+<section class="troubles">
+  <p class="intro-label">FOR YOU</p>
+  <h2 class="intro-title">こんなお気持ち、ありませんか？</h2>
+  <p class="troubles-intro">
+    ひとつでも心に響くものがあれば、<br>ぜひお話しにいらしてください。
+  </p>
+  <div class="troubles-grid">
+    <div class="trouble"><div class="trouble-swan">🦢</div>理由はわからないけど、心がザワザワする</div>
+    <div class="trouble"><div class="trouble-swan">🦢</div>人間関係で同じパターンを繰り返してしまう</div>
+    <div class="trouble"><div class="trouble-swan">🦢</div>自分の気持ちが、自分でもわからない</div>
+    <div class="trouble"><div class="trouble-swan">🦢</div>家族や友達には話せないことがある</div>
+    <div class="trouble"><div class="trouble-swan">🦢</div>理由のない涙や不安に悩まされる</div>
+    <div class="trouble"><div class="trouble-swan">🦢</div>"本当の自分"を見つけたい</div>
+  </div>
+</section>
+
+<!-- Services -->
+<div class="services">
+  <div class="services-inner">
+    <p class="intro-label">SERVICE</p>
+    <h2 class="intro-title">ご用意しているお話の時間</h2>
+    <div class="service-cards">
+      <div class="svc">
+        <div class="svc-swan-wrap">🦢</div>
+        <p class="svc-label">MENU 01</p>
+        <h3 class="svc-name">算命学鑑定</h3>
+        <p class="svc-desc">
+          生まれた日から導かれる宿命の星を読み解き、あなたの本質・才能・運命のリズムをお伝えします。
+          「自分らしさ」のヒントがきっと見つかります。
+        </p>
+      </div>
+      <div class="svc">
+        <div class="svc-swan-wrap">🦢</div>
+        <p class="svc-label">MENU 02</p>
+        <h3 class="svc-name">深層心理リーディング</h3>
+        <p class="svc-desc">
+          心の奥にある"本当の気持ち"を、そっと読み解きます。
+          自分でも気づかなかった想いに出会える、やさしい時間です。
+        </p>
+      </div>
+      <div class="svc">
+        <div class="svc-swan-wrap">🦢</div>
+        <p class="svc-label">MENU 03</p>
+        <h3 class="svc-name">過去世リーディング</h3>
+        <p class="svc-desc">
+          繰り返される悩みの根っこが、過去世にあることも。
+          魂の物語をひもとくことで、すとんと腑に落ちる瞬間があります。
+        </p>
+      </div>
+      <div class="svc">
+        <div class="svc-swan-wrap">🦢</div>
+        <p class="svc-label">MENU 04</p>
+        <h3 class="svc-name">感情の浄化</h3>
+        <p class="svc-desc">
+          未消化のまま溜まっていた想いを、やさしく手放すお手伝い。
+          話し終わったあとの、ふわっと軽くなる感覚を大切にしています。
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Flow -->
+<section class="flow">
+  <p class="intro-label">FLOW</p>
+  <h2 class="intro-title">お話の流れ</h2>
+  <div class="flow-step">
+    <div class="flow-swan-num">
+      <span class="swan-bg">🦢</span>
+      <span class="num">1</span>
+    </div>
+    <div class="flow-content">
+      <h4>まずはご挨拶から</h4>
+      <p>緊張せず、ふつうの会話のように始められたら嬉しいです。</p>
+    </div>
+  </div>
+  <div class="flow-step">
+    <div class="flow-swan-num">
+      <span class="swan-bg">🦢</span>
+      <span class="num">2</span>
+    </div>
+    <div class="flow-content">
+      <h4>お気持ちを聞かせてください</h4>
+      <p>うまく言葉にならなくても大丈夫。ゆっくりで構いません。</p>
+    </div>
+  </div>
+  <div class="flow-step">
+    <div class="flow-swan-num">
+      <span class="swan-bg">🦢</span>
+      <span class="num">3</span>
+    </div>
+    <div class="flow-content">
+      <h4>リーディング</h4>
+      <p>心の奥や過去世の記憶から、感じ取ったことをお伝えします。</p>
+    </div>
+  </div>
+  <div class="flow-step">
+    <div class="flow-swan-num">
+      <span class="swan-bg">🦢</span>
+      <span class="num">4</span>
+    </div>
+    <div class="flow-content">
+      <h4>やさしいメッセージ</h4>
+      <p>これからを歩いていくためのヒントを、そっとお渡しします。</p>
+    </div>
+  </div>
+</section>
+
+<!-- Schedule -->
+<div class="schedule">
+  <div class="schedule-inner">
+    <p class="schedule-head">お話しできる時間</p>
+    <p class="schedule-time">午後 1:00 〜 4:00</p>
+    <p class="schedule-time">午後 7:00 〜 11:00</p>
+    <p class="schedule-note">
+      ※ 上記以外の時間もご相談に応じます。<br>
+      できるかぎりあなたに合わせてお話しします。
+    </p>
+    <div class="price-tag">100<small> 円/分</small></div>
+  </div>
+</div>
+
+<!-- CTA -->
+<section class="cta">
+  <div class="cta-swans">
+    <span class="swan-left">🦢</span><span class="swan-right">🦢</span>
+  </div>
+  <h2>ゆっくり、お話ししませんか？</h2>
+  <p>
+    白鳥がそっと寄り添うように、<br>
+    あなたのお話を静かに聴かせてください。
+  </p>
+  <a href="#" class="cta-btn">お話を申し込む</a>
+</section>
+
+</main>
+
+<footer>
+  <div class="swans">
+    <span class="swan-left">🦢</span><span class="swan-right">🦢</span>
+  </div>
+  <p>© 2026 ライトワーク SWAN</p>
+  <p style="margin-top:6px;opacity:0.6;">ここに来てくれて、ありがとう。</p>
+</footer>
+
+</body>
+</html>

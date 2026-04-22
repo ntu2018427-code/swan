@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>表紙サムネ 4パターン【白鳥画像入り】</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;600;700&family=Klee+One:wght@400;600&family=Zen+Maru+Gothic:wght@400;500;700;900&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/html-to-image@1.11.11/dist/html-to-image.min.js"></script>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    margin: 0;
+    padding: 40px 20px;
+    background: #f5f0fa;
+    font-family: "Zen Maru Gothic", "Hiragino Sans", sans-serif;
+    color: #4a3b4a;
+  }
+  .page-header { text-align: center; margin-bottom: 40px; }
+  .page-header h1 {
+    font-size: 24px; color: #6a5a9e; margin-bottom: 10px;
+    letter-spacing: 3px; font-weight: 500;
+  }
+  .page-header p { font-size: 13px; color: #7a6a9a; line-height: 1.9; }
+  .gallery { max-width: 1100px; margin: 0 auto; display: grid; gap: 30px; }
+  .item {
+    background: white; border-radius: 20px; overflow: hidden;
+    box-shadow: 0 12px 40px rgba(150, 120, 200, 0.18);
+  }
+  .item-header { padding: 20px 24px; border-bottom: 1px solid #f0e8f8; }
+  .item-tag {
+    display: inline-block; font-size: 11px; padding: 4px 14px;
+    background: linear-gradient(135deg, #f0e0f5, #f5d0e5);
+    color: #8a5a9e; border-radius: 20px;
+    letter-spacing: 2px; margin-bottom: 8px; font-weight: 600;
+  }
+  .item-title {
+    font-size: 18px; color: #5a3a5a; font-weight: 700;
+    margin-bottom: 4px; letter-spacing: 1px;
+  }
+  .item-sub { font-size: 13px; color: #8a7a9a; line-height: 1.8; }
+  .thumb-area { padding: 24px; background: #faf5fc; overflow: auto; }
+  .thumb-preview-wrapper {
+    width: 100%; max-width: 700px; margin: 0 auto;
+    position: relative; aspect-ratio: 1200/630;
+  }
+  .thumb-preview-wrapper .thumb {
+    transform: scale(0.58); transform-origin: top left;
+    position: absolute; top: 0; left: 0;
+  }
+  @media (max-width: 768px) { .thumb-preview-wrapper .thumb { transform: scale(0.36); } }
+  @media (max-width: 480px) { .thumb-preview-wrapper .thumb { transform: scale(0.27); } }
+  .thumb {
+    width: 1200px; height: 630px; position: relative;
+    overflow: hidden; border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  }
+  .download-area {
+    padding: 20px 24px; text-align: center; background: white;
+    border-top: 1px solid #f0e8f8;
+  }
+  .download-btn {
+    display: inline-block;
+    background: linear-gradient(135deg, #6a5ac8, #9878d0);
+    color: white; padding: 13px 38px; border-radius: 50px;
+    font-size: 14px; font-weight: 600; letter-spacing: 3px;
+    border: none; cursor: pointer;
+    box-shadow: 0 6px 20px rgba(106, 90, 200, 0.3);
+    transition: transform 0.2s;
+  }
+  .download-btn:hover { transform: translateY(-2px); }
+  .download-btn:disabled { opacity: 0.5; cursor: wait; }
+  .status {
+    margin-top: 8px; font-size: 12px; color: #8a7a9a; min-height: 16px;
+  }
+  .status.success { color: #4a9a6a; }
+
+  /* ============ 共通：白鳥画像背景 ============ */
+  .bg-swans {
+    background:
+      linear-gradient(180deg,
+        rgba(232, 242, 245, 0.85) 0%,
+        rgba(200, 230, 240, 0.25) 12%,
+        transparent 25%,
+        transparent 60%,
+        rgba(200, 220, 240, 0.35) 75%,
+        rgba(180, 170, 215, 0.8) 95%,
+        rgba(170, 160, 210, 0.9) 100%),
+      url('/swans.jpg') center 22% / cover no-repeat,
+      linear-gradient(180deg, #d8ecf2 0%, #5ac3d8 50%, #7a78bc 100%);
+  }
+  .bg-swans-darker {
+    background:
+      linear-gradient(180deg,
+        rgba(40, 30, 80, 0.25) 0%,
+        rgba(100, 90, 160, 0.15) 20%,
+        transparent 40%,
+        transparent 60%,
+        rgba(80, 70, 140, 0.25) 85%,
+        rgba(60, 50, 120, 0.45) 100%),
+      url('/swans.jpg') center 25% / cover no-repeat,
+      linear-gradient(180deg, #d8ecf2 0%, #5ac3d8 50%, #7a78bc 100%);
+  }
+  .bg-swans-left {
+    background:
+      linear-gradient(90deg,
+        rgba(254, 248, 236, 0.95) 0%,
+        rgba(254, 248, 236, 0.7) 35%,
+        rgba(254, 248, 236, 0.1) 55%,
+        transparent 65%),
+      linear-gradient(180deg,
+        transparent 0%,
+        rgba(80, 100, 160, 0.2) 100%),
+      url('/swans.jpg') center 22% / cover no-repeat,
+      linear-gradient(180deg, #d8ecf2 0%, #5ac3d8 50%, #7a78bc 100%);
+  }
+  .bg-swans-frame {
+    background:
+      linear-gradient(180deg,
+        rgba(70, 60, 130, 0.7) 0%,
+        rgba(70, 60, 130, 0.3) 10%,
+        transparent 25%,
+        transparent 75%,
+        rgba(70, 60, 130, 0.5) 95%,
+        rgba(70, 60, 130, 0.75) 100%),
+      url('/swans.jpg') center 22% / cover no-repeat,
+      linear-gradient(180deg, #d8ecf2 0%, #5ac3d8 50%, #7a78bc 100%);
+  }
+
+  /* 星のキラキラ */
+  .stars {
+    position: absolute; inset: 0; pointer-events: none; z-index: 1;
+    background-image:
+      radial-gradient(2px 2px at 8% 10%, rgba(255,255,255,0.9), transparent),
+      radial-gradient(1.5px 1.5px at 18% 18%, rgba(255,255,255,0.8), transparent),
+      radial-gradient(2px 2px at 88% 15%, rgba(255,255,255,0.9), transparent),
+      radial-gradient(1.5px 1.5px at 92% 22%, rgba(255,255,255,0.8), transparent),
+      radial-gradient(2px 2px at 15% 85%, rgba(255,255,255,0.7), transparent),
+      radial-gradient(1.5px 1.5px at 85% 88%, rgba(255,255,255,0.7), transparent);
+  }
+
+  /* ======== 共通：ソフトゴールドバッジ ======== */
+  .badge-gold {
+    width: 122px; height: 122px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    z-index: 5;
+  }
+  .badge-gold::before {
+    content: "";
+    position: absolute; inset: 0;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #fff4d4, #f5d89a 60%, #e8b878 100%);
+    box-shadow: 0 6px 20px rgba(80, 50, 10, 0.4), inset 0 2px 4px rgba(255,255,255,0.6);
+    border: 2px solid white;
+  }
+  .badge-gold::after {
+    content: "";
+    position: absolute; inset: 8px;
+    border-radius: 50%;
+    border: 1.5px dashed rgba(120,80,30,0.4);
+  }
+  .badge-gold > * { position: relative; z-index: 2; }
+  .badge-gold .top {
+    font-family: "Shippori Mincho", serif; font-size: 13px;
+    font-weight: 700; color: #5a3a10; letter-spacing: 2px;
+  }
+  .badge-gold .num {
+    font-family: "Shippori Mincho", serif; font-size: 52px;
+    font-weight: 800; color: #3a2a0a; line-height: 0.95;
+    margin: 2px 0;
+  }
+  .badge-gold .bot {
+    font-family: "Shippori Mincho", serif; font-size: 12px;
+    font-weight: 700; color: #5a3a10; letter-spacing: 4px;
+  }
+
+  /* ===========================================================
+   *【α】上下バランス型（現行ベース）
+   * =========================================================== */
+  .t-alpha .badge-gold { top: 28px; right: 28px; transform: rotate(5deg); }
+  .t-alpha .top-keywords {
+    position: absolute; top: 38px; left: 50%; transform: translateX(-50%);
+    display: flex; gap: 10px; align-items: center; z-index: 4;
+    padding-right: 140px;
+  }
+  .t-alpha .kw {
+    background: rgba(255, 255, 255, 0.92);
+    padding: 8px 22px; border-radius: 50px;
+    font-family: "Shippori Mincho", serif;
+    font-size: 20px; font-weight: 700;
+    color: #2a2060; letter-spacing: 3px;
+    box-shadow: 0 4px 12px rgba(40, 30, 100, 0.2);
+    border: 1.5px solid rgba(232, 201, 120, 0.6);
+    white-space: nowrap;
+  }
+  .t-alpha .kw-dot { color: #e8a840; font-size: 14px; }
+  .t-alpha .main-card {
+    position: absolute;
+    bottom: 120px; left: 50%; transform: translateX(-50%);
+    background: linear-gradient(135deg, rgba(254,250,240,0.97), rgba(254,245,232,0.97));
+    padding: 24px 56px;
+    border-radius: 16px;
+    box-shadow: 0 14px 40px rgba(40, 30, 100, 0.35), inset 0 0 0 2px rgba(232, 201, 120, 0.6);
+    text-align: center;
+    z-index: 4;
+  }
+  .t-alpha .main-card::before {
+    content: "❁"; position: absolute;
+    top: -18px; left: 50%; transform: translateX(-50%);
+    font-size: 26px; color: #d8487a;
+    background: #fef8ec; padding: 0 12px; border-radius: 50%;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  }
+  .t-alpha .main-card .l1 {
+    font-family: "Klee One", serif;
+    font-size: 26px; font-weight: 600;
+    color: #5a3a6a; letter-spacing: 5px;
+    margin-bottom: 12px; white-space: nowrap;
+  }
+  .t-alpha .main-card .l2 {
+    font-family: "Shippori Mincho", serif;
+    font-size: 60px; font-weight: 800;
+    color: #2a2060; letter-spacing: 8px;
+    line-height: 1.15; white-space: nowrap;
+  }
+  .t-alpha .main-card .l2 .ac {
+    color: #c8487a; position: relative;
+  }
+  .t-alpha .main-card .l2 .ac::after {
+    content: ""; position: absolute; left: -4px; right: -4px; bottom: 6px;
+    height: 12px; background: rgba(255, 210, 120, 0.45);
+    z-index: -1; border-radius: 3px;
+  }
+  .t-alpha .tagline {
+    position: absolute; bottom: 58px; left: 50%; transform: translateX(-50%);
+    font-family: "Klee One", serif; font-size: 22px; font-weight: 600;
+    color: white; letter-spacing: 6px; white-space: nowrap; z-index: 4;
+    text-shadow: 0 2px 10px rgba(30, 20, 80, 0.7);
+  }
+  .t-alpha .tagline .mark { color: #ffd890; margin: 0 10px; }
+  .t-alpha .author {
+    position: absolute; bottom: 22px; left: 50%; transform: translateX(-50%);
+    font-family: "Shippori Mincho", serif;
+    color: rgba(255,255,255,0.95);
+    font-size: 16px; letter-spacing: 7px; font-weight: 600;
+    text-shadow: 0 2px 8px rgba(30, 20, 80, 0.7); z-index: 4;
+  }
+
+  /* ===========================================================
+   *【β】縦書き風・左寄せ型（縦リボン）
+   * =========================================================== */
+  .t-beta .badge-gold { top: 30px; right: 30px; transform: rotate(5deg); }
+  .t-beta .left-panel {
+    position: absolute;
+    top: 0; left: 0; bottom: 0; width: 500px;
+    background: linear-gradient(135deg,
+      rgba(254, 248, 236, 0.95) 0%,
+      rgba(254, 245, 232, 0.88) 70%,
+      rgba(254, 245, 232, 0.6) 100%);
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 50px 40px;
+    border-right: 2px solid rgba(232, 201, 120, 0.5);
+  }
+  .t-beta .left-panel::before {
+    content: "";
+    position: absolute; top: 30px; right: -6px;
+    width: 10px; height: 10px; border-radius: 50%;
+    background: #e8c878;
+    box-shadow: 0 0 10px rgba(232, 201, 120, 0.8);
+  }
+  .t-beta .tagline-top {
+    font-family: "Klee One", serif; font-size: 22px; font-weight: 600;
+    color: #6a4a7a; letter-spacing: 5px;
+    margin-bottom: 24px; white-space: nowrap;
+  }
+  .t-beta .tagline-top::before,
+  .t-beta .tagline-top::after {
+    content: "❁"; color: #d8487a; margin: 0 8px;
+  }
+  .t-beta .main-l1 {
+    font-family: "Shippori Mincho", serif; font-size: 26px; font-weight: 500;
+    color: #6a4a7a; letter-spacing: 5px; margin-bottom: 20px;
+    white-space: nowrap;
+  }
+  .t-beta .main-l1::before,
+  .t-beta .main-l1::after {
+    content: "〜"; color: #d8487a; margin: 0 6px;
+  }
+  .t-beta .main-l2 {
+    font-family: "Shippori Mincho", serif; font-size: 54px; font-weight: 800;
+    color: #2a2060; letter-spacing: 8px; line-height: 1.2;
+    margin-bottom: 40px;
+  }
+  .t-beta .main-l2 .ac {
+    color: #c8487a; position: relative;
+  }
+  .t-beta .main-l2 .ac::after {
+    content: ""; position: absolute; left: -4px; right: -4px; bottom: 4px;
+    height: 10px; background: rgba(255, 210, 120, 0.5);
+    z-index: -1; border-radius: 3px;
+  }
+  .t-beta .kw-stack {
+    display: flex; flex-direction: column; gap: 8px;
+  }
+  .t-beta .kw-stack .kw {
+    font-family: "Shippori Mincho", serif;
+    font-size: 20px; font-weight: 700;
+    color: #3a2a5a; letter-spacing: 3px;
+    padding: 6px 18px;
+    background: white; display: inline-block;
+    align-self: flex-start;
+    border-radius: 50px;
+    box-shadow: 0 3px 10px rgba(40, 30, 100, 0.1);
+    border: 1px solid rgba(232, 201, 120, 0.5);
+  }
+  .t-beta .kw-stack .kw::before {
+    content: "❁ "; color: #d8487a; font-size: 14px;
+  }
+  .t-beta .author-beta {
+    position: absolute; bottom: 30px; right: 30px;
+    font-family: "Shippori Mincho", serif;
+    color: white; font-size: 18px; letter-spacing: 6px; font-weight: 600;
+    text-shadow: 0 2px 10px rgba(30, 20, 80, 0.7); z-index: 4;
+  }
+
+  /* ===========================================================
+   *【γ】リボン装飾型（上下リボン）
+   * =========================================================== */
+  .t-gamma .top-ribbon {
+    position: absolute; top: 0; left: 0; right: 0;
+    background: linear-gradient(135deg, #fef8ec, #fef3dc);
+    padding: 16px 40px; text-align: center;
+    box-shadow: 0 4px 14px rgba(40, 30, 100, 0.15);
+    border-bottom: 3px solid #e8c878;
+    z-index: 4;
+    height: 68px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+  }
+  .t-gamma .top-ribbon .kw {
+    font-family: "Shippori Mincho", serif;
+    font-size: 24px; font-weight: 700;
+    color: #2a2060; letter-spacing: 4px;
+    white-space: nowrap;
+  }
+  .t-gamma .top-ribbon .kw-dot {
+    color: #d8487a; font-size: 16px;
+  }
+  .t-gamma .badge-gold { top: 90px; right: 30px; transform: rotate(5deg); }
+  .t-gamma .main-center {
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+    text-align: center; z-index: 3; white-space: nowrap;
+    padding-top: 20px;
+  }
+  .t-gamma .main-center .l1 {
+    font-family: "Klee One", serif; font-size: 28px; font-weight: 600;
+    color: #fef8ec; letter-spacing: 6px; margin-bottom: 18px;
+    text-shadow: 0 3px 14px rgba(30, 20, 80, 0.85), 0 0 20px rgba(30, 20, 80, 0.5);
+  }
+  .t-gamma .main-center .l2 {
+    font-family: "Shippori Mincho", serif; font-size: 84px; font-weight: 800;
+    color: white; letter-spacing: 10px; line-height: 1.1;
+    text-shadow: 0 4px 20px rgba(30, 20, 80, 0.85), 0 0 30px rgba(30, 20, 80, 0.5);
+  }
+  .t-gamma .main-center .l2 .ac {
+    color: #ffd890;
+  }
+  .t-gamma .bottom-ribbon {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    background: linear-gradient(135deg, #fef8ec, #fef3dc);
+    padding: 16px 40px; text-align: center;
+    box-shadow: 0 -4px 14px rgba(40, 30, 100, 0.15);
+    border-top: 3px solid #e8c878;
+    z-index: 4;
+    height: 68px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+  }
+  .t-gamma .bottom-ribbon .tag {
+    font-family: "Klee One", serif; font-size: 22px; font-weight: 600;
+    color: #6a4a7a; letter-spacing: 5px; white-space: nowrap;
+  }
+  .t-gamma .bottom-ribbon .tag::before,
+  .t-gamma .bottom-ribbon .tag::after {
+    content: "❁"; color: #d8487a; margin: 0 10px;
+  }
+  .t-gamma .bottom-ribbon .divider {
+    width: 1px; height: 20px; background: #d8a0c0;
+  }
+  .t-gamma .bottom-ribbon .author {
+    font-family: "Shippori Mincho", serif;
+    font-size: 16px; font-weight: 700;
+    color: #2a2060; letter-spacing: 6px;
+  }
+
+  /* ===========================================================
+   *【δ】フレーム型（お手紙封筒風）
+   * =========================================================== */
+  .t-delta::before {
+    content: "";
+    position: absolute; inset: 28px;
+    border: 2px solid rgba(232, 201, 120, 0.75);
+    border-radius: 10px;
+    pointer-events: none;
+    z-index: 3;
+  }
+  .t-delta::after {
+    content: "";
+    position: absolute; inset: 36px;
+    border: 1px solid rgba(232, 201, 120, 0.5);
+    border-radius: 6px;
+    pointer-events: none;
+    z-index: 3;
+  }
+  .t-delta .corner {
+    position: absolute; color: #e8c878; font-size: 28px;
+    text-shadow: 0 2px 6px rgba(0,0,0,0.2); z-index: 4;
+  }
+  .t-delta .c-tl { top: 20px; left: 20px; }
+  .t-delta .c-tr { top: 20px; right: 20px; }
+  .t-delta .c-bl { bottom: 20px; left: 20px; }
+  .t-delta .c-br { bottom: 20px; right: 20px; }
+  .t-delta .badge-gold { top: 52px; left: 52px; transform: rotate(-6deg); }
+  .t-delta .top-label {
+    position: absolute;
+    top: 60px; left: 50%; transform: translateX(-50%);
+    font-family: "Klee One", serif; font-size: 22px; font-weight: 600;
+    color: white; letter-spacing: 8px; white-space: nowrap; z-index: 4;
+    text-shadow: 0 2px 10px rgba(30, 20, 80, 0.8);
+  }
+  .t-delta .top-label .mark { color: #ffd890; margin: 0 10px; }
+  .t-delta .main-frame {
+    position: absolute; bottom: 130px; left: 50%; transform: translateX(-50%);
+    text-align: center; z-index: 4;
+    padding: 16px 60px;
+    background: linear-gradient(180deg, rgba(254, 250, 240, 0.92), rgba(254, 245, 232, 0.92));
+    border-radius: 6px;
+    box-shadow: 0 10px 30px rgba(40, 30, 100, 0.3);
+  }
+  .t-delta .main-frame::before,
+  .t-delta .main-frame::after {
+    position: absolute; font-size: 40px;
+    color: rgba(216, 72, 122, 0.7);
+    font-family: "Shippori Mincho", serif;
+  }
+  .t-delta .main-frame::before {
+    content: "❝"; top: -6px; left: 14px;
+  }
+  .t-delta .main-frame::after {
+    content: "❞"; bottom: -24px; right: 14px;
+  }
+  .t-delta .main-frame .l1 {
+    font-family: "Klee One", serif; font-size: 22px; font-weight: 600;
+    color: #6a4a7a; letter-spacing: 5px; margin-bottom: 10px;
+    white-space: nowrap;
+  }
+  .t-delta .main-frame .l2 {
+    font-family: "Shippori Mincho", serif; font-size: 58px; font-weight: 800;
+    color: #2a2060; letter-spacing: 8px; line-height: 1.15;
+    white-space: nowrap;
+  }
+  .t-delta .main-frame .l2 .ac {
+    color: #c8487a; position: relative;
+  }
+  .t-delta .kw-bottom {
+    position: absolute; bottom: 70px; left: 50%; transform: translateX(-50%);
+    display: flex; gap: 12px; align-items: center; z-index: 4;
+  }
+  .t-delta .kw-bottom .kw {
+    font-family: "Shippori Mincho", serif;
+    font-size: 20px; font-weight: 700;
+    color: white; letter-spacing: 3px;
+    padding: 5px 18px;
+    background: rgba(40, 30, 90, 0.55);
+    border-radius: 50px;
+    white-space: nowrap;
+    border: 1px solid rgba(232, 201, 120, 0.6);
+    text-shadow: 0 1px 4px rgba(0,0,0,0.3);
+  }
+  .t-delta .kw-bottom .dot { color: #ffd890; font-size: 14px; }
+  .t-delta .author-delta {
+    position: absolute; bottom: 36px; left: 50%; transform: translateX(-50%);
+    font-family: "Shippori Mincho", serif;
+    color: rgba(255,255,255,0.95);
+    font-size: 15px; letter-spacing: 6px; font-weight: 600; z-index: 4;
+    text-shadow: 0 2px 8px rgba(30, 20, 80, 0.7);
+  }
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <h1>🦢 表紙サムネ 4パターン【白鳥画像入り】</h1>
+  <p>お母様の白鳥画像を背景に、4つの異なる構図で作成しました</p>
+</div>
+
+<div class="gallery">
+
+  <!-- 【α】上下バランス型 -->
+  <div class="item">
+    <div class="item-header">
+      <span class="item-tag">α ★上下バランス型</span>
+      <div class="item-title">【α】上にキーワード、下にメイン</div>
+      <div class="item-sub">白鳥が主役。上にキーワード、下にクリームカードで安定の構成</div>
+    </div>
+    <div class="thumb-area">
+      <div class="thumb-preview-wrapper">
+        <div id="thumb-alpha" class="thumb t-alpha bg-swans">
+          <div class="stars"></div>
+          <div class="badge-gold">
+            <div class="top">鑑定歴</div><div class="num">15</div><div class="bot">YEARS</div>
+          </div>
+          <div class="top-keywords">
+            <div class="kw">算命学</div>
+            <div class="kw-dot">❁</div>
+            <div class="kw">数秘術</div>
+            <div class="kw-dot">❁</div>
+            <div class="kw">過去世リーディング</div>
+          </div>
+          <div class="main-card">
+            <div class="l1">〜 心のモヤモヤを、やさしくひもとく 〜</div>
+            <div class="l2">あなたの<span class="ac">"本質"</span>をひもときます</div>
+          </div>
+          <div class="tagline"><span class="mark">❁</span>やさしく寄り添う、心の相談<span class="mark">❁</span></div>
+          <div class="author">LIGHTWORK SWAN</div>
+        </div>
+      </div>
+    </div>
+    <div class="download-area">
+      <button class="download-btn" data-target="thumb-alpha" data-name="α-上下バランス">📥 PNGダウンロード</button>
+      <div class="status" id="status-thumb-alpha"></div>
+    </div>
+  </div>
+
+  <!-- 【β】左パネル型 -->
+  <div class="item">
+    <div class="item-header">
+      <span class="item-tag">β ★左パネル型</span>
+      <div class="item-title">【β】左に情報、右に白鳥</div>
+      <div class="item-sub">クリーム色の左パネルにじっくり情報を配置。白鳥は右側で主張</div>
+    </div>
+    <div class="thumb-area">
+      <div class="thumb-preview-wrapper">
+        <div id="thumb-beta" class="thumb t-beta bg-swans-left">
+          <div class="stars"></div>
+          <div class="left-panel">
+            <div class="tagline-top">やさしく寄り添う、心の相談</div>
+            <div class="main-l1">心のモヤモヤを、ひもとく</div>
+            <div class="main-l2">あなたの<span class="ac">"本質"</span>を<br>ひもときます</div>
+            <div class="kw-stack">
+              <div class="kw">算命学</div>
+              <div class="kw">数秘術</div>
+              <div class="kw">過去世リーディング</div>
+            </div>
+          </div>
+          <div class="badge-gold">
+            <div class="top">鑑定歴</div><div class="num">15</div><div class="bot">YEARS</div>
+          </div>
+          <div class="author-beta">LIGHTWORK SWAN</div>
+        </div>
+      </div>
+    </div>
+    <div class="download-area">
+      <button class="download-btn" data-target="thumb-beta" data-name="β-左パネル">📥 PNGダウンロード</button>
+      <div class="status" id="status-thumb-beta"></div>
+    </div>
+  </div>
+
+  <!-- 【γ】インパクト型（大文字中央） -->
+  <div class="item">
+    <div class="item-header">
+      <span class="item-tag">γ ★インパクト型</span>
+      <div class="item-title">【γ】大きな文字が主役</div>
+      <div class="item-sub">メインコピーを白鳥の上に大きく載せて、目を引く。上下リボンで情報整理</div>
+    </div>
+    <div class="thumb-area">
+      <div class="thumb-preview-wrapper">
+        <div id="thumb-gamma" class="thumb t-gamma bg-swans-darker">
+          <div class="stars"></div>
+          <div class="top-ribbon">
+            <span class="kw">算命学</span>
+            <span class="kw-dot">❁</span>
+            <span class="kw">数秘術</span>
+            <span class="kw-dot">❁</span>
+            <span class="kw">過去世リーディング</span>
+          </div>
+          <div class="badge-gold">
+            <div class="top">鑑定歴</div><div class="num">15</div><div class="bot">YEARS</div>
+          </div>
+          <div class="main-center">
+            <div class="l1">〜 心のモヤモヤを、ひもとく 〜</div>
+            <div class="l2">あなたの<span class="ac">"本質"</span>を視ます</div>
+          </div>
+          <div class="bottom-ribbon">
+            <span class="tag">やさしく寄り添う、心の相談</span>
+            <span class="divider"></span>
+            <span class="author">LIGHTWORK SWAN</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="download-area">
+      <button class="download-btn" data-target="thumb-gamma" data-name="γ-インパクト">📥 PNGダウンロード</button>
+      <div class="status" id="status-thumb-gamma"></div>
+    </div>
+  </div>
+
+  <!-- 【δ】お手紙封筒型 -->
+  <div class="item">
+    <div class="item-header">
+      <span class="item-tag">δ ★お手紙封筒型</span>
+      <div class="item-title">【δ】金の額縁に収めた、お手紙のような佇まい</div>
+      <div class="item-sub">全体を金の額縁で囲み、ホテルのしおりのような上品さ。四隅に装飾</div>
+    </div>
+    <div class="thumb-area">
+      <div class="thumb-preview-wrapper">
+        <div id="thumb-delta" class="thumb t-delta bg-swans-frame">
+          <div class="stars"></div>
+          <div class="corner c-tl">❁</div>
+          <div class="corner c-tr">❁</div>
+          <div class="corner c-bl">❁</div>
+          <div class="corner c-br">❁</div>
+          <div class="badge-gold">
+            <div class="top">鑑定歴</div><div class="num">15</div><div class="bot">YEARS</div>
+          </div>
+          <div class="top-label"><span class="mark">❁</span>やさしく寄り添う、心の相談<span class="mark">❁</span></div>
+          <div class="main-frame">
+            <div class="l1">〜 心のモヤモヤを、やさしくひもとく 〜</div>
+            <div class="l2">あなたの<span class="ac">"本質"</span>をひもときます</div>
+          </div>
+          <div class="kw-bottom">
+            <span class="kw">算命学</span>
+            <span class="dot">❁</span>
+            <span class="kw">数秘術</span>
+            <span class="dot">❁</span>
+            <span class="kw">過去世リーディング</span>
+          </div>
+          <div class="author-delta">— LIGHTWORK SWAN —</div>
+        </div>
+      </div>
+    </div>
+    <div class="download-area">
+      <button class="download-btn" data-target="thumb-delta" data-name="δ-お手紙封筒">📥 PNGダウンロード</button>
+      <div class="status" id="status-thumb-delta"></div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  document.querySelectorAll('.download-btn').forEach(btn => {
+    btn.addEventListener('click', async () => {
+      const targetId = btn.dataset.target;
+      const fileName = btn.dataset.name || 'thumbnail';
+      const el = document.getElementById(targetId);
+      const status = document.getElementById('status-' + targetId);
+      if (!el) return;
+
+      btn.disabled = true;
+      status.textContent = '画像を生成しています...';
+      status.className = 'status';
+
+      try {
+        const originalTransform = el.style.transform;
+        el.style.transform = 'none';
+        await document.fonts.ready;
+        await new Promise(r => setTimeout(r, 500));
+
+        const dataUrl = await htmlToImage.toPng(el, {
+          width: 1200, height: 630, pixelRatio: 2, cacheBust: true,
+        });
+
+        el.style.transform = originalTransform;
+
+        const link = document.createElement('a');
+        link.download = `ライトワークSWAN_表紙_${fileName}.png`;
+        link.href = dataUrl;
+        link.click();
+
+        status.textContent = '✓ 保存しました！';
+        status.className = 'status success';
+      } catch (err) {
+        console.error(err);
+        status.textContent = '⚠ エラーが発生しました。';
+        status.className = 'status';
+      } finally {
+        btn.disabled = false;
+      }
+    });
+  });
+</script>
+
+</body>
+</html>

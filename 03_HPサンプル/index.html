@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ライトワークSWAN | HPサンプル一覧</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: "Hiragino Sans", "Yu Gothic", sans-serif;
+    background: #faf5f5;
+    color: #4a3b4a;
+    line-height: 1.8;
+    padding: 60px 20px 100px;
+  }
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .page-header {
+    text-align: center;
+    margin-bottom: 60px;
+  }
+  .page-header h1 {
+    font-size: 32px;
+    color: #7b4b9e;
+    margin-bottom: 12px;
+    letter-spacing: 4px;
+  }
+  .page-header p {
+    font-size: 15px;
+    color: #8a7a8a;
+  }
+  .swans {
+    font-size: 60px;
+    margin-bottom: 20px;
+  }
+  .swans .swan-left { display: inline-block; transform: scaleX(-1); }
+  .swans .swan-right { display: inline-block; }
+
+  .samples {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 30px;
+  }
+  .sample-card {
+    background: white;
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 10px 40px rgba(123, 75, 158, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  .sample-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 50px rgba(123, 75, 158, 0.2);
+  }
+  .sample-thumb {
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 80px;
+    position: relative;
+  }
+  .thumb-a { background: linear-gradient(135deg, #fdf8f3, #f5ede2); }
+  .thumb-b { background: linear-gradient(135deg, #fdf6ed, #fbe4d2); }
+  .thumb-c {
+    background: linear-gradient(135deg, #fff8f5, #f3f8fc, #f5c9d020);
+    position: relative;
+  }
+  .thumb-c::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 200px 120px at 30% 40%, rgba(245, 201, 208, 0.4), transparent),
+      radial-gradient(ellipse 200px 120px at 70% 60%, rgba(216, 201, 232, 0.4), transparent);
+  }
+  .sample-thumb .swan-left { display: inline-block; transform: scaleX(-1); position: relative; z-index: 1; }
+  .sample-thumb .swan-right { display: inline-block; position: relative; z-index: 1; }
+
+  .sample-body {
+    padding: 30px;
+  }
+  .sample-tag {
+    display: inline-block;
+    font-size: 11px;
+    padding: 4px 14px;
+    border-radius: 50px;
+    letter-spacing: 2px;
+    margin-bottom: 14px;
+    font-weight: 600;
+  }
+  .tag-a { background: #fdf2ec; color: #b87d4f; }
+  .tag-b { background: #fef3e4; color: #d9a679; }
+  .tag-c { background: #fbe4ea; color: #e89ca7; }
+
+  .sample-title {
+    font-size: 20px;
+    color: #4a3b4a;
+    margin-bottom: 10px;
+    font-weight: 700;
+    letter-spacing: 2px;
+  }
+  .sample-feature {
+    font-size: 13px;
+    color: #7a6a7a;
+    margin-bottom: 20px;
+    line-height: 1.9;
+  }
+  .sample-detail {
+    font-size: 12px;
+    color: #9a8a9a;
+    margin-bottom: 20px;
+    padding-top: 16px;
+    border-top: 1px dashed #e0d0e0;
+  }
+  .sample-detail strong { color: #7b4b9e; font-weight: 600; }
+
+  .sample-btn {
+    display: block;
+    width: 100%;
+    background: linear-gradient(135deg, #7b4b9e, #b87d4f);
+    color: white;
+    text-align: center;
+    padding: 14px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    transition: transform 0.2s;
+  }
+  .sample-btn:hover { transform: translateY(-2px); }
+
+  .note {
+    text-align: center;
+    margin-top: 50px;
+    padding: 24px;
+    background: white;
+    border-radius: 16px;
+    font-size: 13px;
+    color: #7a6a7a;
+    line-height: 2;
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <div class="page-header">
+    <div class="swans">
+      <span class="swan-left">🦢</span><span class="swan-right">🦢</span>
+    </div>
+    <h1>HPサンプル 3パターン</h1>
+    <p>算命学 × スピリチュアルリーディングのHP、3つの雰囲気でご用意しました</p>
+  </div>
+
+  <div class="samples">
+
+    <!-- Sample A -->
+    <div class="sample-card">
+      <div class="sample-thumb thumb-a">
+        <span class="swan-left">🦢</span><span class="swan-right">🦢</span>
+      </div>
+      <div class="sample-body">
+        <span class="sample-tag tag-a">お手紙 / 便箋風</span>
+        <h2 class="sample-title">お手紙のような場所</h2>
+        <p class="sample-feature">
+          便箋にしたためた手紙のような、丁寧で親密な雰囲気。クリーム色の紙の質感にマスキングテープを添えて、あたたかく迎え入れるトーン。
+        </p>
+        <div class="sample-detail">
+          <strong>配色:</strong> クリーム × ローズピンク<br>
+          <strong>フォント:</strong> Klee One（手書き風）<br>
+          <strong>こんな方に:</strong> 親密さ・誠実さを伝えたい
+        </div>
+        <a href="hp-sample-a-letter.html" class="sample-btn" target="_blank">デザインAを見る →</a>
+      </div>
+    </div>
+
+    <!-- Sample B -->
+    <div class="sample-card">
+      <div class="sample-thumb thumb-b">
+        <span class="swan-left">🦢</span><span class="swan-right">🦢</span>
+      </div>
+      <div class="sample-body">
+        <span class="sample-tag tag-b">カフェ / ほっこり系</span>
+        <h2 class="sample-title">心のお茶会</h2>
+        <p class="sample-feature">
+          カフェに誘うような、ほっこり親しみやすい雰囲気。吹き出しや丸いフレームで、「気軽に話せる」空気感を演出。
+        </p>
+        <div class="sample-detail">
+          <strong>配色:</strong> ベージュ × キャメル × ピンク<br>
+          <strong>フォント:</strong> Zen Maru Gothic（丸ゴシック）<br>
+          <strong>こんな方に:</strong> 明るさ・親しみやすさを伝えたい
+        </div>
+        <a href="hp-sample-b-cozy.html" class="sample-btn" target="_blank">デザインBを見る →</a>
+      </div>
+    </div>
+
+    <!-- Sample C -->
+    <div class="sample-card">
+      <div class="sample-thumb thumb-c">
+        <span class="swan-left">🦢</span><span class="swan-right">🦢</span>
+      </div>
+      <div class="sample-body">
+        <span class="sample-tag tag-c">水彩 / やさしい和風</span>
+        <h2 class="sample-title">やさしい水辺で</h2>
+        <p class="sample-feature">
+          水彩画のような柔らかいグラデーション。明朝体で品格と癒しを両立。水面に浮かぶ白鳥のイメージで、スピリチュアルな世界観を表現。
+        </p>
+        <div class="sample-detail">
+          <strong>配色:</strong> 水色 × 淡ピンク × ラベンダー<br>
+          <strong>フォント:</strong> Shippori Mincho（明朝）<br>
+          <strong>こんな方に:</strong> 上品さ・神秘性を伝えたい
+        </div>
+        <a href="hp-sample-c-watercolor.html" class="sample-btn" target="_blank">デザインCを見る →</a>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="note">
+    お好みのデザインが決まったら、文言・写真・経歴など、<br>
+    より具体的な内容にカスタマイズしていきます。<br>
+    3つの要素を組み合わせたいなど、ご要望があればお気軽にお申し付けください。
+  </div>
+
+</div>
+
+</body>
+</html>

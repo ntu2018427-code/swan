@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>表紙サムネ【オリジナル白鳥】- ライトワークSWAN</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;600;700&family=Klee+One:wght@400;600&family=Zen+Maru+Gothic:wght@400;500;700;900&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/html-to-image@1.11.11/dist/html-to-image.min.js"></script>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    margin: 0;
+    padding: 30px 20px;
+    background: #f5f0fa;
+    font-family: "Zen Maru Gothic", "Hiragino Sans", sans-serif;
+    color: #4a3b4a;
+  }
+  .page-header { text-align: center; margin-bottom: 30px; }
+  .page-header h1 {
+    font-size: 22px; color: #6a5a9e; margin-bottom: 10px;
+    letter-spacing: 3px; font-weight: 500;
+  }
+  .page-header p { font-size: 13px; color: #7a6a9a; line-height: 1.9; }
+  .gallery { max-width: 1100px; margin: 0 auto; display: grid; gap: 30px; }
+  .item {
+    background: white; border-radius: 20px; overflow: hidden;
+    box-shadow: 0 12px 40px rgba(150, 120, 200, 0.18);
+  }
+  .item-header { padding: 20px 24px; border-bottom: 1px solid #f0e8f8; }
+  .item-tag {
+    display: inline-block; font-size: 11px; padding: 4px 14px;
+    background: linear-gradient(135deg, #e0f5e8, #d0f0e0);
+    color: #4a8a6a; border-radius: 20px;
+    letter-spacing: 2px; margin-bottom: 8px; font-weight: 600;
+  }
+  .item-title {
+    font-size: 18px; color: #5a3a5a; font-weight: 700;
+    margin-bottom: 4px; letter-spacing: 1px;
+  }
+  .item-sub { font-size: 13px; color: #8a7a9a; line-height: 1.8; }
+  .thumb-area { padding: 24px; background: #faf5fc; overflow: auto; }
+  .thumb-preview-wrapper {
+    width: 100%; max-width: 700px; margin: 0 auto;
+    position: relative; aspect-ratio: 1200/630;
+  }
+  .thumb-preview-wrapper .thumb {
+    transform: scale(0.58); transform-origin: top left;
+    position: absolute; top: 0; left: 0;
+  }
+  @media (max-width: 768px) { .thumb-preview-wrapper .thumb { transform: scale(0.36); } }
+  .thumb {
+    width: 1200px; height: 630px; position: relative;
+    overflow: hidden; border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  }
+  .download-area {
+    padding: 20px 24px; text-align: center; background: white;
+    border-top: 1px solid #f0e8f8;
+  }
+  .download-btn {
+    display: inline-block;
+    background: linear-gradient(135deg, #6a5ac8, #9878d0);
+    color: white; padding: 13px 38px; border-radius: 50px;
+    font-size: 14px; font-weight: 600; letter-spacing: 3px;
+    border: none; cursor: pointer;
+    box-shadow: 0 6px 20px rgba(106, 90, 200, 0.3);
+    transition: transform 0.2s;
+  }
+  .download-btn:hover { transform: translateY(-2px); }
+  .download-btn:disabled { opacity: 0.5; cursor: wait; }
+  .status {
+    margin-top: 8px; font-size: 12px; color: #8a7a9a; min-height: 16px;
+  }
+  .status.success { color: #4a9a6a; }
+
+  /* =========== 背景：オリジナル白鳥SVG ============ */
+  .bg-original {
+    background:
+      linear-gradient(180deg,
+        transparent 0%,
+        transparent 55%,
+        rgba(100, 110, 180, 0.2) 75%,
+        rgba(100, 110, 180, 0.4) 100%),
+      url('/swans-original.svg') center top / cover no-repeat;
+  }
+
+  /* ソフトゴールドバッジ */
+  .badge-gold {
+    position: absolute;
+    width: 122px; height: 122px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 5;
+    top: 28px; right: 28px;
+    transform: rotate(5deg);
+  }
+  .badge-gold::before {
+    content: "";
+    position: absolute; inset: 0;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #fff4d4, #f5d89a 60%, #e8b878 100%);
+    box-shadow: 0 6px 20px rgba(80, 50, 10, 0.4), inset 0 2px 4px rgba(255,255,255,0.6);
+    border: 2px solid white;
+  }
+  .badge-gold::after {
+    content: "";
+    position: absolute; inset: 8px;
+    border-radius: 50%;
+    border: 1.5px dashed rgba(120,80,30,0.4);
+  }
+  .badge-gold > * { position: relative; z-index: 2; }
+  .badge-gold .top {
+    font-family: "Shippori Mincho", serif; font-size: 13px;
+    font-weight: 700; color: #5a3a10; letter-spacing: 2px;
+  }
+  .badge-gold .num {
+    font-family: "Shippori Mincho", serif; font-size: 52px;
+    font-weight: 800; color: #3a2a0a; line-height: 0.95;
+    margin: 2px 0;
+  }
+  .badge-gold .bot {
+    font-family: "Shippori Mincho", serif; font-size: 12px;
+    font-weight: 700; color: #5a3a10; letter-spacing: 4px;
+  }
+
+  /* 上部3キーワード */
+  .top-keywords {
+    position: absolute; top: 38px; left: 50%; transform: translateX(-50%);
+    display: flex; gap: 10px; align-items: center; z-index: 4;
+    padding-right: 140px;
+  }
+  .top-keywords .kw {
+    background: rgba(255, 255, 255, 0.92);
+    padding: 8px 22px; border-radius: 50px;
+    font-family: "Shippori Mincho", serif;
+    font-size: 20px; font-weight: 700;
+    color: #2a2060; letter-spacing: 3px;
+    box-shadow: 0 4px 12px rgba(40, 30, 100, 0.2);
+    border: 1.5px solid rgba(232, 201, 120, 0.6);
+    white-space: nowrap;
+  }
+  .top-keywords .kw-dot { color: #e8a840; font-size: 14px; }
+
+  /* メインカード */
+  .main-card {
+    position: absolute;
+    bottom: 120px; left: 50%; transform: translateX(-50%);
+    background: linear-gradient(135deg, rgba(254,250,240,0.97), rgba(254,245,232,0.97));
+    padding: 24px 56px;
+    border-radius: 16px;
+    box-shadow: 0 14px 40px rgba(40, 30, 100, 0.35), inset 0 0 0 2px rgba(232, 201, 120, 0.6);
+    text-align: center;
+    z-index: 4;
+  }
+  .main-card::before {
+    content: "❁"; position: absolute;
+    top: -18px; left: 50%; transform: translateX(-50%);
+    font-size: 26px; color: #d8487a;
+    background: #fef8ec; padding: 0 12px; border-radius: 50%;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  }
+  .main-card .l1 {
+    font-family: "Klee One", serif;
+    font-size: 26px; font-weight: 600;
+    color: #5a3a6a; letter-spacing: 5px;
+    margin-bottom: 12px; white-space: nowrap;
+  }
+  .main-card .l2 {
+    font-family: "Shippori Mincho", serif;
+    font-size: 60px; font-weight: 800;
+    color: #2a2060; letter-spacing: 8px;
+    line-height: 1.15; white-space: nowrap;
+  }
+  .main-card .l2 .ac {
+    color: #c8487a; position: relative;
+  }
+  .main-card .l2 .ac::after {
+    content: ""; position: absolute; left: -4px; right: -4px; bottom: 6px;
+    height: 12px; background: rgba(255, 210, 120, 0.45);
+    z-index: -1; border-radius: 3px;
+  }
+
+  .tagline {
+    position: absolute; bottom: 58px; left: 50%; transform: translateX(-50%);
+    font-family: "Klee One", serif; font-size: 22px; font-weight: 600;
+    color: white; letter-spacing: 6px; white-space: nowrap; z-index: 4;
+    text-shadow: 0 2px 10px rgba(30, 20, 80, 0.7);
+  }
+  .tagline .mark { color: #ffd890; margin: 0 10px; }
+
+  .author {
+    position: absolute; bottom: 22px; left: 50%; transform: translateX(-50%);
+    font-family: "Shippori Mincho", serif;
+    color: rgba(255,255,255,0.95);
+    font-size: 16px; letter-spacing: 7px; font-weight: 600;
+    text-shadow: 0 2px 8px rgba(30, 20, 80, 0.7); z-index: 4;
+  }
+
+  .help-box {
+    max-width: 720px; margin: 30px auto 0;
+    background: white; padding: 24px 28px;
+    border-radius: 16px; border: 2px solid #d0f0e0;
+  }
+  .help-box h3 { font-size: 15px; color: #4a8a6a; margin-bottom: 12px; }
+  .help-box ol { padding-left: 20px; font-size: 14px; line-height: 2; color: #5a4a6a; }
+  .help-box .note {
+    margin-top: 14px; padding: 10px 14px;
+    background: #eff9f3; border-radius: 8px;
+    font-size: 13px; color: #4a8a6a;
+  }
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <h1>🦢 表紙サムネ【オリジナル白鳥画像】</h1>
+  <p>著作権フリーのオリジナルSVG白鳥イラストを使用しています</p>
+</div>
+
+<div class="gallery">
+
+  <div class="item">
+    <div class="item-header">
+      <span class="item-tag">✓ 著作権クリア / ✓ 商用利用OK</span>
+      <div class="item-title">あなたの"本質"をひもときます</div>
+      <div class="item-sub">オリジナル白鳥イラスト（pngtree透かしなし・完全オリジナル）</div>
+    </div>
+    <div class="thumb-area">
+      <div class="thumb-preview-wrapper">
+        <div id="thumb-final" class="thumb bg-original">
+          <div class="badge-gold">
+            <div class="top">鑑定歴</div><div class="num">15</div><div class="bot">YEARS</div>
+          </div>
+          <div class="top-keywords">
+            <div class="kw">算命学</div>
+            <div class="kw-dot">❁</div>
+            <div class="kw">数秘術</div>
+            <div class="kw-dot">❁</div>
+            <div class="kw">過去世リーディング</div>
+          </div>
+          <div class="main-card">
+            <div class="l1">〜 心のモヤモヤを、やさしくひもとく 〜</div>
+            <div class="l2">あなたの<span class="ac">"本質"</span>をひもときます</div>
+          </div>
+          <div class="tagline"><span class="mark">❁</span>やさしく寄り添う、心の相談<span class="mark">❁</span></div>
+          <div class="author">LIGHTWORK SWAN</div>
+        </div>
+      </div>
+    </div>
+    <div class="download-area">
+      <button class="download-btn" data-target="thumb-final" data-name="00-表紙_オリジナル白鳥">
+        📥 PNGダウンロード
+      </button>
+      <div class="status" id="status-thumb-final"></div>
+    </div>
+  </div>
+
+</div>
+
+<div class="help-box">
+  <h3>✅ 著作権について</h3>
+  <ol>
+    <li>このサムネで使用している白鳥画像は<strong>完全オリジナル</strong>（SVGイラスト）です</li>
+    <li>pngtreeなどの透かしは一切入っていません</li>
+    <li>商用利用（ココナラ、HP、SNS、広告など）すべてOK</li>
+    <li>著作権は利用者様にあります</li>
+  </ol>
+  <div class="note">
+    💡 PNG形式で高解像度（2400×1260px相当）で出力されるため、印刷物にも使用できます。
+  </div>
+</div>
+
+<script>
+  document.querySelectorAll('.download-btn').forEach(btn => {
+    btn.addEventListener('click', async () => {
+      const targetId = btn.dataset.target;
+      const fileName = btn.dataset.name || 'thumbnail';
+      const el = document.getElementById(targetId);
+      const status = document.getElementById('status-' + targetId);
+      if (!el) return;
+
+      btn.disabled = true;
+      status.textContent = '画像を生成しています...';
+      status.className = 'status';
+
+      try {
+        const originalTransform = el.style.transform;
+        el.style.transform = 'none';
+        await document.fonts.ready;
+        await new Promise(r => setTimeout(r, 500));
+
+        const dataUrl = await htmlToImage.toPng(el, {
+          width: 1200, height: 630, pixelRatio: 2, cacheBust: true,
+        });
+
+        el.style.transform = originalTransform;
+
+        const link = document.createElement('a');
+        link.download = `ライトワークSWAN_表紙_${fileName}.png`;
+        link.href = dataUrl;
+        link.click();
+
+        status.textContent = '✓ 保存しました！';
+        status.className = 'status success';
+      } catch (err) {
+        console.error(err);
+        status.textContent = '⚠ エラーが発生しました。';
+        status.className = 'status';
+      } finally {
+        btn.disabled = false;
+      }
+    });
+  });
+</script>
+
+</body>
+</html>

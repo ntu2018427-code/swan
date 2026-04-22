@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 500" preserveAspectRatio="xMidYMid meet">
+  <defs>
+    <!-- 空 -->
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#f0f8fb"/>
+      <stop offset="15%" stop-color="#c0e0ea"/>
+      <stop offset="38%" stop-color="#7ac5d8"/>
+      <stop offset="55%" stop-color="#5aafc8"/>
+      <stop offset="75%" stop-color="#6582bc"/>
+      <stop offset="100%" stop-color="#8878b8"/>
+    </linearGradient>
+
+    <!-- 水面 -->
+    <linearGradient id="water" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#6bc3d5" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#6878b8" stop-opacity="0.7"/>
+    </linearGradient>
+
+    <!-- 白鳥の体 -->
+    <linearGradient id="body" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="35%" stop-color="#f5edfb"/>
+      <stop offset="70%" stop-color="#ddc8ec"/>
+      <stop offset="100%" stop-color="#b0a0d0"/>
+    </linearGradient>
+
+    <!-- 羽根（青紫のグラデーション） -->
+    <linearGradient id="wing" x1="0.3" y1="0" x2="0.8" y2="1">
+      <stop offset="0%" stop-color="#e8e0f5"/>
+      <stop offset="25%" stop-color="#b0c8e5"/>
+      <stop offset="55%" stop-color="#7a9ad0"/>
+      <stop offset="80%" stop-color="#8078c8"/>
+      <stop offset="100%" stop-color="#9070b8"/>
+    </linearGradient>
+
+    <!-- 羽根の内側 -->
+    <linearGradient id="wingInner" x1="0.5" y1="0" x2="0.5" y2="1">
+      <stop offset="0%" stop-color="#f0e8fa"/>
+      <stop offset="50%" stop-color="#c8b8e0"/>
+      <stop offset="100%" stop-color="#a090c8"/>
+    </linearGradient>
+
+    <!-- ドロップシャドウ -->
+    <filter id="softShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="4" in="SourceAlpha"/>
+      <feOffset dx="0" dy="4"/>
+      <feComponentTransfer>
+        <feFuncA type="linear" slope="0.3"/>
+      </feComponentTransfer>
+      <feMerge>
+        <feMergeNode/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- ========= 背景 ========= -->
+  <rect width="1200" height="500" fill="url(#sky)"/>
+
+  <!-- ========= 星 ========= -->
+  <g fill="#ffffff" opacity="0.9">
+    <circle cx="80" cy="50" r="1.8"/>
+    <circle cx="160" cy="100" r="1.3"/>
+    <circle cx="240" cy="45" r="2.2"/>
+    <circle cx="320" cy="85" r="1.2"/>
+    <circle cx="430" cy="60" r="1.8"/>
+    <circle cx="540" cy="100" r="1.5"/>
+    <circle cx="680" cy="55" r="1.8"/>
+    <circle cx="780" cy="90" r="1.3"/>
+    <circle cx="890" cy="50" r="2"/>
+    <circle cx="970" cy="95" r="1.4"/>
+    <circle cx="1060" cy="65" r="1.7"/>
+    <circle cx="1140" cy="110" r="1.5"/>
+  </g>
+
+  <!-- ========= 水面 ========= -->
+  <rect y="280" width="1200" height="220" fill="url(#water)"/>
+
+  <!-- 水面の光の筋 -->
+  <g opacity="0.35" stroke="#ffffff" stroke-width="1.3" fill="none">
+    <path d="M 40,400 Q 180,398 320,400"/>
+    <path d="M 380,425 Q 510,423 640,425"/>
+    <path d="M 100,455 Q 240,453 380,455"/>
+    <path d="M 700,410 Q 830,408 960,410"/>
+    <path d="M 820,445 Q 960,443 1100,445"/>
+    <path d="M 60,475 Q 200,473 340,475"/>
+    <path d="M 700,470 Q 840,468 980,470"/>
+  </g>
+
+  <!-- ========= 2羽の白鳥（ハート型） ========= -->
+  <!-- 左の白鳥 -->
+  <g transform="translate(470, 330)" filter="url(#softShadow)">
+    <!-- 外側の大きな翼 -->
+    <path d="M 0,60
+             C -60,50 -140,10 -200,-50
+             C -240,-90 -255,-130 -240,-150
+             C -220,-165 -180,-160 -140,-140
+             C -80,-110 -30,-60 -5,0
+             C 5,30 5,50 0,60 Z"
+          fill="url(#wing)"/>
+
+    <!-- 翼の羽毛ライン -->
+    <g stroke="#ffffff" stroke-width="1.4" fill="none" opacity="0.5">
+      <path d="M -40,-50 Q -80,-20 -110,10"/>
+      <path d="M -70,-80 Q -110,-40 -140,-5"/>
+      <path d="M -100,-100 Q -140,-60 -170,-20"/>
+      <path d="M -130,-115 Q -170,-80 -195,-45"/>
+    </g>
+
+    <!-- 内側の翼 -->
+    <path d="M 15,40
+             C -20,30 -60,10 -85,-20
+             C -105,-45 -108,-70 -95,-85
+             C -80,-93 -55,-85 -35,-65
+             C -10,-40 10,-5 15,40 Z"
+          fill="url(#wingInner)" opacity="0.85"/>
+
+    <!-- 本体 -->
+    <path d="M -60,90
+             C -110,85 -130,60 -130,40
+             C -130,0 -100,-10 -60,-5
+             C -20,5 10,10 40,5
+             C 80,5 100,30 95,60
+             C 85,90 40,100 0,100
+             C -25,100 -45,95 -60,90 Z"
+          fill="url(#body)"/>
+
+    <!-- 首のベース（体とのつなぎ） -->
+    <ellipse cx="30" cy="10" rx="30" ry="25" fill="url(#body)"/>
+
+    <!-- 首（S字カーブ） -->
+    <path d="M 45,0
+             C 55,-40 70,-85 85,-125
+             C 95,-155 100,-175 100,-185"
+          stroke="url(#body)" stroke-width="26" fill="none" stroke-linecap="round"/>
+
+    <!-- 首のハイライト -->
+    <path d="M 45,0
+             C 55,-40 70,-85 85,-125
+             C 95,-155 100,-175 100,-185"
+          stroke="#ffffff" stroke-width="12" fill="none" stroke-linecap="round" opacity="0.5"/>
+
+    <!-- 頭 -->
+    <path d="M 100,-180
+             C 98,-195 105,-205 118,-205
+             C 132,-205 138,-198 138,-188
+             C 138,-178 130,-172 118,-172
+             C 108,-172 101,-175 100,-180 Z"
+          fill="url(#body)"/>
+
+    <!-- 目 -->
+    <circle cx="128" cy="-190" r="2.5" fill="#2a1a3a"/>
+    <circle cx="129" cy="-191" r="0.8" fill="#ffffff"/>
+
+    <!-- くちばし（オレンジ色） -->
+    <path d="M 138,-188
+             L 172,-183
+             L 165,-175
+             L 138,-180 Z"
+          fill="#ec8030"/>
+    <!-- くちばし上部ハイライト -->
+    <path d="M 138,-188
+             L 172,-183
+             L 160,-184 Z"
+          fill="#ffaa50"/>
+    <!-- くちばし黒い鼻部分 -->
+    <path d="M 168,-184 L 174,-183 L 170,-178 Z" fill="#2a1820"/>
+  </g>
+
+  <!-- 右の白鳥（左右反転） -->
+  <g transform="translate(730, 330) scale(-1, 1)" filter="url(#softShadow)">
+    <!-- 外側の大きな翼 -->
+    <path d="M 0,60
+             C -60,50 -140,10 -200,-50
+             C -240,-90 -255,-130 -240,-150
+             C -220,-165 -180,-160 -140,-140
+             C -80,-110 -30,-60 -5,0
+             C 5,30 5,50 0,60 Z"
+          fill="url(#wing)"/>
+
+    <g stroke="#ffffff" stroke-width="1.4" fill="none" opacity="0.5">
+      <path d="M -40,-50 Q -80,-20 -110,10"/>
+      <path d="M -70,-80 Q -110,-40 -140,-5"/>
+      <path d="M -100,-100 Q -140,-60 -170,-20"/>
+      <path d="M -130,-115 Q -170,-80 -195,-45"/>
+    </g>
+
+    <path d="M 15,40
+             C -20,30 -60,10 -85,-20
+             C -105,-45 -108,-70 -95,-85
+             C -80,-93 -55,-85 -35,-65
+             C -10,-40 10,-5 15,40 Z"
+          fill="url(#wingInner)" opacity="0.85"/>
+
+    <path d="M -60,90
+             C -110,85 -130,60 -130,40
+             C -130,0 -100,-10 -60,-5
+             C -20,5 10,10 40,5
+             C 80,5 100,30 95,60
+             C 85,90 40,100 0,100
+             C -25,100 -45,95 -60,90 Z"
+          fill="url(#body)"/>
+
+    <ellipse cx="30" cy="10" rx="30" ry="25" fill="url(#body)"/>
+
+    <path d="M 45,0
+             C 55,-40 70,-85 85,-125
+             C 95,-155 100,-175 100,-185"
+          stroke="url(#body)" stroke-width="26" fill="none" stroke-linecap="round"/>
+
+    <path d="M 45,0
+             C 55,-40 70,-85 85,-125
+             C 95,-155 100,-175 100,-185"
+          stroke="#ffffff" stroke-width="12" fill="none" stroke-linecap="round" opacity="0.5"/>
+
+    <path d="M 100,-180
+             C 98,-195 105,-205 118,-205
+             C 132,-205 138,-198 138,-188
+             C 138,-178 130,-172 118,-172
+             C 108,-172 101,-175 100,-180 Z"
+          fill="url(#body)"/>
+
+    <circle cx="128" cy="-190" r="2.5" fill="#2a1a3a"/>
+    <circle cx="129" cy="-191" r="0.8" fill="#ffffff"/>
+
+    <path d="M 138,-188
+             L 172,-183
+             L 165,-175
+             L 138,-180 Z"
+          fill="#ec8030"/>
+    <path d="M 138,-188
+             L 172,-183
+             L 160,-184 Z"
+          fill="#ffaa50"/>
+    <path d="M 168,-184 L 174,-183 L 170,-178 Z" fill="#2a1820"/>
+  </g>
+
+  <!-- 水面の波紋（白鳥の下） -->
+  <ellipse cx="470" cy="435" rx="150" ry="12" fill="#ffffff" opacity="0.3"/>
+  <ellipse cx="730" cy="435" rx="150" ry="12" fill="#ffffff" opacity="0.3"/>
+
+  <!-- 大きめのキラキラ -->
+  <g opacity="0.85">
+    <!-- ✦ 8方向の光 -->
+    <g transform="translate(250, 210)" fill="#fff8c8">
+      <path d="M 0,-14 L 2.5,-2.5 L 14,0 L 2.5,2.5 L 0,14 L -2.5,2.5 L -14,0 L -2.5,-2.5 Z"/>
+    </g>
+    <g transform="translate(950, 220)" fill="#fff8c8">
+      <path d="M 0,-12 L 2,-2 L 12,0 L 2,2 L 0,12 L -2,2 L -12,0 L -2,-2 Z"/>
+    </g>
+    <g transform="translate(600, 170)" fill="#ffffff">
+      <path d="M 0,-10 L 1.8,-1.8 L 10,0 L 1.8,1.8 L 0,10 L -1.8,1.8 L -10,0 L -1.8,-1.8 Z"/>
+    </g>
+    <g transform="translate(160, 340)" fill="#fff8c8">
+      <path d="M 0,-9 L 1.8,-1.8 L 9,0 L 1.8,1.8 L 0,9 L -1.8,1.8 L -9,0 L -1.8,-1.8 Z"/>
+    </g>
+    <g transform="translate(1040, 360)" fill="#fff8c8">
+      <path d="M 0,-10 L 1.8,-1.8 L 10,0 L 1.8,1.8 L 0,10 L -1.8,1.8 L -10,0 L -1.8,-1.8 Z"/>
+    </g>
+    <g transform="translate(380, 150)" fill="#ffffff">
+      <path d="M 0,-8 L 1.5,-1.5 L 8,0 L 1.5,1.5 L 0,8 L -1.5,1.5 L -8,0 L -1.5,-1.5 Z"/>
+    </g>
+    <g transform="translate(820, 155)" fill="#ffffff">
+      <path d="M 0,-8 L 1.5,-1.5 L 8,0 L 1.5,1.5 L 0,8 L -1.5,1.5 L -8,0 L -1.5,-1.5 Z"/>
+    </g>
+  </g>
+</svg>

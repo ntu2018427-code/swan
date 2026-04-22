@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>ココナラ サムネイル案 v2 - 算命学×15年実績</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;700;800&family=Zen+Maru+Gothic:wght@500;700;900&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    margin: 0;
+    padding: 40px 20px;
+    background: #f5f5f7;
+    font-family: "Zen Maru Gothic", "Hiragino Sans", sans-serif;
+  }
+  h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 10px;
+  }
+  .note {
+    text-align: center;
+    color: #666;
+    margin-bottom: 40px;
+    font-size: 14px;
+    line-height: 1.8;
+  }
+  .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 50px;
+  }
+  .thumb-wrapper {
+    text-align: center;
+  }
+  .label {
+    font-size: 18px;
+    font-weight: bold;
+    color: #555;
+    margin-bottom: 8px;
+  }
+  .sublabel {
+    font-size: 13px;
+    color: #888;
+    margin-bottom: 15px;
+    line-height: 1.6;
+  }
+
+  /* 共通：1200x630 サイズ */
+  .thumb {
+    width: 1200px;
+    height: 630px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 12px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+    transform: scale(0.55);
+    transform-origin: top center;
+    margin-bottom: -280px;
+  }
+
+  .mincho { font-family: "Shippori Mincho", serif; }
+
+  /* =================================== */
+  /* 【E】権威×柔らかさ型 - 15年実績重視  */
+  /* =================================== */
+  .thumb-e {
+    background: linear-gradient(135deg, #f5ede2 0%, #f5d5c8 50%, #e8c5d8 100%);
+  }
+  .thumb-e::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+      radial-gradient(circle at 15% 25%, rgba(255,255,255,0.4) 0%, transparent 40%),
+      radial-gradient(circle at 85% 75%, rgba(255,255,255,0.3) 0%, transparent 40%);
+  }
+  .thumb-e .badge-15 {
+    position: absolute;
+    top: 60px;
+    left: 60px;
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #c85a5a, #e88888);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 10px 30px rgba(200,90,90,0.35);
+    transform: rotate(-8deg);
+    border: 4px solid white;
+  }
+  .thumb-e .badge-15 .years {
+    font-size: 64px;
+    font-weight: 900;
+    line-height: 1;
+    letter-spacing: -2px;
+  }
+  .thumb-e .badge-15 .label-top {
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    margin-bottom: 4px;
+  }
+  .thumb-e .badge-15 .label-bottom {
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    margin-top: 4px;
+  }
+  .thumb-e .swans {
+    position: absolute;
+    top: 40px;
+    right: 80px;
+    font-size: 130px;
+    filter: drop-shadow(0 6px 20px rgba(255,255,255,0.6));
+  }
+  .thumb-e .swans .swan-left { display: inline-block; transform: scaleX(-1); }
+  .thumb-e .swans .swan-right { display: inline-block; }
+  .thumb-e .main-title {
+    position: absolute;
+    bottom: 180px;
+    left: 60px;
+    right: 60px;
+    font-family: "Shippori Mincho", serif;
+    font-size: 92px;
+    font-weight: 700;
+    color: #4a3728;
+    text-align: center;
+    letter-spacing: 8px;
+    text-shadow: 0 2px 10px rgba(255,255,255,0.5);
+    line-height: 1.2;
+  }
+  .thumb-e .main-title .accent {
+    color: #c85a5a;
+  }
+  .thumb-e .subtitle {
+    position: absolute;
+    bottom: 100px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: white;
+    padding: 18px 48px;
+    border-radius: 50px;
+    font-size: 32px;
+    font-weight: 700;
+    color: #7a4a5c;
+    letter-spacing: 4px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+    white-space: nowrap;
+  }
+  .thumb-e .author {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 22px;
+    color: #8a6a5a;
+    letter-spacing: 6px;
+    font-weight: 500;
+  }
+
+  /* =================================== */
+  /* 【F】算命学特化型 - 神秘と信頼       */
+  /* =================================== */
+  .thumb-f {
+    background: linear-gradient(135deg, #2d1b3d 0%, #4a2d5c 50%, #6b3d7a 100%);
+  }
+  .thumb-f::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+      radial-gradient(1.5px 1.5px at 5% 15%, #ffd700, transparent),
+      radial-gradient(1px 1px at 15% 35%, #fff, transparent),
+      radial-gradient(2px 2px at 25% 55%, #ffd700, transparent),
+      radial-gradient(1px 1px at 35% 25%, #fff, transparent),
+      radial-gradient(1.5px 1.5px at 45% 75%, #fff, transparent),
+      radial-gradient(2px 2px at 55% 15%, #ffd700, transparent),
+      radial-gradient(1px 1px at 65% 55%, #fff, transparent),
+      radial-gradient(1.5px 1.5px at 75% 35%, #fff, transparent),
+      radial-gradient(1px 1px at 85% 80%, #fff, transparent),
+      radial-gradient(2px 2px at 95% 25%, #ffd700, transparent);
+  }
+  .thumb-f .experience-line {
+    position: absolute;
+    top: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: linear-gradient(135deg, #ffd700, #ff9f5a);
+    color: #2d1b3d;
+    padding: 10px 36px;
+    border-radius: 50px;
+    font-size: 28px;
+    font-weight: 900;
+    letter-spacing: 4px;
+    box-shadow: 0 6px 20px rgba(255,215,0,0.4);
+    white-space: nowrap;
+  }
+  .thumb-f .main-title {
+    position: absolute;
+    top: 150px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: "Shippori Mincho", serif;
+    font-size: 130px;
+    font-weight: 800;
+    color: #ffd700;
+    letter-spacing: 12px;
+    text-shadow:
+      0 0 20px rgba(255,215,0,0.6),
+      0 0 40px rgba(255,215,0,0.3),
+      0 4px 10px rgba(0,0,0,0.4);
+    white-space: nowrap;
+  }
+  .thumb-f .subtitle-line {
+    position: absolute;
+    top: 320px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: "Shippori Mincho", serif;
+    font-size: 38px;
+    color: white;
+    letter-spacing: 8px;
+    font-weight: 500;
+    white-space: nowrap;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.5);
+  }
+  .thumb-f .subtitle-line .dot {
+    color: #ffd700;
+    margin: 0 12px;
+  }
+  .thumb-f .swans {
+    position: absolute;
+    top: 420px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 100px;
+    filter: drop-shadow(0 0 20px rgba(255,215,0,0.5));
+  }
+  .thumb-f .swans .swan-left { display: inline-block; transform: scaleX(-1); }
+  .thumb-f .swans .swan-right { display: inline-block; }
+  .thumb-f .bottom-tag {
+    position: absolute;
+    bottom: 35px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: rgba(255,255,255,0.85);
+    font-size: 22px;
+    letter-spacing: 6px;
+  }
+
+  /* =================================== */
+  /* 【G】柔らか・共感型 - 話しやすさ     */
+  /* =================================== */
+  .thumb-g {
+    background: linear-gradient(180deg, #fef5ed 0%, #fde4d2 50%, #fccfc5 100%);
+  }
+  .thumb-g::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(circle at 20% 30%, rgba(255,255,255,0.6) 0%, transparent 50%),
+      radial-gradient(circle at 80% 70%, rgba(255,218,200,0.5) 0%, transparent 50%);
+  }
+  .thumb-g .quote-mark {
+    position: absolute;
+    top: 40px;
+    left: 80px;
+    font-family: "Shippori Mincho", serif;
+    font-size: 140px;
+    color: #e8a888;
+    opacity: 0.4;
+    line-height: 1;
+  }
+  .thumb-g .main-copy {
+    position: absolute;
+    top: 120px;
+    left: 80px;
+    right: 80px;
+    font-family: "Shippori Mincho", serif;
+    font-size: 72px;
+    font-weight: 700;
+    color: #5a3a2a;
+    letter-spacing: 4px;
+    line-height: 1.5;
+  }
+  .thumb-g .main-copy .wave {
+    background: linear-gradient(transparent 60%, #ffd54f 60%);
+    padding: 0 6px;
+  }
+  .thumb-g .main-copy .accent {
+    color: #c85a5a;
+  }
+  .thumb-g .swans {
+    position: absolute;
+    bottom: 140px;
+    right: 80px;
+    font-size: 160px;
+    filter: drop-shadow(0 8px 20px rgba(200,130,90,0.3));
+  }
+  .thumb-g .swans .swan-left { display: inline-block; transform: scaleX(-1); }
+  .thumb-g .swans .swan-right { display: inline-block; }
+  .thumb-g .bubble-left {
+    position: absolute;
+    top: 80px;
+    right: 80px;
+    background: white;
+    padding: 14px 28px;
+    border-radius: 30px;
+    font-size: 26px;
+    font-weight: 700;
+    color: #7a4a5c;
+    transform: rotate(4deg);
+    box-shadow: 0 4px 14px rgba(0,0,0,0.1);
+    white-space: nowrap;
+  }
+  .thumb-g .bubble-left::after {
+    content: "";
+    position: absolute;
+    bottom: -8px;
+    left: 40px;
+    border: 10px solid transparent;
+    border-top-color: white;
+    border-bottom: 0;
+  }
+  .thumb-g .bottom-bar {
+    position: absolute;
+    bottom: 40px;
+    left: 80px;
+    display: flex;
+    gap: 16px;
+    align-items: center;
+  }
+  .thumb-g .bottom-bar .chip {
+    background: white;
+    color: #c85a5a;
+    padding: 10px 24px;
+    border-radius: 50px;
+    font-size: 22px;
+    font-weight: 700;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+    letter-spacing: 2px;
+  }
+  .thumb-g .bottom-bar .author {
+    color: #8a6a5a;
+    font-size: 20px;
+    letter-spacing: 4px;
+  }
+
+  /* =================================== */
+  /* 【H】モニター募集型 - レビュー集め   */
+  /* =================================== */
+  .thumb-h {
+    background: linear-gradient(135deg, #fef0e5 0%, #fbe4d2 100%);
+  }
+  .thumb-h .swans-bg {
+    position: absolute;
+    bottom: 80px;
+    right: 70px;
+    font-size: 180px;
+    opacity: 0.5;
+    filter: drop-shadow(0 6px 16px rgba(255,107,107,0.2));
+  }
+  .thumb-h .swans-bg .swan-left { display: inline-block; transform: scaleX(-1); }
+  .thumb-h .swans-bg .swan-right { display: inline-block; margin-left: -30px; }
+  .thumb-h .ribbon {
+    position: absolute;
+    top: 50px;
+    left: -40px;
+    background: #ff4757;
+    color: white;
+    font-size: 42px;
+    font-weight: 900;
+    padding: 18px 90px;
+    transform: rotate(-8deg);
+    box-shadow: 0 6px 20px rgba(255,71,87,0.4);
+    letter-spacing: 4px;
+  }
+  .thumb-h .experience {
+    position: absolute;
+    top: 170px;
+    left: 80px;
+    background: linear-gradient(135deg, #ffd93d, #ffb347);
+    color: #5a3a2a;
+    padding: 8px 24px;
+    border-radius: 8px;
+    font-size: 28px;
+    font-weight: 900;
+    letter-spacing: 3px;
+    box-shadow: 0 4px 12px rgba(255,180,71,0.4);
+  }
+  .thumb-h .title-big {
+    position: absolute;
+    top: 230px;
+    left: 80px;
+    max-width: 640px;
+    font-family: "Shippori Mincho", serif;
+    font-size: 90px;
+    font-weight: 800;
+    color: #2a4a6a;
+    line-height: 1.15;
+    letter-spacing: 4px;
+    z-index: 2;
+  }
+  .thumb-h .title-big span {
+    color: #ff6b6b;
+  }
+  .thumb-h .sub-line {
+    position: absolute;
+    top: 425px;
+    left: 80px;
+    font-size: 28px;
+    color: #5a3a2a;
+    font-weight: 700;
+    background: rgba(255,255,255,0.92);
+    padding: 8px 20px;
+    border-radius: 10px;
+    letter-spacing: 2px;
+    z-index: 2;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  }
+  .thumb-h .price-box {
+    position: absolute;
+    bottom: 45px;
+    left: 80px;
+    background: white;
+    padding: 14px 32px;
+    border-radius: 16px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+    border: 3px solid #ff6b6b;
+    z-index: 2;
+  }
+  .thumb-h .price-box .label {
+    font-size: 20px;
+    color: #999;
+    margin-bottom: 2px;
+  }
+  .thumb-h .price-box .price {
+    font-size: 44px;
+    font-weight: 900;
+    color: #ff6b6b;
+    line-height: 1;
+  }
+  .thumb-h .price-box .price small { font-size: 26px; }
+
+  /* =================================== */
+  /* 【I】和モダン・神秘型 - 上品さ       */
+  /* =================================== */
+  .thumb-i {
+    background: linear-gradient(135deg, #f5f2ed 0%, #e8ddd0 100%);
+  }
+  .thumb-i::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      repeating-linear-gradient(
+        90deg,
+        transparent 0,
+        transparent 100px,
+        rgba(140, 110, 80, 0.05) 100px,
+        rgba(140, 110, 80, 0.05) 102px
+      );
+  }
+  .thumb-i .frame {
+    position: absolute;
+    inset: 30px;
+    border: 2px solid #8a6a4a;
+    opacity: 0.3;
+  }
+  .thumb-i .frame-inner {
+    position: absolute;
+    inset: 40px;
+    border: 1px solid #8a6a4a;
+    opacity: 0.3;
+  }
+  .thumb-i .vertical-text {
+    position: absolute;
+    top: 70px;
+    left: 90px;
+    font-family: "Shippori Mincho", serif;
+    font-size: 28px;
+    color: #5a3a2a;
+    writing-mode: vertical-rl;
+    letter-spacing: 8px;
+    font-weight: 600;
+  }
+  .thumb-i .vertical-text-right {
+    position: absolute;
+    top: 70px;
+    right: 90px;
+    font-family: "Shippori Mincho", serif;
+    font-size: 28px;
+    color: #8a6a4a;
+    writing-mode: vertical-rl;
+    letter-spacing: 8px;
+  }
+  .thumb-i .center-title {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+  }
+  .thumb-i .center-title .main {
+    font-family: "Shippori Mincho", serif;
+    font-size: 108px;
+    font-weight: 800;
+    color: #3a2a1a;
+    letter-spacing: 20px;
+    margin-bottom: 20px;
+    text-shadow: 0 2px 6px rgba(90,60,40,0.15);
+  }
+  .thumb-i .center-title .sub-seal {
+    display: inline-flex;
+    align-items: center;
+    gap: 30px;
+  }
+  .thumb-i .center-title .seal {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 70px;
+    height: 70px;
+    background: #c85a3a;
+    color: white;
+    font-family: "Shippori Mincho", serif;
+    font-size: 26px;
+    font-weight: 700;
+    border-radius: 8px;
+    transform: rotate(-2deg);
+    letter-spacing: 2px;
+    line-height: 1.2;
+    padding: 8px;
+  }
+  .thumb-i .center-title .seal-text {
+    font-family: "Shippori Mincho", serif;
+    font-size: 36px;
+    color: #5a3a2a;
+    letter-spacing: 6px;
+    font-weight: 600;
+  }
+  .thumb-i .swans {
+    position: absolute;
+    bottom: 60px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 90px;
+    filter: drop-shadow(0 4px 12px rgba(90,60,40,0.2));
+  }
+  .thumb-i .swans .swan-left { display: inline-block; transform: scaleX(-1); }
+  .thumb-i .swans .swan-right { display: inline-block; }
+
+  /* =================================== */
+  /* 【J】問いかけ型 - ターゲット直撃     */
+  /* =================================== */
+  .thumb-j {
+    background: linear-gradient(180deg, #e8e0f0 0%, #f0d8e5 100%);
+  }
+  .thumb-j::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+      radial-gradient(1.5px 1.5px at 10% 20%, rgba(255,255,255,0.6), transparent),
+      radial-gradient(2px 2px at 80% 30%, rgba(255,255,255,0.6), transparent),
+      radial-gradient(1px 1px at 40% 60%, rgba(255,255,255,0.6), transparent),
+      radial-gradient(1.5px 1.5px at 90% 70%, rgba(255,255,255,0.6), transparent);
+  }
+  .thumb-j .question-mark {
+    position: absolute;
+    top: 40px;
+    right: 80px;
+    font-family: "Shippori Mincho", serif;
+    font-size: 200px;
+    color: #c85a9a;
+    opacity: 0.2;
+    line-height: 1;
+  }
+  .thumb-j .tag-top {
+    position: absolute;
+    top: 60px;
+    left: 80px;
+    background: #c85a9a;
+    color: white;
+    padding: 10px 28px;
+    border-radius: 50px;
+    font-size: 24px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    box-shadow: 0 4px 14px rgba(200,90,154,0.35);
+  }
+  .thumb-j .q1 {
+    position: absolute;
+    top: 150px;
+    left: 80px;
+    font-family: "Shippori Mincho", serif;
+    font-size: 52px;
+    font-weight: 700;
+    color: #4a3a5a;
+    letter-spacing: 3px;
+    line-height: 1.4;
+  }
+  .thumb-j .q2 {
+    position: absolute;
+    top: 240px;
+    left: 80px;
+    font-family: "Shippori Mincho", serif;
+    font-size: 52px;
+    font-weight: 700;
+    color: #4a3a5a;
+    letter-spacing: 3px;
+    line-height: 1.4;
+  }
+  .thumb-j .answer-box {
+    position: absolute;
+    bottom: 140px;
+    left: 80px;
+    right: 80px;
+    background: white;
+    padding: 30px 40px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(74,58,90,0.15);
+    display: flex;
+    align-items: center;
+    gap: 24px;
+  }
+  .thumb-j .answer-swans {
+    flex-shrink: 0;
+    font-size: 80px;
+  }
+  .thumb-j .answer-swans .swan-left { display: inline-block; transform: scaleX(-1); }
+  .thumb-j .answer-swans .swan-right { display: inline-block; }
+  .thumb-j .answer-text {
+    font-family: "Shippori Mincho", serif;
+    font-size: 36px;
+    color: #4a3a5a;
+    font-weight: 700;
+    letter-spacing: 2px;
+    line-height: 1.4;
+  }
+  .thumb-j .answer-text .highlight {
+    color: #c85a9a;
+  }
+  .thumb-j .bottom-credit {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #6a5a7a;
+    font-size: 22px;
+    letter-spacing: 4px;
+    font-weight: 500;
+  }
+  .thumb-j .bottom-credit strong {
+    color: #c85a9a;
+    font-weight: 900;
+    font-size: 26px;
+  }
+</style>
+</head>
+<body>
+
+<h1>ココナラ サムネイル案 v2</h1>
+<p class="note">
+  【15年の実績 × 算命学】を軸に、新しい雰囲気の6パターンをご用意しました。<br>
+  実寸は1200×630px、画面では55%縮小表示。お気に入りの案をスクリーンショットでご利用ください。
+</p>
+
+<div class="container">
+
+  <!-- 【E】権威×柔らかさ型 -->
+  <div class="thumb-wrapper">
+    <div class="label">【E】15年バッジ型（権威×柔らかさ）</div>
+    <div class="sublabel">赤丸バッジで15年を強調。検索結果で埋もれない視認性重視</div>
+    <div class="thumb thumb-e">
+      <div class="badge-15">
+        <div class="label-top">占い師歴</div>
+        <div class="years">15</div>
+        <div class="label-bottom">YEARS</div>
+      </div>
+      <div class="swans">
+        <span class="swan-left">🦢</span><span class="swan-right">🦢</span>
+      </div>
+      <div class="main-title">
+        <span class="accent">算命学</span>で<br>宿命をひもとく
+      </div>
+      <div class="subtitle">心のモヤモヤ、やさしく浄化します</div>
+      <div class="author">LIGHTWORK SWAN</div>
+    </div>
+  </div>
+
+  <!-- 【F】算命学特化型 -->
+  <div class="thumb-wrapper">
+    <div class="label">【F】算命学フォーカス型（神秘×信頼）</div>
+    <div class="sublabel">夜空×金色で算命学の権威性を最大化。「算命学」で検索する層に直撃</div>
+    <div class="thumb thumb-f">
+      <div class="experience-line">✦ 占い師歴 15年 ✦</div>
+      <div class="main-title">算命学 鑑定</div>
+      <div class="subtitle-line">宿命<span class="dot">・</span>天命<span class="dot">・</span>過去世</div>
+      <div class="swans">
+        <span class="swan-left">🦢</span><span class="swan-right">🦢</span>
+      </div>
+      <div class="bottom-tag">LIGHTWORK SWAN</div>
+    </div>
+  </div>
+
+  <!-- 【G】柔らか・共感型 -->
+  <div class="thumb-wrapper">
+    <div class="label">【G】共感・話しやすさ型（柔らか・親しみ）</div>
+    <div class="sublabel">「話を聞いてくれそう」な雰囲気を最重視。女性ユーザーに選ばれやすい</div>
+    <div class="thumb thumb-g">
+      <div class="quote-mark">"</div>
+      <div class="main-copy">
+        もう、<span class="wave">ひとり</span>で<br>
+        <span class="accent">抱え込まなくて、</span><br>
+        いいんです。
+      </div>
+      <div class="bubble-left">話してみませんか？</div>
+      <div class="swans">
+        <span class="swan-left">🦢</span><span class="swan-right">🦢</span>
+      </div>
+      <div class="bottom-bar">
+        <div class="chip">占い師歴 15年</div>
+        <div class="chip">算命学</div>
+        <div class="author">SWAN</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 【H】モニター募集型 -->
+  <div class="thumb-wrapper">
+    <div class="label">【H】モニター募集型（レビュー集め・実績作り）</div>
+    <div class="sublabel">最初の5〜10件のレビューを集めるためのサービス専用サムネ</div>
+    <div class="thumb thumb-h">
+      <div class="swans-bg">
+        <span class="swan-left">🦢</span><span class="swan-right">🦢</span>
+      </div>
+      <div class="ribbon">モニター募集中</div>
+      <div class="experience">占い師歴 15年</div>
+      <div class="title-big">算命学<br><span>お試し鑑定</span></div>
+      <div class="sub-line">あなたの宿命、視させてください</div>
+      <div class="price-box">
+        <div class="label">特別モニター価格</div>
+        <div class="price">100<small>円/分</small></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 【I】和モダン・神秘型 -->
+  <div class="thumb-wrapper">
+    <div class="label">【I】和モダン・上品型（品格×神秘）</div>
+    <div class="sublabel">縦書き＋朱印風で、他の出品者と一線を画すデザイン。上級者狙い</div>
+    <div class="thumb thumb-i">
+      <div class="frame"></div>
+      <div class="frame-inner"></div>
+      <div class="vertical-text">占い師歴 拾伍年</div>
+      <div class="vertical-text-right">宿命 ・ 天命</div>
+      <div class="center-title">
+        <div class="main">算命学</div>
+        <div class="sub-seal">
+          <div class="seal">SWAN</div>
+          <div class="seal-text">深層心理リーディング</div>
+        </div>
+      </div>
+      <div class="swans">
+        <span class="swan-left">🦢</span><span class="swan-right">🦢</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 【J】問いかけ型 -->
+  <div class="thumb-wrapper">
+    <div class="label">【J】問いかけ型（ターゲット直撃）</div>
+    <div class="sublabel">悩みを抱える方に「自分のことだ」と思わせる直接的な語りかけ</div>
+    <div class="thumb thumb-j">
+      <div class="question-mark">?</div>
+      <div class="tag-top">こんな方へ</div>
+      <div class="q1">いつも同じ悩みを、</div>
+      <div class="q2">繰り返していませんか？</div>
+      <div class="answer-box">
+        <div class="answer-swans">
+          <span class="swan-left">🦢</span><span class="swan-right">🦢</span>
+        </div>
+        <div class="answer-text">
+          <span class="highlight">算命学</span>で、その根っこが視えます。
+        </div>
+      </div>
+      <div class="bottom-credit">
+        <strong>占い師歴 15年</strong> ｜ LIGHTWORK SWAN
+      </div>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>

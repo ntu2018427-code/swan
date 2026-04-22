@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>ココナラ サムネイル案 - ライトワークSWAN</title>
+<style>
+  body {
+    margin: 0;
+    padding: 40px 20px;
+    background: #f5f5f7;
+    font-family: "Hiragino Sans", "Yu Gothic", sans-serif;
+  }
+  h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 10px;
+  }
+  .note {
+    text-align: center;
+    color: #666;
+    margin-bottom: 40px;
+    font-size: 14px;
+  }
+  .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 50px;
+  }
+  .thumb-wrapper {
+    text-align: center;
+  }
+  .label {
+    font-size: 18px;
+    font-weight: bold;
+    color: #555;
+    margin-bottom: 12px;
+  }
+  .sublabel {
+    font-size: 13px;
+    color: #888;
+    margin-bottom: 15px;
+  }
+
+  /* 共通：1200x630 サイズ */
+  .thumb {
+    width: 1200px;
+    height: 630px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 12px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+    transform: scale(0.55);
+    transform-origin: top center;
+    margin-bottom: -280px;
+  }
+
+  /* ===== パターンA: 共感訴求型 ===== */
+  .thumb-a {
+    background: linear-gradient(135deg, #a8c5e8 0%, #c8a8e8 50%, #e8a8d0 100%);
+  }
+  .thumb-a::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(circle at 20% 30%, rgba(255,255,255,0.4) 0%, transparent 40%),
+      radial-gradient(circle at 80% 70%, rgba(255,255,255,0.3) 0%, transparent 40%);
+  }
+  .thumb-a .stars {
+    position: absolute;
+    inset: 0;
+    background-image:
+      radial-gradient(2px 2px at 10% 20%, white, transparent),
+      radial-gradient(2px 2px at 30% 80%, white, transparent),
+      radial-gradient(1px 1px at 50% 40%, white, transparent),
+      radial-gradient(2px 2px at 70% 60%, white, transparent),
+      radial-gradient(1px 1px at 90% 30%, white, transparent),
+      radial-gradient(2px 2px at 15% 70%, white, transparent),
+      radial-gradient(1px 1px at 85% 85%, white, transparent);
+  }
+  .thumb-a .swans {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 20px;
+    filter: drop-shadow(0 4px 12px rgba(255,255,255,0.6));
+  }
+  .thumb-a .swans .swan-left {
+    font-size: 180px;
+    transform: scaleX(-1);
+  }
+  .thumb-a .swans .swan-right {
+    font-size: 180px;
+  }
+  .thumb-a .main-copy {
+    position: absolute;
+    top: 240px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 88px;
+    font-weight: 900;
+    color: white;
+    text-shadow: 0 4px 20px rgba(100,50,150,0.5), 0 0 40px rgba(255,255,255,0.3);
+    letter-spacing: 4px;
+    white-space: nowrap;
+  }
+  .thumb-a .sub-copy {
+    position: absolute;
+    top: 380px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(255,255,255,0.95);
+    color: #7b4b9e;
+    font-size: 42px;
+    font-weight: bold;
+    padding: 18px 50px;
+    border-radius: 50px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+    letter-spacing: 2px;
+    white-space: nowrap;
+  }
+  .thumb-a .tag {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: white;
+    font-size: 32px;
+    font-weight: bold;
+    letter-spacing: 6px;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+  }
+  .thumb-a .badge {
+    position: absolute;
+    top: 40px;
+    right: 40px;
+    background: #ff6b9d;
+    color: white;
+    font-size: 28px;
+    font-weight: bold;
+    padding: 12px 24px;
+    border-radius: 50px;
+    box-shadow: 0 4px 15px rgba(255,107,157,0.5);
+    transform: rotate(8deg);
+  }
+
+  /* ===== パターンB: ベネフィット明示型 ===== */
+  .thumb-b {
+    background:
+      radial-gradient(ellipse at top, #3a1e5c 0%, #1a0b3d 100%);
+  }
+  .thumb-b::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+      radial-gradient(1.5px 1.5px at 5% 10%, #fff, transparent),
+      radial-gradient(1px 1px at 15% 30%, #fff, transparent),
+      radial-gradient(2px 2px at 25% 50%, #ffd700, transparent),
+      radial-gradient(1px 1px at 35% 20%, #fff, transparent),
+      radial-gradient(1.5px 1.5px at 45% 70%, #fff, transparent),
+      radial-gradient(2px 2px at 55% 15%, #ffd700, transparent),
+      radial-gradient(1px 1px at 65% 55%, #fff, transparent),
+      radial-gradient(1.5px 1.5px at 75% 35%, #fff, transparent),
+      radial-gradient(1px 1px at 85% 80%, #fff, transparent),
+      radial-gradient(2px 2px at 95% 25%, #ffd700, transparent),
+      radial-gradient(1px 1px at 8% 85%, #fff, transparent),
+      radial-gradient(1.5px 1.5px at 92% 60%, #fff, transparent);
+  }
+  .thumb-b .moon {
+    position: absolute;
+    top: 40px;
+    right: 60px;
+    font-size: 90px;
+    filter: drop-shadow(0 0 30px rgba(255,215,0,0.6));
+  }
+  .thumb-b .crystal {
+    position: absolute;
+    top: 60px;
+    left: 60px;
+    font-size: 80px;
+    filter: drop-shadow(0 0 20px rgba(200,168,232,0.8));
+  }
+  .thumb-b .swans {
+    position: absolute;
+    top: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 10px;
+    filter: drop-shadow(0 0 25px rgba(255,215,0,0.5));
+  }
+  .thumb-b .swans .swan-left {
+    font-size: 130px;
+    transform: scaleX(-1);
+  }
+  .thumb-b .swans .swan-right {
+    font-size: 130px;
+  }
+  .thumb-b .main-copy {
+    position: absolute;
+    top: 200px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 110px;
+    font-weight: 900;
+    color: #ffd700;
+    text-shadow:
+      0 0 20px rgba(255,215,0,0.8),
+      0 0 40px rgba(255,215,0,0.5),
+      0 4px 15px rgba(0,0,0,0.5);
+    letter-spacing: 6px;
+    white-space: nowrap;
+  }
+  .thumb-b .sub-copy {
+    position: absolute;
+    top: 350px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 50px;
+    font-weight: bold;
+    color: white;
+    letter-spacing: 4px;
+    white-space: nowrap;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+  }
+  .thumb-b .features {
+    position: absolute;
+    bottom: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 24px;
+    white-space: nowrap;
+  }
+  .thumb-b .feature {
+    background: linear-gradient(135deg, #c8a8e8, #e8a8d0);
+    color: #3a1e5c;
+    font-size: 32px;
+    font-weight: bold;
+    padding: 16px 36px;
+    border-radius: 50px;
+    box-shadow: 0 4px 15px rgba(200,168,232,0.5);
+    letter-spacing: 2px;
+    white-space: nowrap;
+  }
+
+  /* ===== パターンC: 安心感・信頼型 ===== */
+  .thumb-c {
+    background: linear-gradient(180deg, #fff5f0 0%, #ffe8e0 50%, #ffd8e8 100%);
+  }
+  .thumb-c::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(circle at 30% 40%, rgba(255,255,255,0.6) 0%, transparent 50%),
+      radial-gradient(circle at 70% 60%, rgba(255,220,200,0.5) 0%, transparent 50%);
+  }
+  .thumb-c .swans {
+    position: absolute;
+    top: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 16px;
+    filter: drop-shadow(0 4px 20px rgba(200,150,180,0.4));
+  }
+  .thumb-c .swans .swan-left {
+    font-size: 140px;
+    transform: scaleX(-1);
+  }
+  .thumb-c .swans .swan-right {
+    font-size: 140px;
+  }
+  .thumb-c .sparkle-left {
+    position: absolute;
+    top: 100px;
+    left: 150px;
+    font-size: 50px;
+  }
+  .thumb-c .sparkle-right {
+    position: absolute;
+    top: 140px;
+    right: 150px;
+    font-size: 50px;
+  }
+  .thumb-c .main-copy {
+    position: absolute;
+    top: 240px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 78px;
+    font-weight: 900;
+    color: #c85a7a;
+    text-shadow: 0 3px 10px rgba(255,255,255,0.8);
+    letter-spacing: 3px;
+    white-space: nowrap;
+  }
+  .thumb-c .highlight {
+    background: linear-gradient(transparent 60%, #ffd93d 60%);
+    padding: 0 8px;
+  }
+  .thumb-c .sub-copy {
+    position: absolute;
+    top: 360px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 40px;
+    font-weight: bold;
+    color: #7a4a5c;
+    letter-spacing: 2px;
+    white-space: nowrap;
+  }
+  .thumb-c .author {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    background: white;
+    padding: 16px 40px;
+    border-radius: 60px;
+    box-shadow: 0 6px 20px rgba(200,90,122,0.2);
+  }
+  .thumb-c .author-icon {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #ffb6c1, #dda0dd);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 40px;
+  }
+  .thumb-c .author-name {
+    font-size: 32px;
+    font-weight: bold;
+    color: #c85a7a;
+  }
+  .thumb-c .check {
+    color: #4caf50;
+    font-size: 32px;
+  }
+
+  /* ===== パターンD: モニター募集型 ===== */
+  .thumb-d {
+    background: linear-gradient(135deg, #e0f2ff 0%, #d0e8ff 50%, #b8d8f0 100%);
+    overflow: hidden;
+  }
+  .thumb-d .ribbon {
+    position: absolute;
+    top: 40px;
+    left: -50px;
+    background: #ff4757;
+    color: white;
+    font-size: 38px;
+    font-weight: 900;
+    padding: 16px 80px;
+    transform: rotate(-8deg);
+    box-shadow: 0 6px 20px rgba(255,71,87,0.4);
+    letter-spacing: 3px;
+  }
+  .thumb-d .swans-bg {
+    position: absolute;
+    bottom: 20px;
+    right: 40px;
+    display: flex;
+    gap: 0;
+    opacity: 0.35;
+  }
+  .thumb-d .swans-bg .swan-left {
+    font-size: 220px;
+    transform: scaleX(-1);
+  }
+  .thumb-d .swans-bg .swan-right {
+    font-size: 220px;
+    margin-left: -40px;
+  }
+  .thumb-d .main-title {
+    position: absolute;
+    top: 140px;
+    left: 80px;
+    font-size: 88px;
+    font-weight: 900;
+    color: #1a4a7a;
+    text-shadow: 0 3px 10px rgba(255,255,255,0.6);
+    letter-spacing: 4px;
+    line-height: 1.1;
+  }
+  .thumb-d .main-title span {
+    color: #ff6b9d;
+  }
+  .thumb-d .sub-title {
+    position: absolute;
+    top: 355px;
+    left: 80px;
+    font-size: 36px;
+    font-weight: bold;
+    color: #2a5a8a;
+    letter-spacing: 2px;
+    background: rgba(255,255,255,0.8);
+    padding: 8px 20px;
+    border-radius: 10px;
+  }
+  .thumb-d .price-box {
+    position: absolute;
+    bottom: 40px;
+    left: 80px;
+    background: white;
+    padding: 20px 40px;
+    border-radius: 16px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+    border: 3px solid #ff6b9d;
+  }
+  .thumb-d .price-label {
+    font-size: 24px;
+    color: #666;
+    margin-bottom: 4px;
+  }
+  .thumb-d .price-value {
+    font-size: 48px;
+    font-weight: 900;
+    color: #ff6b9d;
+  }
+  .thumb-d .price-value small {
+    font-size: 28px;
+  }
+</style>
+</head>
+<body>
+
+<h1>ココナラ サムネイル案 - ライトワークSWAN</h1>
+<p class="note">※ 実寸は 1200×630px。画面では55%に縮小表示しています。<br>お好みのデザインを右クリック→スクリーンショットで保存、または画面キャプチャでご利用ください。</p>
+
+<div class="container">
+
+  <!-- パターンA: 共感訴求型 -->
+  <div class="thumb-wrapper">
+    <div class="label">【A】優しさ・浄化（共感訴求型）</div>
+    <div class="sublabel">柔らかい色味で女性に安心感を与えるデザイン</div>
+    <div class="thumb thumb-a">
+      <div class="stars"></div>
+      <div class="badge">残り3枠</div>
+      <div class="swans"><span class="swan-left">🦢</span><span class="swan-right">🦢</span></div>
+      <div class="main-copy">心のモヤモヤ、視えます</div>
+      <div class="sub-copy">✨ 深層心理 × 過去世リーディング ✨</div>
+      <div class="tag">ライトワーク SWAN</div>
+    </div>
+  </div>
+
+  <!-- パターンB: インパクト型 -->
+  <div class="thumb-wrapper">
+    <div class="label">【B】神秘・本格派（インパクト型）</div>
+    <div class="sublabel">夜空×金色で神秘的・プロフェッショナルな印象</div>
+    <div class="thumb thumb-b">
+      <div class="moon">🌙</div>
+      <div class="crystal">🔮</div>
+      <div class="swans"><span class="swan-left">🦢</span><span class="swan-right">🦢</span></div>
+      <div class="main-copy">気づきのリーディング</div>
+      <div class="sub-copy">〜魂の記憶から"本当のあなた"へ〜</div>
+      <div class="features">
+        <div class="feature">深層心理</div>
+        <div class="feature">過去世</div>
+        <div class="feature">感情浄化</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- パターンC: 信頼感型 -->
+  <div class="thumb-wrapper">
+    <div class="label">【C】親しみ・信頼（安心感型）</div>
+    <div class="sublabel">初めての方でも相談しやすい柔らかい雰囲気</div>
+    <div class="thumb thumb-c">
+      <div class="sparkle-left">✨</div>
+      <div class="sparkle-right">✨</div>
+      <div class="swans"><span class="swan-left">🦢</span><span class="swan-right">🦢</span></div>
+      <div class="main-copy">もう<span class="highlight">ひとりで</span>抱えないで</div>
+      <div class="sub-copy">心の奥の"本当の声"をお聴きします</div>
+      <div class="author">
+        <div class="author-icon">🦢</div>
+        <div class="author-name">ライトワーク SWAN</div>
+        <div class="check">✓</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- パターンD: 販促型 -->
+  <div class="thumb-wrapper">
+    <div class="label">【D】限定オファー（販促・集客型）</div>
+    <div class="sublabel">最初の実績作りに◎ クリック率が高いタイプ</div>
+    <div class="thumb thumb-d">
+      <div class="swans-bg"><span class="swan-left">🦢</span><span class="swan-right">🦢</span></div>
+      <div class="ribbon">モニター募集中</div>
+      <div class="main-title">深層心理<br><span>浄化セッション</span></div>
+      <div class="sub-title">未消化な感情を、やさしく手放す</div>
+      <div class="price-box">
+        <div class="price-label">特別価格</div>
+        <div class="price-value">100<small>円/分</small></div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>

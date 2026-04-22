@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>サブスライド 4パターン - ライトワークSWAN</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;600;700&family=Klee+One:wght@400;600&family=Zen+Maru+Gothic:wght@400;500;700;900&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/html-to-image@1.11.11/dist/html-to-image.min.js"></script>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    margin: 0; padding: 30px 20px;
+    background: #f5f0fa;
+    font-family: "Zen Maru Gothic", "Hiragino Sans", sans-serif;
+    color: #4a3b4a;
+  }
+  .page-header { text-align: center; margin-bottom: 40px; }
+  .page-header h1 {
+    font-size: 22px; color: #6a5a9e; margin-bottom: 10px;
+    letter-spacing: 3px; font-weight: 500;
+  }
+  .page-header p { font-size: 13px; color: #7a6a9a; line-height: 1.9; }
+  .gallery { max-width: 1100px; margin: 0 auto; display: grid; gap: 30px; }
+  .item {
+    background: white; border-radius: 20px; overflow: hidden;
+    box-shadow: 0 12px 40px rgba(150, 120, 200, 0.18);
+  }
+  .item-header { padding: 20px 24px; border-bottom: 1px solid #f0e8f8; }
+  .item-tag {
+    display: inline-block; font-size: 11px; padding: 4px 14px;
+    background: linear-gradient(135deg, #e0e8f5, #d0d8ee);
+    color: #5a5a9e; border-radius: 20px;
+    letter-spacing: 2px; margin-bottom: 8px; font-weight: 600;
+  }
+  .item-title {
+    font-size: 18px; color: #5a3a5a; font-weight: 700;
+    margin-bottom: 4px; letter-spacing: 1px;
+  }
+  .item-sub { font-size: 13px; color: #8a7a9a; line-height: 1.8; }
+  .thumb-area { padding: 24px; background: #faf5fc; overflow: auto; }
+  .thumb-preview-wrapper {
+    width: 100%; max-width: 900px; margin: 0 auto;
+    position: relative; aspect-ratio: 1200/630;
+  }
+  .thumb-preview-wrapper .thumb {
+    transform: scale(0.75); transform-origin: top left;
+    position: absolute; top: 0; left: 0;
+  }
+  @media (max-width: 1000px) { .thumb-preview-wrapper .thumb { transform: scale(0.55); } }
+  @media (max-width: 768px) { .thumb-preview-wrapper .thumb { transform: scale(0.42); } }
+  @media (max-width: 480px) { .thumb-preview-wrapper .thumb { transform: scale(0.28); } }
+  .thumb {
+    width: 1200px; height: 630px; position: relative;
+    overflow: hidden; border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  }
+  .download-area {
+    padding: 20px 24px; text-align: center; background: white;
+    border-top: 1px solid #f0e8f8;
+  }
+  .download-btn {
+    display: inline-block;
+    background: linear-gradient(135deg, #6a5ac8, #9878d0);
+    color: white; padding: 13px 38px; border-radius: 50px;
+    font-size: 14px; font-weight: 600; letter-spacing: 3px;
+    border: none; cursor: pointer;
+    box-shadow: 0 6px 20px rgba(106, 90, 200, 0.3);
+    transition: transform 0.2s;
+  }
+  .download-btn:hover { transform: translateY(-2px); }
+  .download-btn:disabled { opacity: 0.5; cursor: wait; }
+  .status {
+    margin-top: 8px; font-size: 12px; color: #8a7a9a; min-height: 16px;
+  }
+  .status.success { color: #4a9a6a; }
+
+  /* ======== 背景画像 ======== */
+  .bg-01 { background: url('./bg-01-lavender.jpeg') center center / cover no-repeat; }
+  .bg-02 { background: url('./bg-02-lake.jpeg') center center / cover no-repeat; }
+  .bg-03 { background: url('./bg-03-dawn.jpeg') center center / cover no-repeat; }
+  .bg-04 { background: url('./bg-04-cosmic.jpeg') center center / cover no-repeat; }
+
+  /* ====================================================
+   *【A】こんなお悩み型（悩みリスト）
+   * ==================================================== */
+  .thumb-a .top-label {
+    position: absolute; top: 50px; left: 50%; transform: translateX(-50%);
+    font-family: "Klee One", serif; font-size: 24px; font-weight: 600;
+    color: #5a3a7a; letter-spacing: 6px; white-space: nowrap;
+    background: rgba(255,255,255,0.85); padding: 8px 28px; border-radius: 50px;
+    box-shadow: 0 4px 14px rgba(120,80,180,0.15);
+    border: 1.5px solid rgba(200, 160, 220, 0.5);
+  }
+  .thumb-a .top-label::before, .thumb-a .top-label::after {
+    content: "❁"; color: #d8487a; margin: 0 10px;
+  }
+  .thumb-a .heading {
+    position: absolute; top: 115px; left: 50%; transform: translateX(-50%);
+    font-family: "Shippori Mincho", serif; font-size: 56px; font-weight: 800;
+    color: #2a1a5a; letter-spacing: 6px; white-space: nowrap; text-align: center;
+    text-shadow: 0 2px 14px rgba(255,255,255,0.8);
+  }
+  .thumb-a .heading .ac { color: #c8487a; }
+  .thumb-a .troubles {
+    position: absolute; top: 210px; left: 50%; transform: translateX(-50%);
+    display: grid; grid-template-columns: 1fr 1fr; gap: 14px 30px;
+    width: 1000px;
+  }
+  .thumb-a .troubles .trouble {
+    background: rgba(255, 255, 255, 0.9);
+    padding: 14px 22px;
+    border-radius: 12px;
+    font-family: "Shippori Mincho", serif; font-size: 22px; font-weight: 600;
+    color: #3a2a5a; letter-spacing: 2px;
+    display: flex; align-items: center; gap: 12px;
+    box-shadow: 0 4px 12px rgba(120,80,180,0.1);
+    border-left: 4px solid #c8a8e0;
+  }
+  .thumb-a .troubles .trouble .check {
+    color: #c8487a; font-size: 20px; flex-shrink: 0;
+  }
+  .thumb-a .bottom-msg {
+    position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%);
+    font-family: "Klee One", serif; font-size: 22px; font-weight: 600;
+    color: #5a3a7a; letter-spacing: 4px; white-space: nowrap;
+  }
+  .thumb-a .bottom-msg::before { content: "▶ "; color: #d8487a; }
+
+  /* ====================================================
+   *【B】鑑定メニュー型
+   * ==================================================== */
+  .thumb-b .top-label {
+    position: absolute; top: 50px; left: 50%; transform: translateX(-50%);
+    font-family: "Klee One", serif; font-size: 22px; font-weight: 600;
+    color: white; letter-spacing: 6px; white-space: nowrap;
+    text-shadow: 0 2px 10px rgba(30,60,120,0.8);
+  }
+  .thumb-b .top-label::before, .thumb-b .top-label::after {
+    content: "◆"; color: #ffd890; margin: 0 10px; font-size: 16px;
+  }
+  .thumb-b .heading {
+    position: absolute; top: 100px; left: 50%; transform: translateX(-50%);
+    font-family: "Shippori Mincho", serif; font-size: 62px; font-weight: 800;
+    color: white; letter-spacing: 8px; white-space: nowrap;
+    text-shadow: 0 3px 16px rgba(30,60,120,0.9), 0 0 30px rgba(100,150,200,0.5);
+  }
+  .thumb-b .heading .ac { color: #ffd890; }
+  .thumb-b .menus {
+    position: absolute; top: 215px; left: 50%; transform: translateX(-50%);
+    display: flex; gap: 24px;
+  }
+  .thumb-b .menu {
+    width: 280px;
+    background: linear-gradient(180deg, rgba(255,250,240,0.96), rgba(254,245,232,0.94));
+    padding: 24px 20px 26px;
+    border-radius: 16px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(30,50,120,0.3);
+    border: 2px solid rgba(232, 201, 120, 0.7);
+  }
+  .thumb-b .menu .num {
+    font-family: "Shippori Mincho", serif;
+    font-size: 16px; color: #b89060;
+    letter-spacing: 4px; margin-bottom: 6px;
+    font-weight: 700;
+  }
+  .thumb-b .menu .icon {
+    font-size: 40px; margin-bottom: 10px;
+  }
+  .thumb-b .menu .name {
+    font-family: "Shippori Mincho", serif;
+    font-size: 28px; font-weight: 800;
+    color: #2a1a5a; letter-spacing: 3px;
+    margin-bottom: 10px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid rgba(200, 160, 220, 0.4);
+  }
+  .thumb-b .menu .desc {
+    font-size: 14px;
+    color: #5a4a6a; line-height: 1.7;
+    letter-spacing: 1px;
+  }
+  .thumb-b .bottom-msg {
+    position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%);
+    font-family: "Klee One", serif; font-size: 22px; font-weight: 600;
+    color: white; letter-spacing: 6px; white-space: nowrap;
+    text-shadow: 0 2px 10px rgba(30,60,120,0.8);
+  }
+  .thumb-b .bottom-msg::before, .thumb-b .bottom-msg::after {
+    content: "❁"; color: #ffd890; margin: 0 10px;
+  }
+
+  /* ====================================================
+   *【C】結果・変化型（話し終わったあと）
+   * ==================================================== */
+  .thumb-c .top-label {
+    position: absolute; top: 60px; left: 50%; transform: translateX(-50%);
+    background: rgba(255,255,255,0.85);
+    padding: 10px 30px; border-radius: 50px;
+    font-family: "Klee One", serif; font-size: 22px; font-weight: 600;
+    color: #a05030; letter-spacing: 6px; white-space: nowrap;
+    box-shadow: 0 4px 14px rgba(180,120,80,0.15);
+    border: 1.5px solid rgba(240, 200, 160, 0.6);
+  }
+  .thumb-c .before {
+    position: absolute; top: 140px; left: 50%; transform: translateX(-50%);
+    text-align: center; white-space: nowrap;
+  }
+  .thumb-c .before .label {
+    display: inline-block;
+    background: rgba(100, 80, 120, 0.15);
+    padding: 4px 20px; border-radius: 50px;
+    font-size: 16px; color: #6a5a7a; font-weight: 700;
+    letter-spacing: 3px; margin-bottom: 10px;
+    border: 1px solid rgba(150, 120, 170, 0.3);
+  }
+  .thumb-c .before .text {
+    font-family: "Shippori Mincho", serif; font-size: 38px; font-weight: 600;
+    color: #6a4a6a; letter-spacing: 5px;
+    text-shadow: 0 2px 10px rgba(255,255,255,0.8);
+  }
+  .thumb-c .arrow {
+    position: absolute; top: 245px; left: 50%; transform: translateX(-50%);
+    font-size: 42px; color: #d8a050;
+    text-shadow: 0 0 20px rgba(255,215,120,0.9);
+  }
+  .thumb-c .after {
+    position: absolute; top: 305px; left: 50%; transform: translateX(-50%);
+    background: linear-gradient(135deg, rgba(255,250,240,0.97), rgba(254,245,232,0.95));
+    padding: 22px 56px; border-radius: 14px;
+    text-align: center; white-space: nowrap;
+    box-shadow: 0 12px 40px rgba(180,120,80,0.3);
+    border: 2px solid rgba(232, 180, 120, 0.7);
+  }
+  .thumb-c .after .label {
+    display: inline-block;
+    background: linear-gradient(135deg, #ffb870, #ff9050);
+    color: white;
+    padding: 4px 18px; border-radius: 50px;
+    font-size: 15px; font-weight: 900;
+    letter-spacing: 3px; margin-bottom: 10px;
+  }
+  .thumb-c .after .text {
+    font-family: "Shippori Mincho", serif; font-size: 60px; font-weight: 800;
+    color: #2a1a5a; letter-spacing: 8px; line-height: 1;
+  }
+  .thumb-c .after .text .ac {
+    color: #d8487a; position: relative;
+  }
+  .thumb-c .after .text .ac::after {
+    content: ""; position: absolute; left: -4px; right: -4px; bottom: 4px;
+    height: 10px; background: rgba(255, 210, 120, 0.5);
+    z-index: -1; border-radius: 3px;
+  }
+  .thumb-c .bottom-msg {
+    position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%);
+    font-family: "Klee One", serif; font-size: 20px; font-weight: 600;
+    color: #8a5a5a; letter-spacing: 4px;
+    background: rgba(255,255,255,0.8); padding: 8px 24px; border-radius: 50px;
+    white-space: nowrap;
+  }
+
+  /* ====================================================
+   *【D】安心の約束型（3つの約束）
+   * ==================================================== */
+  .thumb-d .top-label {
+    position: absolute; top: 55px; left: 50%; transform: translateX(-50%);
+    font-family: "Klee One", serif; font-size: 22px; font-weight: 600;
+    color: #ffd890; letter-spacing: 6px; white-space: nowrap;
+    text-shadow: 0 2px 10px rgba(30,20,60,0.85);
+  }
+  .thumb-d .top-label::before, .thumb-d .top-label::after {
+    content: "✦"; color: #ffd890; margin: 0 10px;
+  }
+  .thumb-d .heading {
+    position: absolute; top: 110px; left: 50%; transform: translateX(-50%);
+    font-family: "Shippori Mincho", serif; font-size: 66px; font-weight: 800;
+    color: white; letter-spacing: 10px; white-space: nowrap;
+    text-shadow: 0 3px 18px rgba(30,20,60,0.9), 0 0 30px rgba(180,150,220,0.5);
+  }
+  .thumb-d .heading .ac { color: #ffd890; }
+  .thumb-d .promises {
+    position: absolute; top: 245px; left: 50%; transform: translateX(-50%);
+    display: flex; gap: 20px;
+  }
+  .thumb-d .promise {
+    width: 260px;
+    background: rgba(255, 255, 255, 0.96);
+    padding: 24px 18px;
+    border-radius: 18px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(30,20,80,0.35);
+    border: 1.5px solid rgba(232, 201, 120, 0.7);
+  }
+  .thumb-d .promise .num {
+    display: inline-block;
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #fff4d4, #e8b878);
+    color: #3a2a0a;
+    font-family: "Shippori Mincho", serif;
+    font-size: 22px; font-weight: 800;
+    display: inline-flex; align-items: center; justify-content: center;
+    margin-bottom: 12px;
+    box-shadow: 0 4px 10px rgba(180,120,40,0.3);
+  }
+  .thumb-d .promise .title {
+    font-family: "Shippori Mincho", serif;
+    font-size: 24px; font-weight: 700;
+    color: #2a1a5a; letter-spacing: 3px;
+    margin-bottom: 10px;
+  }
+  .thumb-d .promise .desc {
+    font-size: 13px;
+    color: #5a4a6a; line-height: 1.6;
+  }
+  .thumb-d .bottom-msg {
+    position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%);
+    font-family: "Klee One", serif; font-size: 22px; font-weight: 600;
+    color: white; letter-spacing: 5px; white-space: nowrap;
+    text-shadow: 0 2px 10px rgba(30,20,60,0.8);
+  }
+  .thumb-d .bottom-msg .mark { color: #ffd890; margin: 0 8px; }
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <h1>🦢 サブスライド 4パターン（2枚目以降）</h1>
+  <p>AI生成背景 × お悩み・メニュー・変化・約束の4構成でココナラを充実させる</p>
+</div>
+
+<div class="gallery">
+
+  <!-- 【A】こんなお悩み型 -->
+  <div class="item">
+    <div class="item-header">
+      <span class="item-tag">A ★ お悩み・共感型</span>
+      <div class="item-title">【A】こんなお悩み、ありませんか？</div>
+      <div class="item-sub">ターゲット層の悩みをリストアップ。自分事として引き込む</div>
+    </div>
+    <div class="thumb-area">
+      <div class="thumb-preview-wrapper">
+        <div id="thumb-a" class="thumb thumb-a bg-01">
+          <div class="top-label">FOR YOU</div>
+          <div class="heading">こんなお悩み、<span class="ac">ありませんか</span>？</div>
+          <div class="troubles">
+            <div class="trouble"><span class="check">❁</span>いつも心がモヤモヤする</div>
+            <div class="trouble"><span class="check">❁</span>同じことを繰り返してしまう</div>
+            <div class="trouble"><span class="check">❁</span>本当の自分がわからない</div>
+            <div class="trouble"><span class="check">❁</span>誰にも話せない気持ちがある</div>
+            <div class="trouble"><span class="check">❁</span>自分の宿命を知りたい</div>
+            <div class="trouble"><span class="check">❁</span>これからの人生が不安</div>
+          </div>
+          <div class="bottom-msg">ひとつでも当てはまったら、お話を聞かせてください</div>
+        </div>
+      </div>
+    </div>
+    <div class="download-area">
+      <button class="download-btn" data-target="thumb-a" data-name="A-お悩みリスト">📥 PNGダウンロード</button>
+      <div class="status" id="status-thumb-a"></div>
+    </div>
+  </div>
+
+  <!-- 【B】鑑定メニュー型 -->
+  <div class="item">
+    <div class="item-header">
+      <span class="item-tag">B ★ サービス紹介型</span>
+      <div class="item-title">【B】3つの鑑定メニュー</div>
+      <div class="item-sub">算命学・数秘術・過去世リーディングを分かりやすく配置</div>
+    </div>
+    <div class="thumb-area">
+      <div class="thumb-preview-wrapper">
+        <div id="thumb-b" class="thumb thumb-b bg-02">
+          <div class="top-label">SERVICE MENU</div>
+          <div class="heading">3つの<span class="ac">鑑定メニュー</span></div>
+          <div class="menus">
+            <div class="menu">
+              <div class="num">MENU 01</div>
+              <div class="icon">✦</div>
+              <div class="name">算命学</div>
+              <div class="desc">生年月日から<br>宿命の星を読み解く</div>
+            </div>
+            <div class="menu">
+              <div class="num">MENU 02</div>
+              <div class="icon">❁</div>
+              <div class="name">数秘術</div>
+              <div class="desc">数字が示すあなたの<br>本質と才能を知る</div>
+            </div>
+            <div class="menu">
+              <div class="num">MENU 03</div>
+              <div class="icon">✧</div>
+              <div class="name">過去世</div>
+              <div class="desc">魂の記憶から<br>今世のヒントを得る</div>
+            </div>
+          </div>
+          <div class="bottom-msg">独自の視点で、あなたに寄り添います</div>
+        </div>
+      </div>
+    </div>
+    <div class="download-area">
+      <button class="download-btn" data-target="thumb-b" data-name="B-鑑定メニュー">📥 PNGダウンロード</button>
+      <div class="status" id="status-thumb-b"></div>
+    </div>
+  </div>
+
+  <!-- 【C】結果・変化型 -->
+  <div class="item">
+    <div class="item-header">
+      <span class="item-tag">C ★ 変化・結果型</span>
+      <div class="item-title">【C】話し終わったあとの、変化</div>
+      <div class="item-sub">ビフォー・アフターで「どうなれるか」を見せる</div>
+    </div>
+    <div class="thumb-area">
+      <div class="thumb-preview-wrapper">
+        <div id="thumb-c" class="thumb thumb-c bg-03">
+          <div class="top-label">〜 話し終わったあと 〜</div>
+          <div class="before">
+            <div class="label">BEFORE</div>
+            <div class="text">心のモヤモヤ、ひとりで抱えている</div>
+          </div>
+          <div class="arrow">▼</div>
+          <div class="after">
+            <div class="label">AFTER</div>
+            <div class="text"><span class="ac">心</span>が、すーっと軽くなる</div>
+          </div>
+          <div class="bottom-msg">✦ たくさんのお客様の声をいただいています ✦</div>
+        </div>
+      </div>
+    </div>
+    <div class="download-area">
+      <button class="download-btn" data-target="thumb-c" data-name="C-変化">📥 PNGダウンロード</button>
+      <div class="status" id="status-thumb-c"></div>
+    </div>
+  </div>
+
+  <!-- 【D】安心の約束型 -->
+  <div class="item">
+    <div class="item-header">
+      <span class="item-tag">D ★ 安心・信頼型</span>
+      <div class="item-title">【D】安心の3つの約束</div>
+      <div class="item-sub">ジャッジしない・急かさない・完全守秘で信頼感を醸成</div>
+    </div>
+    <div class="thumb-area">
+      <div class="thumb-preview-wrapper">
+        <div id="thumb-d" class="thumb thumb-d bg-04">
+          <div class="top-label">OUR PROMISE</div>
+          <div class="heading">安心の<span class="ac">3つの約束</span></div>
+          <div class="promises">
+            <div class="promise">
+              <div class="num">1</div>
+              <div class="title">ジャッジしません</div>
+              <div class="desc">どんなお話も、<br>まっすぐ受けとめます</div>
+            </div>
+            <div class="promise">
+              <div class="num">2</div>
+              <div class="title">急かしません</div>
+              <div class="desc">あなたのペースを<br>大切にします</div>
+            </div>
+            <div class="promise">
+              <div class="num">3</div>
+              <div class="title">完全守秘</div>
+              <div class="desc">NDA締結済み、<br>秘密は守ります</div>
+            </div>
+          </div>
+          <div class="bottom-msg"><span class="mark">✦</span>安心して、お話しください<span class="mark">✦</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="download-area">
+      <button class="download-btn" data-target="thumb-d" data-name="D-3つの約束">📥 PNGダウンロード</button>
+      <div class="status" id="status-thumb-d"></div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  document.querySelectorAll('.download-btn').forEach(btn => {
+    btn.addEventListener('click', async () => {
+      const targetId = btn.dataset.target;
+      const fileName = btn.dataset.name || 'thumbnail';
+      const el = document.getElementById(targetId);
+      const status = document.getElementById('status-' + targetId);
+      if (!el) return;
+
+      btn.disabled = true;
+      status.textContent = '画像を生成しています...';
+      status.className = 'status';
+
+      try {
+        const originalTransform = el.style.transform;
+        el.style.transform = 'none';
+        await document.fonts.ready;
+        await new Promise(r => setTimeout(r, 500));
+
+        const dataUrl = await htmlToImage.toPng(el, {
+          width: 1200, height: 630, pixelRatio: 2, cacheBust: true,
+        });
+
+        el.style.transform = originalTransform;
+
+        const link = document.createElement('a');
+        link.download = `ライトワークSWAN_サブ_${fileName}.png`;
+        link.href = dataUrl;
+        link.click();
+
+        status.textContent = '✓ 保存しました！';
+        status.className = 'status success';
+      } catch (err) {
+        console.error(err);
+        status.textContent = '⚠ エラーが発生しました。';
+        status.className = 'status';
+      } finally {
+        btn.disabled = false;
+      }
+    });
+  });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>表紙サムネ【星空バージョン】- ライトワークSWAN</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;600;700;800&family=Klee+One:wght@400;600&family=Zen+Maru+Gothic:wght@400;500;700;900&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/html-to-image@1.11.11/dist/html-to-image.min.js"></script>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    margin: 0; padding: 40px 20px;
+    background: #1a0b3a;
+    font-family: "Zen Maru Gothic", "Hiragino Sans", sans-serif;
+    color: #4a3b4a;
+  }
+  .page-header { text-align: center; margin-bottom: 40px; color: #e0d4f0; }
+  .page-header h1 {
+    font-size: 24px; color: #e8d8f5; margin-bottom: 10px;
+    letter-spacing: 3px; font-weight: 500;
+  }
+  .page-header p { font-size: 13px; color: #b8a8d5; line-height: 1.9; }
+  .gallery { max-width: 1100px; margin: 0 auto; }
+  .item {
+    background: white; border-radius: 20px; overflow: hidden;
+    box-shadow: 0 12px 40px rgba(40, 20, 80, 0.4);
+  }
+  .item-header { padding: 24px 28px; border-bottom: 1px solid #f0e8f8; }
+  .item-tag {
+    display: inline-block; font-size: 11px; padding: 4px 14px;
+    background: linear-gradient(135deg, #3a1a5c, #5a2a7c);
+    color: #ffd890; border-radius: 20px;
+    letter-spacing: 2px; margin-bottom: 8px; font-weight: 700;
+  }
+  .item-title {
+    font-size: 20px; color: #5a3a5a; font-weight: 700;
+    margin-bottom: 6px; letter-spacing: 2px;
+  }
+  .item-sub { font-size: 13px; color: #8a7a9a; line-height: 1.8; }
+  .thumb-area { padding: 30px; background: #faf5fc; overflow: auto; }
+  .thumb-preview-wrapper {
+    width: 100%; max-width: 900px; margin: 0 auto;
+    position: relative; aspect-ratio: 1200/630;
+  }
+  .thumb-preview-wrapper .thumb {
+    transform: scale(0.75); transform-origin: top left;
+    position: absolute; top: 0; left: 0;
+  }
+  @media (max-width: 1000px) { .thumb-preview-wrapper .thumb { transform: scale(0.55); } }
+  @media (max-width: 768px) { .thumb-preview-wrapper .thumb { transform: scale(0.42); } }
+  @media (max-width: 480px) { .thumb-preview-wrapper .thumb { transform: scale(0.28); } }
+  .thumb {
+    width: 1200px; height: 630px; position: relative;
+    overflow: hidden; border-radius: 10px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+  }
+  .download-area {
+    padding: 24px; text-align: center; background: white;
+    border-top: 1px solid #f0e8f8;
+  }
+  .download-btn {
+    display: inline-block;
+    background: linear-gradient(135deg, #5a3a8c, #8a5abc);
+    color: white; padding: 16px 44px; border-radius: 50px;
+    font-size: 15px; font-weight: 600; letter-spacing: 3px;
+    border: none; cursor: pointer;
+    box-shadow: 0 6px 20px rgba(90, 58, 140, 0.4);
+    transition: transform 0.2s;
+  }
+  .download-btn:hover { transform: translateY(-2px); }
+  .download-btn:disabled { opacity: 0.5; cursor: wait; }
+  .status {
+    margin-top: 10px; font-size: 13px; color: #8a7a9a; min-height: 18px;
+  }
+  .status.success { color: #4a9a6a; }
+
+  /* 背景：AI生成星空画像 */
+  .bg-cosmic {
+    background: url('./bg-04-cosmic.jpeg') center center / cover no-repeat;
+  }
+
+  /* ======== 上部セクション（サブタイトル + バッジ） ======== */
+  .thumb-final .top-section {
+    position: absolute; top: 0; left: 0; right: 0;
+    padding: 32px 160px 24px 40px;
+    background: linear-gradient(180deg,
+      rgba(30, 15, 60, 0.75) 0%,
+      rgba(30, 15, 60, 0.45) 60%,
+      transparent 100%);
+    z-index: 4;
+    text-align: center;
+    position: relative;
+  }
+  .thumb-final .top-section .mini-tag {
+    display: inline-block;
+    font-family: "Klee One", serif; font-size: 15px;
+    color: #ffd890; letter-spacing: 4px;
+    margin-bottom: 10px;
+    font-weight: 600;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.6);
+  }
+  .thumb-final .top-section .mini-tag::before,
+  .thumb-final .top-section .mini-tag::after {
+    content: "✦"; color: #ffd890; margin: 0 10px;
+  }
+  .thumb-final .top-section .subtitle {
+    font-family: "Shippori Mincho", serif;
+    font-size: 28px; font-weight: 700;
+    color: #ffffff;
+    letter-spacing: 3px;
+    white-space: nowrap;
+    line-height: 1.3;
+    text-shadow:
+      0 2px 12px rgba(0,0,0,0.8),
+      0 0 20px rgba(120, 80, 180, 0.6);
+  }
+  .thumb-final .top-section .subtitle .emphasis {
+    color: #ffd890;
+    position: relative;
+    font-weight: 800;
+    text-shadow:
+      0 2px 12px rgba(0,0,0,0.8),
+      0 0 20px rgba(255, 200, 100, 0.6);
+  }
+  .thumb-final .top-section .subtitle .q {
+    color: #ffd890;
+    font-weight: 900;
+    margin-left: 4px;
+  }
+
+  /* ======== 15年バッジ ======== */
+  .thumb-final .badge-gold {
+    position: absolute;
+    width: 118px; height: 118px;
+    top: 22px; right: 28px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 5;
+    transform: rotate(5deg);
+  }
+  .thumb-final .badge-gold::before {
+    content: "";
+    position: absolute; inset: 0;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #fff4d4, #f5d89a 60%, #e8b878 100%);
+    box-shadow:
+      0 8px 24px rgba(255, 200, 100, 0.5),
+      0 0 30px rgba(255, 215, 100, 0.4),
+      inset 0 2px 4px rgba(255,255,255,0.8);
+    border: 2px solid rgba(255, 240, 200, 0.95);
+  }
+  .thumb-final .badge-gold::after {
+    content: "";
+    position: absolute; inset: 8px;
+    border-radius: 50%;
+    border: 1.5px dashed rgba(120,80,30,0.5);
+  }
+  .thumb-final .badge-gold > * { position: relative; z-index: 2; }
+  .thumb-final .badge-gold .top {
+    font-family: "Shippori Mincho", serif; font-size: 13px;
+    font-weight: 700; color: #5a3a10; letter-spacing: 2px;
+  }
+  .thumb-final .badge-gold .num {
+    font-family: "Shippori Mincho", serif; font-size: 50px;
+    font-weight: 800; color: #3a2a0a; line-height: 0.95;
+    margin: 2px 0;
+  }
+  .thumb-final .badge-gold .bot {
+    font-family: "Shippori Mincho", serif; font-size: 12px;
+    font-weight: 700; color: #5a3a10; letter-spacing: 4px;
+  }
+
+  /* ======== 中央装飾キラキラ ======== */
+  .thumb-final .center-deco {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 3;
+    font-family: "Shippori Mincho", serif;
+    text-align: center;
+    pointer-events: none;
+  }
+  .thumb-final .center-deco .divider-top,
+  .thumb-final .center-deco .divider-bot {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    color: #ffd890;
+  }
+  .thumb-final .center-deco .divider-top .line,
+  .thumb-final .center-deco .divider-bot .line {
+    width: 110px; height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255, 216, 144, 0.6), transparent);
+  }
+  .thumb-final .center-deco .divider-top .star,
+  .thumb-final .center-deco .divider-bot .star {
+    font-size: 18px;
+    color: #ffd890;
+    text-shadow: 0 0 10px rgba(255, 215, 100, 0.8);
+  }
+
+  /* ======== 下部セクション（メインコピー） ======== */
+  .thumb-final .bottom-section {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    padding: 30px 40px 26px;
+    background: linear-gradient(0deg,
+      rgba(30, 15, 60, 0.88) 0%,
+      rgba(30, 15, 60, 0.6) 70%,
+      transparent 100%);
+    z-index: 4;
+    text-align: center;
+  }
+  .thumb-final .bottom-section .l1 {
+    font-family: "Shippori Mincho", serif; font-size: 44px; font-weight: 700;
+    color: #ffffff; letter-spacing: 6px;
+    margin-bottom: 12px; white-space: nowrap;
+    text-shadow:
+      0 2px 12px rgba(0,0,0,0.7),
+      0 0 24px rgba(120, 80, 180, 0.6);
+  }
+  .thumb-final .bottom-section .l1 .x {
+    color: #ffd890; margin: 0 6px;
+    font-size: 38px;
+    font-weight: 800;
+    text-shadow: 0 0 16px rgba(255, 215, 100, 0.8);
+  }
+  .thumb-final .bottom-section .l1 .keyword {
+    color: #ffffff;
+  }
+  .thumb-final .bottom-section .l2 {
+    font-family: "Shippori Mincho", serif; font-size: 62px; font-weight: 800;
+    color: #ffffff; letter-spacing: 10px; line-height: 1.1;
+    white-space: nowrap;
+    margin-bottom: 8px;
+    text-shadow:
+      0 2px 14px rgba(0,0,0,0.8),
+      0 0 30px rgba(120, 80, 180, 0.7),
+      0 0 40px rgba(255, 215, 100, 0.3);
+  }
+  .thumb-final .bottom-section .l2 .ac {
+    color: #ffd890;
+    position: relative;
+    text-shadow:
+      0 2px 14px rgba(0,0,0,0.6),
+      0 0 30px rgba(255, 215, 100, 0.9);
+  }
+  .thumb-final .bottom-section .l2 .ac::after {
+    content: ""; position: absolute; left: -4px; right: -4px; bottom: 5px;
+    height: 12px; background: rgba(255, 215, 100, 0.25);
+    z-index: -1; border-radius: 3px;
+  }
+  .thumb-final .bottom-section .author {
+    font-family: "Shippori Mincho", serif; font-size: 14px;
+    color: rgba(255, 232, 200, 0.9); letter-spacing: 6px; font-weight: 600;
+    margin-top: 6px;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.6);
+  }
+
+  .help-box {
+    max-width: 720px; margin: 30px auto 0;
+    background: white; padding: 24px 28px;
+    border-radius: 16px; border: 2px solid #d0d0f0;
+  }
+  .help-box h3 { font-size: 15px; color: #5a4a8a; margin-bottom: 12px; }
+  .help-box ul { padding-left: 20px; font-size: 14px; line-height: 2; color: #5a4a6a; }
+  .help-box .note {
+    margin-top: 14px; padding: 10px 14px;
+    background: #f5f0ff; border-radius: 8px;
+    font-size: 13px; color: #5a4a8a;
+  }
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <h1>🌙 表紙サムネ【星空バージョン】</h1>
+  <p>神秘的な星空×月×星座で、スピリチュアルな世界観を最大演出</p>
+</div>
+
+<div class="gallery">
+
+  <div class="item">
+    <div class="item-header">
+      <span class="item-tag">★ 星空バージョン / 神秘・本格派</span>
+      <div class="item-title">算命学×数秘術×過去世で、あなたを総合鑑定</div>
+      <div class="item-sub">星空と月の神秘的な背景で、占い・スピリチュアル感を最大限に演出</div>
+    </div>
+    <div class="thumb-area">
+      <div class="thumb-preview-wrapper">
+        <div id="thumb-final" class="thumb thumb-final bg-cosmic">
+          <div class="top-section">
+            <div class="mini-tag">やさしく寄り添う、心の相談</div>
+            <div class="subtitle">心の奥の<span class="emphasis">"本当の声"</span>を、ひもときます</div>
+            <div class="badge-gold">
+              <div class="top">鑑定歴</div><div class="num">15</div><div class="bot">YEARS</div>
+            </div>
+          </div>
+          <div class="center-deco">
+            <div class="divider-top">
+              <span class="line"></span>
+              <span class="star">✦</span>
+              <span class="line"></span>
+            </div>
+          </div>
+          <div class="bottom-section">
+            <div class="l1"><span class="keyword">算命学</span><span class="x">×</span><span class="keyword">数秘術</span><span class="x">×</span><span class="keyword">過去世</span>で、</div>
+            <div class="l2">あなたを<span class="ac">総合鑑定</span></div>
+            <div class="author">LIGHTWORK SWAN</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="download-area">
+      <button class="download-btn" data-target="thumb-final" data-name="表紙_星空">
+        📥 PNGダウンロード
+      </button>
+      <div class="status" id="status-thumb-final"></div>
+    </div>
+  </div>
+
+</div>
+
+<div class="help-box">
+  <h3>🌙 星空バージョンの特徴</h3>
+  <ul>
+    <li><strong>神秘的な深い紫×金</strong>で、占い・スピリチュアルの世界観を強化</li>
+    <li><strong>月と星座</strong>の美しいビジュアルで、運命や宿命を連想させる</li>
+    <li><strong>ゴールドの文字</strong>で格調高く、権威性がUP</li>
+    <li><strong>夜空の静けさ</strong>が、心を落ち着かせて相談したくなる空気</li>
+    <li>白鳥バージョンと2枚使いで、異なる層に訴求可能</li>
+  </ul>
+  <div class="note">
+    💡 このバージョンは、より本格派・占い好きの方に刺さります。白鳥バージョンは、柔らかい雰囲気が好きな方向け。両方ダウンロードしてA/Bテストもおすすめ。
+  </div>
+</div>
+
+<script>
+  document.querySelectorAll('.download-btn').forEach(btn => {
+    btn.addEventListener('click', async () => {
+      const targetId = btn.dataset.target;
+      const fileName = btn.dataset.name || 'thumbnail';
+      const el = document.getElementById(targetId);
+      const status = document.getElementById('status-' + targetId);
+      if (!el) return;
+
+      btn.disabled = true;
+      status.textContent = '画像を生成しています...';
+      status.className = 'status';
+
+      try {
+        const originalTransform = el.style.transform;
+        el.style.transform = 'none';
+        await document.fonts.ready;
+        await new Promise(r => setTimeout(r, 500));
+
+        const dataUrl = await htmlToImage.toPng(el, {
+          width: 1200, height: 630, pixelRatio: 2, cacheBust: true,
+        });
+
+        el.style.transform = originalTransform;
+
+        const link = document.createElement('a');
+        link.download = `ライトワークSWAN_表紙_${fileName}.png`;
+        link.href = dataUrl;
+        link.click();
+
+        status.textContent = '✓ 保存しました！';
+        status.className = 'status success';
+      } catch (err) {
+        console.error(err);
+        status.textContent = '⚠ エラーが発生しました。';
+        status.className = 'status';
+      } finally {
+        btn.disabled = false;
+      }
+    });
+  });
+</script>
+
+</body>
+</html>

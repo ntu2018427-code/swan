@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>表紙サムネ - ライトワークSWAN（集客仕様）</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;700;800&family=Zen+Maru+Gothic:wght@500;700;900&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/html-to-image@1.11.11/dist/html-to-image.min.js"></script>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    margin: 0;
+    padding: 30px 20px;
+    background: #eef2f8;
+    font-family: "Zen Maru Gothic", "Hiragino Sans", sans-serif;
+    color: #4a3b4a;
+  }
+  .page-header {
+    text-align: center;
+    margin-bottom: 30px;
+  }
+  .page-header h1 {
+    font-size: 22px;
+    color: #4a3b9e;
+    margin-bottom: 10px;
+    letter-spacing: 2px;
+  }
+  .page-header p {
+    font-size: 13px;
+    color: #6a7a9a;
+    line-height: 1.8;
+  }
+  .gallery {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    gap: 30px;
+  }
+  .item {
+    background: white;
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 8px 30px rgba(74, 91, 158, 0.12);
+  }
+  .item-header {
+    padding: 20px 24px;
+    border-bottom: 1px solid #e8ecf5;
+  }
+  .item-tag {
+    display: inline-block;
+    font-size: 11px;
+    padding: 3px 12px;
+    background: #e8dff5;
+    color: #6a4a9e;
+    border-radius: 20px;
+    letter-spacing: 2px;
+    margin-bottom: 6px;
+    font-weight: 600;
+  }
+  .item-title {
+    font-size: 18px;
+    color: #4a3b4a;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+  .item-sub {
+    font-size: 13px;
+    color: #8a7a8a;
+    line-height: 1.7;
+  }
+  .thumb-area {
+    padding: 20px;
+    background: #f5f5fb;
+    overflow: auto;
+  }
+  .thumb-preview-wrapper {
+    width: 100%;
+    max-width: 700px;
+    margin: 0 auto;
+    position: relative;
+    aspect-ratio: 1200/630;
+  }
+  .thumb-preview-wrapper .thumb {
+    transform: scale(0.58);
+    transform-origin: top left;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+  @media (max-width: 768px) {
+    .thumb-preview-wrapper .thumb { transform: scale(0.36); }
+  }
+  @media (max-width: 480px) {
+    .thumb-preview-wrapper .thumb { transform: scale(0.27); }
+  }
+  .thumb {
+    width: 1200px;
+    height: 630px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  }
+  .download-area {
+    padding: 16px 24px;
+    text-align: center;
+    background: white;
+    border-top: 1px solid #e8ecf5;
+  }
+  .download-btn {
+    display: inline-block;
+    background: linear-gradient(135deg, #6a5ac8, #9878d0);
+    color: white;
+    padding: 14px 36px;
+    border-radius: 50px;
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 4px 14px rgba(106, 90, 200, 0.3);
+    transition: transform 0.2s;
+  }
+  .download-btn:hover { transform: translateY(-2px); }
+  .download-btn:disabled { opacity: 0.5; cursor: wait; }
+  .status {
+    margin-top: 8px;
+    font-size: 12px;
+    color: #8a7a8a;
+    min-height: 16px;
+  }
+  .status.success { color: #4a9a6a; }
+
+  /* ============================================================= */
+  /* 【S】表紙・集客仕様（青×紫×ゴールド・安心と信頼）             */
+  /* ============================================================= */
+  .thumb-s {
+    background:
+      linear-gradient(180deg,
+        #c9dff0 0%,
+        #95c5dd 18%,
+        #6db4cf 35%,
+        #5a9ac4 50%,
+        #6a85bc 65%,
+        #7e78bc 80%,
+        #9478bc 100%);
+  }
+  /* 星のキラキラレイヤー */
+  .thumb-s::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+      radial-gradient(2px 2px at 5% 10%, rgba(255,255,255,0.95), transparent),
+      radial-gradient(1.5px 1.5px at 12% 25%, rgba(255,255,255,0.8), transparent),
+      radial-gradient(2.5px 2.5px at 22% 15%, rgba(255,240,180,0.9), transparent),
+      radial-gradient(1px 1px at 32% 32%, rgba(255,255,255,0.8), transparent),
+      radial-gradient(2px 2px at 45% 12%, rgba(255,255,255,0.9), transparent),
+      radial-gradient(1.5px 1.5px at 58% 28%, rgba(255,240,180,0.8), transparent),
+      radial-gradient(2px 2px at 70% 8%, rgba(255,255,255,0.9), transparent),
+      radial-gradient(1.5px 1.5px at 82% 22%, rgba(255,255,255,0.8), transparent),
+      radial-gradient(2.5px 2.5px at 92% 14%, rgba(255,240,180,0.9), transparent),
+      radial-gradient(1.5px 1.5px at 8% 55%, rgba(255,255,255,0.7), transparent),
+      radial-gradient(2px 2px at 96% 55%, rgba(255,255,255,0.7), transparent);
+  }
+  /* 水面の光の筋 */
+  .thumb-s::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 180px;
+    background:
+      repeating-linear-gradient(
+        90deg,
+        transparent 0,
+        transparent 60px,
+        rgba(255,255,255,0.1) 60px,
+        rgba(255,255,255,0.1) 62px
+      );
+    pointer-events: none;
+  }
+
+  .thumb-s .content {
+    position: relative;
+    z-index: 2;
+    height: 100%;
+  }
+
+  /* ゴールドバッジ（15年歴） */
+  .thumb-s .badge-anni {
+    position: absolute;
+    top: 38px;
+    right: 38px;
+    width: 144px;
+    height: 144px;
+    border-radius: 50%;
+    background:
+      radial-gradient(circle at 30% 30%, #fff7d4, #ffd54f 40%, #e8a82a 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-shadow:
+      0 10px 30px rgba(80, 50, 10, 0.35),
+      inset 0 2px 4px rgba(255,255,255,0.5);
+    border: 3px solid rgba(255,255,255,0.95);
+    transform: rotate(6deg);
+    z-index: 4;
+  }
+  .thumb-s .badge-anni::before {
+    content: "";
+    position: absolute;
+    inset: 6px;
+    border-radius: 50%;
+    border: 1.5px dashed rgba(90,60,20,0.4);
+  }
+  .thumb-s .badge-anni .top {
+    font-family: "Shippori Mincho", serif;
+    font-size: 17px;
+    font-weight: 700;
+    color: #5a3a10;
+    letter-spacing: 2px;
+    margin-bottom: 0px;
+  }
+  .thumb-s .badge-anni .num {
+    font-family: "Shippori Mincho", serif;
+    font-size: 62px;
+    font-weight: 900;
+    color: #3a2a0a;
+    line-height: 0.95;
+    letter-spacing: -1px;
+  }
+  .thumb-s .badge-anni .bot {
+    font-family: "Shippori Mincho", serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: #5a3a10;
+    letter-spacing: 4px;
+    margin-top: -2px;
+  }
+
+  /* 大きなキラキラ装飾 */
+  .thumb-s .sparkle {
+    position: absolute;
+    color: #fff4c4;
+    text-shadow:
+      0 0 20px rgba(255, 240, 180, 0.9),
+      0 0 40px rgba(255, 240, 180, 0.5);
+    z-index: 3;
+  }
+  .thumb-s .sparkle-1 { top: 130px; left: 90px; font-size: 42px; }
+  .thumb-s .sparkle-2 { top: 240px; left: 60px; font-size: 28px; }
+  .thumb-s .sparkle-3 { top: 350px; left: 120px; font-size: 32px; }
+  .thumb-s .sparkle-4 { top: 180px; right: 180px; font-size: 30px; }
+  .thumb-s .sparkle-5 { top: 410px; right: 90px; font-size: 38px; }
+  .thumb-s .sparkle-6 { top: 500px; left: 180px; font-size: 26px; }
+
+  /* タグライン（上部） */
+  .thumb-s .tagline {
+    position: absolute;
+    top: 70px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: "Shippori Mincho", serif;
+    font-size: 28px;
+    color: #fff7d8;
+    letter-spacing: 10px;
+    font-weight: 500;
+    white-space: nowrap;
+    text-shadow:
+      0 2px 12px rgba(40, 20, 80, 0.5),
+      0 0 20px rgba(255, 240, 180, 0.4);
+  }
+  .thumb-s .tagline .deco {
+    color: #ffd54f;
+    margin: 0 14px;
+    font-weight: 700;
+  }
+
+  /* キーワードピル（算命学・数秘術） */
+  .thumb-s .keywords {
+    position: absolute;
+    top: 130px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 18px;
+    align-items: center;
+    z-index: 3;
+  }
+  .thumb-s .keywords .kw {
+    background: rgba(255, 255, 255, 0.95);
+    padding: 9px 26px;
+    border-radius: 50px;
+    font-family: "Shippori Mincho", serif;
+    font-size: 26px;
+    font-weight: 700;
+    color: #3a2a5a;
+    letter-spacing: 4px;
+    box-shadow:
+      0 6px 18px rgba(40, 20, 80, 0.25),
+      inset 0 -2px 4px rgba(180, 160, 220, 0.15);
+    border: 1.5px solid rgba(255, 215, 100, 0.5);
+    white-space: nowrap;
+  }
+  .thumb-s .keywords .dot {
+    color: #ffd54f;
+    font-size: 20px;
+    text-shadow: 0 0 10px rgba(255,215,80,0.7);
+  }
+
+  /* メインコピー（中央・クリーム白の上品なフレーム） */
+  .thumb-s .main-copy {
+    position: absolute;
+    top: 210px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: linear-gradient(135deg, #fefcf4 0%, #fef8e5 100%);
+    padding: 22px 72px;
+    border-radius: 10px;
+    box-shadow:
+      0 12px 40px rgba(40, 20, 80, 0.3),
+      0 2px 8px rgba(40, 20, 80, 0.15),
+      inset 0 0 0 1.5px rgba(255, 215, 100, 0.6);
+    z-index: 3;
+    text-align: center;
+  }
+  .thumb-s .main-copy .line1 {
+    font-family: "Shippori Mincho", serif;
+    font-size: 44px;
+    font-weight: 700;
+    color: #5a4a2a;
+    letter-spacing: 6px;
+    line-height: 1.2;
+    white-space: nowrap;
+    margin-bottom: 6px;
+  }
+  .thumb-s .main-copy .line2 {
+    font-family: "Shippori Mincho", serif;
+    font-size: 78px;
+    font-weight: 900;
+    color: #2a1a5a;
+    letter-spacing: 10px;
+    line-height: 1.15;
+    white-space: nowrap;
+  }
+  .thumb-s .main-copy .line2 .accent {
+    color: #8a4a7a;
+    background: linear-gradient(transparent 55%, rgba(255,215,100,0.4) 55%, rgba(255,215,100,0.4) 85%, transparent 85%);
+    padding: 0 8px;
+  }
+
+  /* 白鳥 */
+  .thumb-s .swans {
+    position: absolute;
+    top: 360px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 140px;
+    filter:
+      drop-shadow(0 0 40px rgba(220, 200, 255, 0.8))
+      drop-shadow(0 10px 30px rgba(30, 15, 80, 0.5));
+    z-index: 2;
+  }
+  .thumb-s .swans .swan-left { display: inline-block; transform: scaleX(-1); }
+  .thumb-s .swans .swan-right { display: inline-block; }
+
+  /* 水面の波紋 */
+  .thumb-s .ripple {
+    position: absolute;
+    top: 505px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 420px;
+    height: 16px;
+    background: radial-gradient(ellipse, rgba(255,255,255,0.6) 0%, transparent 70%);
+    border-radius: 50%;
+    z-index: 1;
+  }
+
+  /* 著者名（下部） */
+  .thumb-s .author {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    z-index: 3;
+  }
+  .thumb-s .author .name {
+    color: white;
+    font-size: 22px;
+    letter-spacing: 8px;
+    font-weight: 600;
+    font-family: "Shippori Mincho", serif;
+    text-shadow: 0 2px 10px rgba(30, 15, 80, 0.7);
+  }
+  .thumb-s .author .sub {
+    color: rgba(255, 240, 200, 0.9);
+    font-size: 13px;
+    letter-spacing: 5px;
+    margin-top: 2px;
+    text-shadow: 0 2px 6px rgba(30, 15, 80, 0.7);
+  }
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <h1>🦢 表紙サムネ（集客仕様）</h1>
+  <p>青×紫×ゴールドで、安心感・信頼感・専門性を両立</p>
+</div>
+
+<div class="gallery">
+
+  <div class="item">
+    <div class="item-header">
+      <span class="item-tag">表紙・1枚目 ★集客仕様</span>
+      <div class="item-title">心のモヤモヤを、やさしくひもときます</div>
+      <div class="item-sub">算命学・数秘術 × 15年の経験をバランス良く配置し、信頼感と安心感を両立</div>
+    </div>
+    <div class="thumb-area">
+      <div class="thumb-preview-wrapper">
+        <div id="thumb-s" class="thumb thumb-s">
+          <div class="content">
+
+            <!-- キラキラ装飾 -->
+            <div class="sparkle sparkle-1">✦</div>
+            <div class="sparkle sparkle-2">✧</div>
+            <div class="sparkle sparkle-3">✦</div>
+            <div class="sparkle sparkle-4">✧</div>
+            <div class="sparkle sparkle-5">✦</div>
+            <div class="sparkle sparkle-6">✧</div>
+
+            <!-- ゴールドバッジ -->
+            <div class="badge-anni">
+              <div class="top">鑑定歴</div>
+              <div class="num">15</div>
+              <div class="bot">YEARS</div>
+            </div>
+
+            <!-- タグライン -->
+            <div class="tagline">
+              <span class="deco">✦</span>やさしく寄り添う、心の相談<span class="deco">✦</span>
+            </div>
+
+            <!-- キーワード -->
+            <div class="keywords">
+              <div class="kw">算命学</div>
+              <div class="dot">✦</div>
+              <div class="kw">数秘術</div>
+              <div class="dot">✦</div>
+              <div class="kw">過去世リーディング</div>
+            </div>
+
+            <!-- メインコピー -->
+            <div class="main-copy">
+              <div class="line1">〜 心のモヤモヤを、ひもとく 〜</div>
+              <div class="line2">あなたの<span class="accent">本当の声</span>を視ます</div>
+            </div>
+
+            <!-- 白鳥 -->
+            <div class="swans">
+              <span class="swan-left">🦢</span><span class="swan-right">🦢</span>
+            </div>
+
+            <!-- 水面の波紋 -->
+            <div class="ripple"></div>
+
+            <!-- 著者 -->
+            <div class="author">
+              <div class="name">LIGHTWORK SWAN</div>
+              <div class="sub">ライトワーク スワン</div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="download-area">
+      <button class="download-btn" data-target="thumb-s" data-name="00-表紙_集客仕様">
+        📥 PNGダウンロード
+      </button>
+      <div class="status" id="status-thumb-s"></div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  document.querySelectorAll('.download-btn').forEach(btn => {
+    btn.addEventListener('click', async () => {
+      const targetId = btn.dataset.target;
+      const fileName = btn.dataset.name || 'thumbnail';
+      const el = document.getElementById(targetId);
+      const status = document.getElementById('status-' + targetId);
+      if (!el) return;
+
+      btn.disabled = true;
+      status.textContent = '画像を生成しています...';
+      status.className = 'status';
+
+      try {
+        const originalTransform = el.style.transform;
+        el.style.transform = 'none';
+
+        await document.fonts.ready;
+        await new Promise(r => setTimeout(r, 300));
+
+        const dataUrl = await htmlToImage.toPng(el, {
+          width: 1200,
+          height: 630,
+          pixelRatio: 2,
+          cacheBust: true,
+        });
+
+        el.style.transform = originalTransform;
+
+        const link = document.createElement('a');
+        link.download = `ライトワークSWAN_${fileName}.png`;
+        link.href = dataUrl;
+        link.click();
+
+        status.textContent = '✓ 保存しました！';
+        status.className = 'status success';
+      } catch (err) {
+        console.error(err);
+        status.textContent = '⚠ エラーが発生しました。';
+        status.className = 'status';
+      } finally {
+        btn.disabled = false;
+      }
+    });
+  });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ライトワークSWAN | やさしい水辺で、お話しませんか</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600&family=Zen+Kaku+Gothic+New:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --sky: #e8f1f7;
+    --sky-light: #f3f8fc;
+    --water: #c6d9e8;
+    --cream: #fff8f5;
+    --text: #4a5568;
+    --text-soft: #7a8698;
+    --pink: #f5c9d0;
+    --pink-deep: #e89ca7;
+    --lavender: #d8c9e8;
+    --mint: #c5e3d3;
+  }
+
+  body {
+    font-family: "Zen Kaku Gothic New", "Hiragino Sans", sans-serif;
+    color: var(--text);
+    line-height: 2;
+    background: var(--cream);
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, .mincho {
+    font-family: "Shippori Mincho", serif;
+  }
+
+  /* 水彩風ぼかし背景 */
+  .watercolor-bg {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    background:
+      radial-gradient(ellipse 600px 400px at 20% 10%, rgba(245, 201, 208, 0.25) 0%, transparent 60%),
+      radial-gradient(ellipse 500px 500px at 80% 30%, rgba(216, 201, 232, 0.2) 0%, transparent 60%),
+      radial-gradient(ellipse 700px 400px at 50% 70%, rgba(198, 217, 232, 0.25) 0%, transparent 60%),
+      radial-gradient(ellipse 400px 400px at 10% 90%, rgba(197, 227, 211, 0.15) 0%, transparent 60%);
+  }
+
+  main { position: relative; z-index: 1; }
+
+  /* ========== Hero ========== */
+  .hero {
+    min-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 80px 20px;
+    text-align: center;
+    position: relative;
+  }
+  /* 水面の輪 */
+  .hero::before {
+    content: "";
+    position: absolute;
+    bottom: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 500px;
+    height: 500px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(198, 217, 232, 0.3) 0%, transparent 70%);
+    z-index: -1;
+  }
+  .hero-swans {
+    position: relative;
+    font-size: 140px;
+    margin-bottom: 30px;
+    filter: drop-shadow(0 10px 30px rgba(232, 156, 167, 0.3));
+    animation: float 6s ease-in-out infinite;
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+  .hero-swans .swan-left { display: inline-block; transform: scaleX(-1); }
+  .hero-swans .swan-right { display: inline-block; }
+  /* 水面の波紋 */
+  .ripple {
+    position: absolute;
+    bottom: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 300px;
+    height: 30px;
+    background: radial-gradient(ellipse, rgba(198, 217, 232, 0.5) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+  .hero h1 {
+    font-size: 48px;
+    color: var(--text);
+    font-weight: 500;
+    letter-spacing: 6px;
+    margin-bottom: 24px;
+    line-height: 1.6;
+  }
+  .hero h1 .accent {
+    color: var(--pink-deep);
+  }
+  .hero-lead {
+    font-size: 16px;
+    color: var(--text-soft);
+    letter-spacing: 2px;
+    line-height: 2.2;
+    max-width: 480px;
+  }
+  .hero-name {
+    margin-top: 36px;
+    font-size: 14px;
+    letter-spacing: 8px;
+    color: var(--pink-deep);
+    font-family: "Shippori Mincho", serif;
+  }
+
+  /* ========== Section ========== */
+  section {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 80px 20px;
+  }
+  .section-mark {
+    text-align: center;
+    font-size: 40px;
+    margin-bottom: 20px;
+    filter: drop-shadow(0 4px 12px rgba(232, 156, 167, 0.3));
+  }
+  .section-mark .swan-left { display: inline-block; transform: scaleX(-1); }
+  .section-mark .swan-right { display: inline-block; margin-left: 8px; }
+  .section-title {
+    text-align: center;
+    font-size: 30px;
+    color: var(--text);
+    font-weight: 500;
+    margin-bottom: 10px;
+    letter-spacing: 4px;
+    line-height: 1.6;
+  }
+  .section-en {
+    text-align: center;
+    font-size: 11px;
+    color: var(--pink-deep);
+    letter-spacing: 6px;
+    margin-bottom: 40px;
+    font-family: "Shippori Mincho", serif;
+  }
+
+  /* ========== Intro Message ========== */
+  .intro-msg {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    padding: 60px 50px;
+    border-radius: 30px;
+    position: relative;
+    box-shadow: 0 8px 40px rgba(198, 217, 232, 0.25);
+  }
+  .intro-msg::before,
+  .intro-msg::after {
+    content: "";
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    z-index: -1;
+  }
+  .intro-msg::before {
+    top: -40px;
+    left: -40px;
+    background: radial-gradient(circle, rgba(245, 201, 208, 0.5), transparent);
+  }
+  .intro-msg::after {
+    bottom: -40px;
+    right: -40px;
+    background: radial-gradient(circle, rgba(216, 201, 232, 0.5), transparent);
+  }
+  .intro-msg p {
+    font-size: 15px;
+    margin-bottom: 20px;
+    color: var(--text);
+    line-height: 2.3;
+  }
+  .intro-msg .opening {
+    font-family: "Shippori Mincho", serif;
+    font-size: 22px;
+    color: var(--pink-deep);
+    text-align: center;
+    margin-bottom: 30px;
+    letter-spacing: 2px;
+    font-weight: 500;
+  }
+  .intro-msg .closing {
+    text-align: right;
+    margin-top: 30px;
+    font-size: 16px;
+    color: var(--pink-deep);
+    font-family: "Shippori Mincho", serif;
+    letter-spacing: 3px;
+    font-weight: 500;
+  }
+
+  /* ========== Concerns ========== */
+  .concerns {
+    background: linear-gradient(180deg, transparent 0%, rgba(255, 248, 245, 0.5) 100%);
+  }
+  .concerns-intro {
+    text-align: center;
+    font-size: 16px;
+    color: var(--text-soft);
+    margin-bottom: 40px;
+  }
+  .concerns-list {
+    display: grid;
+    gap: 14px;
+  }
+  .concern {
+    background: white;
+    padding: 18px 28px;
+    border-radius: 50px;
+    font-size: 15px;
+    color: var(--text);
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    box-shadow: 0 2px 14px rgba(198, 217, 232, 0.2);
+    transition: transform 0.2s;
+  }
+  .concern:hover { transform: translateX(6px); }
+  .concern-swan {
+    font-size: 22px;
+    flex-shrink: 0;
+  }
+
+  /* ========== Services ========== */
+  .services-grid {
+    display: grid;
+    gap: 20px;
+  }
+  .svc-card {
+    background: white;
+    border-radius: 24px;
+    padding: 36px 40px;
+    display: grid;
+    grid-template-columns: 100px 1fr;
+    gap: 30px;
+    align-items: center;
+    box-shadow: 0 4px 24px rgba(198, 217, 232, 0.2);
+    position: relative;
+    overflow: hidden;
+  }
+  .svc-card::before {
+    content: "";
+    position: absolute;
+    top: -50px;
+    right: -50px;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    opacity: 0.3;
+  }
+  .svc-card:nth-child(1)::before { background: radial-gradient(circle, var(--pink), transparent); }
+  .svc-card:nth-child(2)::before { background: radial-gradient(circle, var(--lavender), transparent); }
+  .svc-card:nth-child(3)::before { background: radial-gradient(circle, var(--mint), transparent); }
+
+  .svc-circle {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 50px;
+    background: linear-gradient(135deg, var(--sky-light), white);
+    box-shadow: 0 4px 14px rgba(198, 217, 232, 0.3);
+  }
+  .svc-content h3 {
+    font-size: 20px;
+    color: var(--text);
+    margin-bottom: 10px;
+    font-weight: 500;
+    letter-spacing: 2px;
+  }
+  .svc-content p {
+    font-size: 14px;
+    color: var(--text-soft);
+    line-height: 2;
+  }
+
+  /* ========== Flow ========== */
+  .flow-steps {
+    position: relative;
+  }
+  .flow-steps::before {
+    content: "";
+    position: absolute;
+    left: 40px;
+    top: 40px;
+    bottom: 40px;
+    width: 2px;
+    background: linear-gradient(180deg, var(--pink), var(--lavender), var(--sky));
+    z-index: 0;
+  }
+  .flow-step {
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    gap: 30px;
+    margin-bottom: 30px;
+    position: relative;
+    z-index: 1;
+  }
+  .flow-circle {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 14px rgba(198, 217, 232, 0.3);
+    position: relative;
+  }
+  .flow-circle .swan {
+    font-size: 36px;
+    opacity: 0.4;
+  }
+  .flow-circle .num {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    font-weight: 500;
+    color: var(--pink-deep);
+    font-family: "Shippori Mincho", serif;
+  }
+  .flow-body {
+    background: white;
+    padding: 24px 28px;
+    border-radius: 20px;
+    box-shadow: 0 3px 14px rgba(198, 217, 232, 0.15);
+  }
+  .flow-body h4 {
+    font-size: 17px;
+    color: var(--text);
+    margin-bottom: 6px;
+    font-weight: 500;
+    letter-spacing: 1px;
+  }
+  .flow-body p {
+    font-size: 13px;
+    color: var(--text-soft);
+    line-height: 1.8;
+  }
+
+  /* ========== Schedule ========== */
+  .schedule-card {
+    background: linear-gradient(135deg, white 0%, var(--sky-light) 100%);
+    padding: 60px 50px;
+    border-radius: 30px;
+    text-align: center;
+    box-shadow: 0 8px 40px rgba(198, 217, 232, 0.3);
+    position: relative;
+  }
+  .schedule-card::before {
+    content: "";
+    position: absolute;
+    top: -1px;
+    left: 20%;
+    right: 20%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--pink), transparent);
+  }
+  .schedule-icon {
+    font-size: 40px;
+    margin-bottom: 16px;
+  }
+  .schedule-icon .swan-left { display: inline-block; transform: scaleX(-1); }
+  .schedule-icon .swan-right { display: inline-block; }
+  .schedule-label {
+    font-size: 14px;
+    color: var(--pink-deep);
+    letter-spacing: 4px;
+    margin-bottom: 20px;
+  }
+  .schedule-time {
+    font-family: "Shippori Mincho", serif;
+    font-size: 24px;
+    color: var(--text);
+    margin: 8px 0;
+    letter-spacing: 3px;
+    font-weight: 500;
+  }
+  .schedule-note {
+    font-size: 13px;
+    color: var(--text-soft);
+    margin-top: 24px;
+    line-height: 2;
+  }
+  .price-oval {
+    margin-top: 30px;
+    display: inline-block;
+    padding: 4px;
+    background: linear-gradient(135deg, var(--pink), var(--lavender));
+    border-radius: 50px;
+  }
+  .price-oval-inner {
+    background: white;
+    padding: 16px 40px;
+    border-radius: 50px;
+  }
+  .price-oval-inner .label {
+    font-size: 12px;
+    color: var(--text-soft);
+    letter-spacing: 3px;
+  }
+  .price-oval-inner .value {
+    font-family: "Shippori Mincho", serif;
+    font-size: 36px;
+    color: var(--pink-deep);
+    font-weight: 500;
+  }
+  .price-oval-inner .value small { font-size: 18px; }
+
+  /* ========== CTA ========== */
+  .cta {
+    text-align: center;
+    padding: 100px 20px;
+  }
+  .cta-swans {
+    font-size: 100px;
+    margin-bottom: 24px;
+    filter: drop-shadow(0 8px 24px rgba(232, 156, 167, 0.3));
+    animation: float 6s ease-in-out infinite;
+  }
+  .cta-swans .swan-left { display: inline-block; transform: scaleX(-1); }
+  .cta-swans .swan-right { display: inline-block; }
+  .cta h2 {
+    font-family: "Shippori Mincho", serif;
+    font-size: 32px;
+    color: var(--text);
+    font-weight: 500;
+    margin-bottom: 20px;
+    letter-spacing: 4px;
+    line-height: 1.7;
+  }
+  .cta p {
+    font-size: 15px;
+    color: var(--text-soft);
+    line-height: 2.2;
+    margin-bottom: 40px;
+  }
+  .cta-btn {
+    display: inline-block;
+    background: linear-gradient(135deg, var(--pink-deep), #e8b4bc);
+    color: white;
+    padding: 20px 60px;
+    border-radius: 60px;
+    font-size: 17px;
+    font-weight: 500;
+    letter-spacing: 4px;
+    text-decoration: none;
+    box-shadow: 0 10px 30px rgba(232, 156, 167, 0.35);
+    transition: transform 0.2s;
+    font-family: "Shippori Mincho", serif;
+  }
+  .cta-btn:hover { transform: translateY(-3px); }
+
+  /* ========== Footer ========== */
+  footer {
+    text-align: center;
+    padding: 40px 20px;
+    color: var(--text-soft);
+    font-size: 12px;
+    border-top: 1px solid rgba(198, 217, 232, 0.3);
+  }
+  footer .mark {
+    font-size: 28px;
+    margin-bottom: 10px;
+  }
+  footer .swan-left { display: inline-block; transform: scaleX(-1); }
+  footer .swan-right { display: inline-block; }
+
+  @media (max-width: 720px) {
+    .hero h1 { font-size: 32px; letter-spacing: 3px; }
+    .hero-swans { font-size: 100px; }
+    .intro-msg { padding: 40px 28px; }
+    .section-title { font-size: 24px; }
+    .svc-card {
+      grid-template-columns: 1fr;
+      text-align: center;
+      padding: 30px 24px;
+    }
+    .svc-circle { margin: 0 auto; }
+    .flow-steps::before { left: 32px; }
+    .flow-step { grid-template-columns: 64px 1fr; gap: 16px; }
+    .flow-circle { width: 64px; height: 64px; }
+    .flow-circle .swan { font-size: 28px; }
+    .flow-circle .num { font-size: 20px; }
+    .schedule-card { padding: 40px 24px; }
+    .cta h2 { font-size: 24px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="watercolor-bg"></div>
+
+<main>
+
+<!-- Hero -->
+<div class="hero">
+  <div class="hero-swans">
+    <span class="swan-left">🦢</span><span class="swan-right">🦢</span>
+    <div class="ripple"></div>
+  </div>
+  <h1>やさしい水辺で、<br><span class="accent">お話</span>しませんか。</h1>
+  <p class="hero-lead">
+    算命学 × 深層心理 × 過去世リーディングで、<br>
+    あなたの"宿命"と"本当の心"に寄り添います。
+  </p>
+  <p class="hero-name">LIGHTWORK SWAN</p>
+</div>
+
+<!-- Intro -->
+<section>
+  <div class="section-mark">
+    <span class="swan-left">🦢</span><span class="swan-right">🦢</span>
+  </div>
+  <p class="section-en">MESSAGE FROM SWAN</p>
+  <h2 class="section-title">心のモヤモヤ、<br>ひとりで抱えていませんか？</h2>
+
+  <div class="intro-msg">
+    <p class="opening">〜 はじめまして 〜</p>
+    <p>
+      数あるページの中から、ここに立ち寄ってくださって、本当にありがとうございます。
+      ライトワークSWANと申します。
+    </p>
+    <p>
+      白鳥は、水面では優雅に見えても、水の中では一生懸命に足を動かしているといいます。
+      それはまるで、日々がんばっている、あなたのようです。
+    </p>
+    <p>
+      わたしは、スピリチュアルリーディングと古代中国から伝わる<span style="color:var(--pink-deep);font-weight:600;">算命学</span>を用いて、
+      あなたが生まれもった宿命、そして天が授けた命の道すじをひもといています。
+    </p>
+    <p>
+      誰にも見せられない涙や、言葉にできないモヤモヤ。
+      そんな心の奥にあるものを、ジャッジすることなく、
+      ただやさしく聴かせてください。
+    </p>
+    <p>
+      スピリチュアルというと、少し構えてしまうかもしれません。
+      でも、ここは"特別な場所"ではなく、
+      お茶を飲みながら心をほどくような、やわらかな時間です。
+    </p>
+    <p>
+      どうぞ、安心しておいでください。
+    </p>
+    <p class="closing">— SWAN より</p>
+  </div>
+</section>
+
+<!-- Concerns -->
+<section class="concerns">
+  <div class="section-mark">
+    <span class="swan-left">🦢</span><span class="swan-right">🦢</span>
+  </div>
+  <p class="section-en">FOR YOU</p>
+  <h2 class="section-title">こんなお気持ち、<br>抱えていませんか？</h2>
+  <p class="concerns-intro">ひとつでも心に響いたなら、<br>きっとここでお話しする意味があります。</p>
+
+  <div class="concerns-list">
+    <div class="concern"><span class="concern-swan">🦢</span>理由はわからないけど、いつも心が重い</div>
+    <div class="concern"><span class="concern-swan">🦢</span>同じ人間関係のパターンを繰り返してしまう</div>
+    <div class="concern"><span class="concern-swan">🦢</span>自分の宿命や天命を知ってみたい</div>
+    <div class="concern"><span class="concern-swan">🦢</span>"本当の自分"がわからなくなっている</div>
+    <div class="concern"><span class="concern-swan">🦢</span>ふとした瞬間に涙が出る、説明のできない不安</div>
+    <div class="concern"><span class="concern-swan">🦢</span>算命学で、これからの流れを知りたい</div>
+  </div>
+</section>
+
+<!-- Services -->
+<section>
+  <div class="section-mark">
+    <span class="swan-left">🦢</span><span class="swan-right">🦢</span>
+  </div>
+  <p class="section-en">SERVICES</p>
+  <h2 class="section-title">お話の時間、<br>4つのかたち</h2>
+
+  <div class="services-grid">
+    <div class="svc-card">
+      <div class="svc-circle">🦢</div>
+      <div class="svc-content">
+        <h3>算命学鑑定</h3>
+        <p>生年月日から導かれる宿命の星を読み解き、あなたの本質・才能・運命のリズムをお伝えします。「自分らしく生きる」ためのヒントが見つかります。</p>
+      </div>
+    </div>
+    <div class="svc-card">
+      <div class="svc-circle">🦢</div>
+      <div class="svc-content">
+        <h3>深層心理リーディング</h3>
+        <p>心の奥にそっとしまった気持ちを、ひとつひとつ読み解きます。気づかなかった"本当の声"との出会いです。</p>
+      </div>
+    </div>
+    <div class="svc-card">
+      <div class="svc-circle">🦢</div>
+      <div class="svc-content">
+        <h3>過去世リーディング</h3>
+        <p>繰り返されるパターンの根源に、魂の記憶があることも。物語を知ることで、すとんと腑に落ちる瞬間があります。</p>
+      </div>
+    </div>
+    <div class="svc-card">
+      <div class="svc-circle">🦢</div>
+      <div class="svc-content">
+        <h3>感情の浄化</h3>
+        <p>未消化な想いを、やさしく手放すお手伝い。話し終わったあと、心がふっと軽くなる感覚を感じていただけます。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Flow -->
+<section>
+  <div class="section-mark">
+    <span class="swan-left">🦢</span><span class="swan-right">🦢</span>
+  </div>
+  <p class="section-en">FLOW</p>
+  <h2 class="section-title">お話の流れ</h2>
+
+  <div class="flow-steps">
+    <div class="flow-step">
+      <div class="flow-circle">
+        <span class="swan">🦢</span>
+        <span class="num">壱</span>
+      </div>
+      <div class="flow-body">
+        <h4>まずは、ひと呼吸</h4>
+        <p>緊張せず、ふつうにお話しする気持ちで大丈夫です。</p>
+      </div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-circle">
+        <span class="swan">🦢</span>
+        <span class="num">弐</span>
+      </div>
+      <div class="flow-body">
+        <h4>お気持ちをゆっくりと</h4>
+        <p>言葉にならなくても、うまく説明できなくても構いません。</p>
+      </div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-circle">
+        <span class="swan">🦢</span>
+        <span class="num">参</span>
+      </div>
+      <div class="flow-body">
+        <h4>リーディングの時間</h4>
+        <p>心の奥や過去世から、感じ取ったことをやさしくお伝えします。</p>
+      </div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-circle">
+        <span class="swan">🦢</span>
+        <span class="num">四</span>
+      </div>
+      <div class="flow-body">
+        <h4>これからを、そっと</h4>
+        <p>あなたのペースで歩んでいけるような、やさしいメッセージを。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Schedule -->
+<section>
+  <div class="section-mark">
+    <span class="swan-left">🦢</span><span class="swan-right">🦢</span>
+  </div>
+  <p class="section-en">SCHEDULE</p>
+  <h2 class="section-title">お話しできる時間</h2>
+
+  <div class="schedule-card">
+    <div class="schedule-icon">
+      <span class="swan-left">🦢</span><span class="swan-right">🦢</span>
+    </div>
+    <p class="schedule-label">📞 ELECTIRIC SESSION</p>
+    <p class="schedule-time">午後 1:00 ― 4:00</p>
+    <p class="schedule-time">午後 7:00 ― 11:00</p>
+    <p class="schedule-note">
+      ※ ご希望の時間がございましたら、お気軽にご相談ください。<br>
+      できるかぎり合わせてお話しします。
+    </p>
+    <div class="price-oval">
+      <div class="price-oval-inner">
+        <p class="label">お話料金</p>
+        <p class="value">100<small> 円/分</small></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta">
+  <div class="cta-swans">
+    <span class="swan-left">🦢</span><span class="swan-right">🦢</span>
+  </div>
+  <h2>小さな勇気を、<br>大きな一歩に。</h2>
+  <p>
+    あなたの「話してみようかな」という気持ちを、<br>
+    白鳥の羽のようにやわらかく、お迎えします。
+  </p>
+  <a href="#" class="cta-btn">お話を申し込む</a>
+</section>
+
+</main>
+
+<footer>
+  <div class="mark">
+    <span class="swan-left">🦢</span><span class="swan-right">🦢</span>
+  </div>
+  <p>© 2026 LIGHTWORK SWAN</p>
+  <p style="margin-top:6px;">このページに来てくださって、ありがとうございます。</p>
+</footer>
+
+</body>
+</html>

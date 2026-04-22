@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>表紙サムネ【淡い星空バージョン】</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;600;700;800&family=Klee+One:wght@400;600&family=Zen+Maru+Gothic:wght@400;500;700;900&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/html-to-image@1.11.11/dist/html-to-image.min.js"></script>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    margin: 0; padding: 40px 20px;
+    background: #f5f0fa;
+    font-family: "Zen Maru Gothic", "Hiragino Sans", sans-serif;
+    color: #4a3b4a;
+  }
+  .page-header { text-align: center; margin-bottom: 40px; }
+  .page-header h1 {
+    font-size: 24px; color: #6a5a9e; margin-bottom: 10px;
+    letter-spacing: 3px; font-weight: 500;
+  }
+  .page-header p { font-size: 13px; color: #7a6a9a; line-height: 1.9; }
+  .gallery { max-width: 1100px; margin: 0 auto; }
+  .item {
+    background: white; border-radius: 20px; overflow: hidden;
+    box-shadow: 0 12px 40px rgba(150, 120, 200, 0.18);
+  }
+  .item-header { padding: 24px 28px; border-bottom: 1px solid #f0e8f8; }
+  .item-tag {
+    display: inline-block; font-size: 11px; padding: 4px 14px;
+    background: linear-gradient(135deg, #f0e0f5, #f5d0e5);
+    color: #8a5a9e; border-radius: 20px;
+    letter-spacing: 2px; margin-bottom: 8px; font-weight: 600;
+  }
+  .item-title {
+    font-size: 20px; color: #5a3a5a; font-weight: 700;
+    margin-bottom: 6px; letter-spacing: 2px;
+  }
+  .item-sub { font-size: 13px; color: #8a7a9a; line-height: 1.8; }
+  .thumb-area { padding: 30px; background: #faf5fc; overflow: auto; }
+  .thumb-preview-wrapper {
+    width: 100%; max-width: 900px; margin: 0 auto;
+    position: relative; aspect-ratio: 1200/630;
+  }
+  .thumb-preview-wrapper .thumb {
+    transform: scale(0.75); transform-origin: top left;
+    position: absolute; top: 0; left: 0;
+  }
+  @media (max-width: 1000px) { .thumb-preview-wrapper .thumb { transform: scale(0.55); } }
+  @media (max-width: 768px) { .thumb-preview-wrapper .thumb { transform: scale(0.42); } }
+  @media (max-width: 480px) { .thumb-preview-wrapper .thumb { transform: scale(0.28); } }
+  .thumb {
+    width: 1200px; height: 630px; position: relative;
+    overflow: hidden; border-radius: 10px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+  }
+  .download-area {
+    padding: 24px; text-align: center; background: white;
+    border-top: 1px solid #f0e8f8;
+  }
+  .download-btn {
+    display: inline-block;
+    background: linear-gradient(135deg, #6a5ac8, #9878d0);
+    color: white; padding: 16px 44px; border-radius: 50px;
+    font-size: 15px; font-weight: 600; letter-spacing: 3px;
+    border: none; cursor: pointer;
+    box-shadow: 0 6px 20px rgba(106, 90, 200, 0.35);
+    transition: transform 0.2s;
+  }
+  .download-btn:hover { transform: translateY(-2px); }
+  .download-btn:disabled { opacity: 0.5; cursor: wait; }
+  .status {
+    margin-top: 10px; font-size: 13px; color: #8a7a9a; min-height: 18px;
+  }
+  .status.success { color: #4a9a6a; }
+
+  /* 背景：AI生成・キラキラ魔法の星空 */
+  .bg-pale-cosmic {
+    background: url('./bg-09-sparkly.jpeg') center center / cover no-repeat;
+  }
+
+  /* ======== 中央コンテンツ（全テキスト中央配置） ======== */
+  .thumb-final .center-content {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    text-align: center;
+    z-index: 4;
+    padding: 0 40px;
+  }
+  .thumb-final .mini-tag {
+    display: inline-block;
+    font-family: "Klee One", serif; font-size: 22px;
+    color: #6a3a8a; letter-spacing: 4px;
+    margin-bottom: 22px;
+    font-weight: 700;
+    text-shadow: 0 2px 8px rgba(255,255,255,0.95);
+  }
+  .thumb-final .mini-tag::before,
+  .thumb-final .mini-tag::after {
+    content: "❁"; color: #d8487a; margin: 0 10px;
+  }
+  .thumb-final .subtitle {
+    font-family: "Klee One", "Zen Maru Gothic", serif;
+    font-size: 32px; font-weight: 600;
+    color: #3a2a5a;
+    letter-spacing: 3px;
+    white-space: nowrap;
+    line-height: 1.3;
+    text-shadow: 0 2px 10px rgba(255,255,255,0.9);
+    margin-bottom: 36px;
+  }
+  .thumb-final .subtitle .emphasis {
+    color: #c8487a;
+    position: relative;
+    font-weight: 700;
+  }
+  .thumb-final .subtitle .emphasis::after {
+    content: ""; position: absolute; left: -2px; right: -2px; bottom: 3px;
+    height: 8px; background: rgba(255, 210, 120, 0.65);
+    z-index: -1; border-radius: 2px;
+  }
+  .thumb-final .divider-deco {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    margin-bottom: 28px;
+    color: #c8a060;
+  }
+  .thumb-final .divider-deco .line {
+    width: 80px; height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(200, 160, 96, 0.6), transparent);
+  }
+  .thumb-final .divider-deco .star {
+    font-size: 18px;
+    color: #c8a060;
+  }
+
+  /* ======== 15年バッジ（左上に移動） ======== */
+  .thumb-final .badge-gold {
+    position: absolute;
+    width: 118px; height: 118px;
+    top: 22px; left: 28px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 5;
+    transform: rotate(-5deg);
+  }
+  .thumb-final .badge-gold::before {
+    content: "";
+    position: absolute; inset: 0;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #fff4d4, #f5d89a 60%, #e8b878 100%);
+    box-shadow: 0 6px 20px rgba(180, 140, 60, 0.4), inset 0 2px 4px rgba(255,255,255,0.8);
+    border: 2px solid white;
+  }
+  .thumb-final .badge-gold::after {
+    content: "";
+    position: absolute; inset: 8px;
+    border-radius: 50%;
+    border: 1.5px dashed rgba(120,80,30,0.45);
+  }
+  .thumb-final .badge-gold > * { position: relative; z-index: 2; }
+  .thumb-final .badge-gold .top {
+    font-family: "Klee One", "Zen Maru Gothic", serif; font-size: 13px;
+    font-weight: 600; color: #5a3a10; letter-spacing: 2px;
+  }
+  .thumb-final .badge-gold .num {
+    font-family: "Zen Maru Gothic", serif; font-size: 50px;
+    font-weight: 900; color: #3a2a0a; line-height: 0.95;
+    margin: 2px 0;
+  }
+  .thumb-final .badge-gold .bot {
+    font-family: "Klee One", "Zen Maru Gothic", serif; font-size: 12px;
+    font-weight: 600; color: #5a3a10; letter-spacing: 4px;
+  }
+
+  /* ======== メインコピー（中央・l1とl2） ======== */
+  .thumb-final .l1 {
+    font-family: "Zen Maru Gothic", "Klee One", serif; font-size: 44px; font-weight: 700;
+    color: #2a2060; letter-spacing: 8px;
+    margin-bottom: 16px; white-space: nowrap;
+    text-shadow: 0 2px 10px rgba(255,255,255,0.85);
+  }
+  .thumb-final .l1 .x {
+    color: #c8487a; margin: 0 10px;
+    font-size: 38px;
+    font-weight: 700;
+  }
+  .thumb-final .l1 .keyword {
+    color: #2a2060;
+  }
+  .thumb-final .l2 {
+    font-family: "Zen Maru Gothic", "Klee One", serif; font-size: 52px; font-weight: 900;
+    color: #2a2060; letter-spacing: 6px; line-height: 1.1;
+    white-space: nowrap;
+    margin-bottom: 16px;
+    text-shadow: 0 2px 12px rgba(255,255,255,0.85);
+  }
+  .thumb-final .l2 .ac {
+    color: #c8487a;
+    position: relative;
+  }
+  .thumb-final .l2 .ac::after {
+    content: ""; position: absolute; left: -4px; right: -4px; bottom: 5px;
+    height: 12px; background: rgba(255, 210, 120, 0.55);
+    z-index: -1; border-radius: 3px;
+  }
+  .thumb-final .author {
+    font-family: "Klee One", "Zen Maru Gothic", serif; font-size: 15px;
+    color: #6a4a8a; letter-spacing: 6px; font-weight: 500;
+    margin-top: 6px;
+    text-shadow: 0 1px 6px rgba(255,255,255,0.8);
+  }
+  .thumb-final .author-jp {
+    font-family: "Klee One", "Zen Maru Gothic", serif; font-size: 13px;
+    color: #8a6aaa; letter-spacing: 5px; font-weight: 500;
+    margin-top: 2px;
+    text-shadow: 0 1px 6px rgba(255,255,255,0.8);
+  }
+
+  .help-box {
+    max-width: 720px; margin: 30px auto 0;
+    background: white; padding: 24px 28px;
+    border-radius: 16px; border: 2px solid #e0d0f0;
+  }
+  .help-box h3 { font-size: 15px; color: #6a4a8a; margin-bottom: 12px; }
+  .help-box ul { padding-left: 20px; font-size: 14px; line-height: 2; color: #5a4a6a; }
+  .help-box .note {
+    margin-top: 14px; padding: 10px 14px;
+    background: #f5f0ff; border-radius: 8px;
+    font-size: 13px; color: #5a4a8a;
+  }
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <h1>🌙 表紙サムネ【淡い星空バージョン】</h1>
+  <p>やさしい淡いラベンダーの星空で、柔らかく神秘的な雰囲気</p>
+</div>
+
+<div class="gallery">
+
+  <div class="item">
+    <div class="item-header">
+      <span class="item-tag">★ 淡い星空バージョン</span>
+      <div class="item-title">算命学×数秘術×過去世で、あなたを総合鑑定</div>
+      <div class="item-sub">淡いラベンダー×水色の星空で、優しさと神秘性の両立</div>
+    </div>
+    <div class="thumb-area">
+      <div class="thumb-preview-wrapper">
+        <div id="thumb-final" class="thumb thumb-final bg-pale-cosmic">
+          <div class="badge-gold">
+            <div class="top">鑑定歴</div><div class="num">15</div><div class="bot">YEARS</div>
+          </div>
+          <div class="center-content">
+            <div class="mini-tag">やさしく寄り添う、心の相談</div>
+            <div class="subtitle">心の奥の<span class="emphasis">"本当の声"</span>を、ひもときます</div>
+            <div class="divider-deco">
+              <span class="line"></span>
+              <span class="star">✦</span>
+              <span class="line"></span>
+            </div>
+            <div class="l1"><span class="keyword">算命学</span><span class="x">×</span><span class="keyword">数秘術</span></div>
+            <div class="l2">あなたの<span class="ac">すべて</span>に、寄り添います</div>
+            <div class="author">LIGHTWORK SWAN</div>
+            <div class="author-jp">ライトワーカー スワン</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="download-area">
+      <button class="download-btn" data-target="thumb-final" data-name="表紙_淡い星空">
+        📥 PNGダウンロード
+      </button>
+      <div class="status" id="status-thumb-final"></div>
+    </div>
+  </div>
+
+</div>
+
+<div class="help-box">
+  <h3>🌙 淡い星空バージョンの特徴</h3>
+  <ul>
+    <li><strong>淡いラベンダー×水色×ピンク</strong>の夢幻的な星空</li>
+    <li><strong>柔らかな三日月</strong>で優しさを演出</li>
+    <li>文字は濃紺で<strong>読みやすさを確保</strong>（暗い夜空より読みやすい）</li>
+    <li><strong>60代女性にも刺さる</strong>優しいトーン</li>
+    <li>前バージョン（深い星空）より親しみやすい印象</li>
+  </ul>
+  <div class="note">
+    💡 このバージョンは、暗めの夜空バージョンよりも柔らかく、女性層にアプローチしやすいです。
+  </div>
+</div>
+
+<script>
+  document.querySelectorAll('.download-btn').forEach(btn => {
+    btn.addEventListener('click', async () => {
+      const targetId = btn.dataset.target;
+      const fileName = btn.dataset.name || 'thumbnail';
+      const el = document.getElementById(targetId);
+      const status = document.getElementById('status-' + targetId);
+      if (!el) return;
+
+      btn.disabled = true;
+      status.textContent = '画像を生成しています...';
+      status.className = 'status';
+
+      try {
+        const originalTransform = el.style.transform;
+        el.style.transform = 'none';
+        await document.fonts.ready;
+        await new Promise(r => setTimeout(r, 500));
+
+        const dataUrl = await htmlToImage.toPng(el, {
+          width: 1200, height: 630, pixelRatio: 2, cacheBust: true,
+        });
+
+        el.style.transform = originalTransform;
+
+        const link = document.createElement('a');
+        link.download = `ライトワークSWAN_表紙_${fileName}.png`;
+        link.href = dataUrl;
+        link.click();
+
+        status.textContent = '✓ 保存しました！';
+        status.className = 'status success';
+      } catch (err) {
+        console.error(err);
+        status.textContent = '⚠ エラーが発生しました。';
+        status.className = 'status';
+      } finally {
+        btn.disabled = false;
+      }
+    });
+  });
+</script>
+
+</body>
+</html>

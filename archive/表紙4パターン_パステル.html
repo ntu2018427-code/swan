@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>表紙サムネ 4パターン（やさしい青紫）- ライトワークSWAN</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;600;700&family=Klee+One:wght@400;600&family=Zen+Maru+Gothic:wght@400;500;700;900&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/html-to-image@1.11.11/dist/html-to-image.min.js"></script>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    margin: 0;
+    padding: 30px 20px;
+    background: #f5f0fa;
+    font-family: "Zen Maru Gothic", "Hiragino Sans", sans-serif;
+    color: #4a3b4a;
+  }
+  .page-header { text-align: center; margin-bottom: 30px; }
+  .page-header h1 {
+    font-size: 22px; color: #6a5a9e; margin-bottom: 10px;
+    letter-spacing: 3px; font-weight: 500;
+  }
+  .page-header p { font-size: 13px; color: #7a6a9a; line-height: 1.8; }
+  .gallery { max-width: 1100px; margin: 0 auto; display: grid; gap: 30px; }
+  .item {
+    background: white; border-radius: 20px; overflow: hidden;
+    box-shadow: 0 8px 30px rgba(150, 120, 200, 0.15);
+  }
+  .item-header { padding: 20px 24px; border-bottom: 1px solid #f0e8f8; }
+  .item-tag {
+    display: inline-block; font-size: 11px; padding: 4px 14px;
+    background: #f0e0f5; color: #8a5a9e; border-radius: 20px;
+    letter-spacing: 2px; margin-bottom: 6px; font-weight: 600;
+  }
+  .item-title {
+    font-size: 17px; color: #5a3a5a; font-weight: 600;
+    margin-bottom: 4px; letter-spacing: 1px;
+  }
+  .item-sub { font-size: 13px; color: #8a7a9a; line-height: 1.7; }
+  .thumb-area { padding: 20px; background: #faf5fc; overflow: auto; }
+  .thumb-preview-wrapper {
+    width: 100%; max-width: 700px; margin: 0 auto;
+    position: relative; aspect-ratio: 1200/630;
+  }
+  .thumb-preview-wrapper .thumb {
+    transform: scale(0.58); transform-origin: top left;
+    position: absolute; top: 0; left: 0;
+  }
+  @media (max-width: 768px) { .thumb-preview-wrapper .thumb { transform: scale(0.36); } }
+  @media (max-width: 480px) { .thumb-preview-wrapper .thumb { transform: scale(0.27); } }
+  .thumb {
+    width: 1200px; height: 630px; position: relative;
+    overflow: hidden; border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  }
+  .download-area {
+    padding: 16px 24px; text-align: center; background: white;
+    border-top: 1px solid #f0e8f8;
+  }
+  .download-btn {
+    display: inline-block;
+    background: linear-gradient(135deg, #c8a0d8, #d8a0c0);
+    color: white; padding: 14px 36px; border-radius: 50px;
+    font-size: 14px; font-weight: 600; letter-spacing: 3px;
+    border: none; cursor: pointer;
+    box-shadow: 0 4px 14px rgba(200, 150, 200, 0.3);
+    transition: transform 0.2s;
+  }
+  .download-btn:hover { transform: translateY(-2px); }
+  .download-btn:disabled { opacity: 0.5; cursor: wait; }
+  .status {
+    margin-top: 8px; font-size: 12px; color: #8a7a9a; min-height: 16px;
+  }
+  .status.success { color: #4a9a6a; }
+
+  /* =========== やさしい明るめの青紫パレット ============ */
+  .bg-soft-sky {
+    background: linear-gradient(180deg,
+      #e8eff9 0%,
+      #d5e5f5 18%,
+      #c8d8ef 35%,
+      #c8c8e8 52%,
+      #d4c8e8 68%,
+      #e0c8e0 85%,
+      #e8d0e0 100%);
+  }
+  .bg-soft-dawn {
+    background: linear-gradient(180deg,
+      #f0e8f8 0%,
+      #e0d4ee 18%,
+      #d0c5e8 35%,
+      #c5bce0 52%,
+      #c8bce0 68%,
+      #d8c8e0 85%,
+      #e5d5e0 100%);
+  }
+  .bg-water-lavender {
+    background: linear-gradient(135deg,
+      #d5e0f0 0%,
+      #c8d0e8 25%,
+      #c5c5e0 50%,
+      #ccbce0 75%,
+      #d5b8d8 100%);
+  }
+  .bg-misty-rose {
+    background: linear-gradient(180deg,
+      #e8e0f0 0%,
+      #d5cce8 30%,
+      #c8c0e0 55%,
+      #ccb8d8 75%,
+      #d8c0d8 100%);
+  }
+
+  /* ===== キラキラ（控えめで柔らかい） ===== */
+  .stars-soft {
+    position: absolute; inset: 0; pointer-events: none; z-index: 1;
+    background-image:
+      radial-gradient(1.5px 1.5px at 10% 15%, rgba(255,255,255,0.85), transparent),
+      radial-gradient(2px 2px at 20% 25%, rgba(255,240,230,0.7), transparent),
+      radial-gradient(1px 1px at 35% 12%, rgba(255,255,255,0.7), transparent),
+      radial-gradient(1.5px 1.5px at 50% 8%, rgba(255,240,230,0.8), transparent),
+      radial-gradient(1px 1px at 62% 22%, rgba(255,255,255,0.65), transparent),
+      radial-gradient(2px 2px at 78% 14%, rgba(255,240,230,0.75), transparent),
+      radial-gradient(1.5px 1.5px at 88% 28%, rgba(255,255,255,0.7), transparent),
+      radial-gradient(1px 1px at 15% 60%, rgba(255,255,255,0.55), transparent),
+      radial-gradient(1.5px 1.5px at 92% 65%, rgba(255,255,255,0.6), transparent);
+  }
+
+  /* ===== ソフトゴールドのバッジ（可愛い版） ===== */
+  .badge-soft {
+    position: absolute;
+    width: 128px;
+    height: 128px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 4;
+  }
+  .badge-soft::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #fff4d4, #f5d89a 60%, #e8b878 100%);
+    box-shadow: 0 6px 18px rgba(180,120,60,0.2);
+  }
+  .badge-soft::after {
+    content: "";
+    position: absolute;
+    inset: 8px;
+    border-radius: 50%;
+    border: 1.5px solid rgba(120,80,30,0.35);
+  }
+  .badge-soft > * { position: relative; z-index: 2; }
+  .badge-soft .top {
+    font-family: "Shippori Mincho", serif; font-size: 14px;
+    font-weight: 600; color: #6a4510; letter-spacing: 3px;
+  }
+  .badge-soft .num {
+    font-family: "Shippori Mincho", serif; font-size: 58px;
+    font-weight: 700; color: #4a3010; line-height: 0.95;
+    margin: 2px 0;
+  }
+  .badge-soft .bot {
+    font-family: "Shippori Mincho", serif; font-size: 13px;
+    font-weight: 600; color: #6a4510; letter-spacing: 4px;
+  }
+
+  /* ===========================================================
+   *【T】やさしい朝空型 - 親しみやすさ重視
+   * =========================================================== */
+  .thumb-t .badge-soft { top: 38px; right: 40px; transform: rotate(5deg); }
+  .thumb-t .heart-sparkle {
+    position: absolute; z-index: 2; font-size: 24px; opacity: 0.7;
+  }
+  .thumb-t .hs1 { top: 90px; left: 120px; color: #f0a8b8; }
+  .thumb-t .hs2 { top: 200px; left: 80px; color: #d8a8c8; font-size: 20px; }
+  .thumb-t .hs3 { top: 140px; right: 200px; color: #c8a8d8; font-size: 22px; }
+  .thumb-t .hs4 { top: 380px; left: 110px; color: #f0a8b8; font-size: 18px; }
+  .thumb-t .hs5 { top: 450px; right: 130px; color: #d8a8c8; font-size: 22px; }
+
+  .thumb-t .tagline {
+    position: absolute; top: 75px; left: 50%; transform: translateX(-50%);
+    font-family: "Klee One", serif; font-size: 26px; font-weight: 600;
+    color: #7a5a8a; letter-spacing: 6px; white-space: nowrap;
+  }
+  .thumb-t .tagline .mark { color: #d8a0b8; margin: 0 12px; }
+
+  .thumb-t .main-copy {
+    position: absolute; top: 135px; left: 50%; transform: translateX(-50%);
+    text-align: center; z-index: 3;
+  }
+  .thumb-t .main-copy .l1 {
+    font-family: "Shippori Mincho", serif; font-size: 34px; font-weight: 500;
+    color: #6a4a7a; letter-spacing: 6px; margin-bottom: 16px;
+    white-space: nowrap;
+  }
+  .thumb-t .main-copy .l1::before,
+  .thumb-t .main-copy .l1::after {
+    content: "〜"; color: #d8a0b8; margin: 0 12px;
+  }
+  .thumb-t .main-copy .l2 {
+    font-family: "Shippori Mincho", serif; font-size: 72px; font-weight: 700;
+    color: #3a2a5a; letter-spacing: 12px; line-height: 1.15;
+    white-space: nowrap;
+    text-shadow: 0 2px 12px rgba(255,255,255,0.6);
+  }
+  .thumb-t .main-copy .l2 .ac {
+    color: #b85a8a;
+    background: linear-gradient(transparent 60%, rgba(240,180,180,0.4) 60% 90%, transparent 90%);
+    padding: 0 6px;
+  }
+
+  .thumb-t .keywords-row {
+    position: absolute; top: 320px; left: 50%; transform: translateX(-50%);
+    display: flex; gap: 16px; align-items: center; z-index: 3;
+  }
+  .thumb-t .kw {
+    background: rgba(255,255,255,0.85);
+    padding: 9px 26px; border-radius: 50px;
+    font-family: "Shippori Mincho", serif; font-size: 24px; font-weight: 600;
+    color: #5a3a6a; letter-spacing: 4px; white-space: nowrap;
+    box-shadow: 0 4px 12px rgba(150,100,180,0.15);
+    border: 1px solid rgba(216, 168, 184, 0.5);
+  }
+  .thumb-t .kw-dot {
+    color: #d8a0b8; font-size: 18px;
+  }
+
+  .thumb-t .swans {
+    position: absolute; top: 390px; left: 50%; transform: translateX(-50%);
+    font-size: 130px;
+    filter: drop-shadow(0 0 30px rgba(255,255,255,0.7))
+            drop-shadow(0 8px 20px rgba(150,100,180,0.25));
+    z-index: 2;
+  }
+  .thumb-t .swans .swan-left { display: inline-block; transform: scaleX(-1); }
+  .thumb-t .swans .swan-right { display: inline-block; }
+  .thumb-t .author {
+    position: absolute; bottom: 34px; left: 50%; transform: translateX(-50%);
+    text-align: center; z-index: 3;
+  }
+  .thumb-t .author .name {
+    font-family: "Shippori Mincho", serif; color: #6a4a7a;
+    font-size: 20px; letter-spacing: 8px; font-weight: 600;
+  }
+  .thumb-t .author .sub {
+    color: #8a6a9a; font-size: 12px; letter-spacing: 4px;
+    margin-top: 4px; font-family: "Klee One", serif;
+  }
+
+  /* ===========================================================
+   *【U】ほっこり手書き風 - 親近感重視
+   * =========================================================== */
+  .thumb-u .badge-soft { top: 42px; left: 44px; transform: rotate(-8deg); }
+  .thumb-u .flower {
+    position: absolute; z-index: 2; opacity: 0.85;
+  }
+  .thumb-u .f1 { top: 60px; right: 70px; font-size: 42px; }
+  .thumb-u .f2 { top: 160px; right: 180px; font-size: 26px; }
+  .thumb-u .f3 { bottom: 120px; left: 90px; font-size: 32px; }
+  .thumb-u .f4 { bottom: 70px; right: 100px; font-size: 38px; }
+  .thumb-u .f5 { top: 300px; left: 60px; font-size: 22px; }
+
+  .thumb-u .hand-note {
+    position: absolute; top: 60px; left: 50%; transform: translateX(-50%);
+    font-family: "Klee One", serif; font-size: 24px; font-weight: 500;
+    color: #8a5a7a; letter-spacing: 4px; white-space: nowrap;
+  }
+  .thumb-u .hand-note::before,
+  .thumb-u .hand-note::after {
+    content: "❁"; color: #d8a0b8; margin: 0 12px; font-size: 20px;
+  }
+
+  .thumb-u .main-copy {
+    position: absolute; top: 135px; left: 50%; transform: translateX(-50%);
+    text-align: center; z-index: 3; white-space: nowrap;
+  }
+  .thumb-u .main-copy .l1 {
+    font-family: "Klee One", serif; font-size: 36px; font-weight: 600;
+    color: #7a4a6a; letter-spacing: 8px; margin-bottom: 20px;
+  }
+  .thumb-u .main-copy .l2 {
+    font-family: "Shippori Mincho", serif; font-size: 80px; font-weight: 700;
+    color: #3a2a5a; letter-spacing: 10px; line-height: 1.1;
+    text-shadow: 0 2px 12px rgba(255,255,255,0.7);
+  }
+  .thumb-u .main-copy .l2 .ac {
+    color: #c0669a;
+    position: relative;
+  }
+  .thumb-u .main-copy .l2 .ac::after {
+    content: ""; position: absolute; left: -6px; right: -6px; bottom: 8px;
+    height: 18px; background: rgba(240,180,200,0.5); z-index: -1; border-radius: 4px;
+  }
+
+  .thumb-u .swans {
+    position: absolute; top: 340px; left: 50%; transform: translateX(-50%);
+    font-size: 110px;
+    filter: drop-shadow(0 0 30px rgba(255,255,255,0.7))
+            drop-shadow(0 8px 20px rgba(150,100,180,0.3));
+    z-index: 2;
+  }
+  .thumb-u .swans .swan-left { display: inline-block; transform: scaleX(-1); }
+  .thumb-u .swans .swan-right { display: inline-block; }
+
+  .thumb-u .keywords-soft {
+    position: absolute; bottom: 65px; left: 50%; transform: translateX(-50%);
+    font-family: "Shippori Mincho", serif; font-size: 24px;
+    color: #6a4a7a; letter-spacing: 6px; white-space: nowrap; font-weight: 600;
+    background: rgba(255,255,255,0.5);
+    padding: 6px 22px; border-radius: 50px;
+  }
+  .thumb-u .keywords-soft .dot {
+    color: #d8a0b8; margin: 0 10px; font-size: 15px;
+  }
+  .thumb-u .author {
+    position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%);
+    font-family: "Klee One", serif; color: #8a5a7a;
+    font-size: 14px; letter-spacing: 5px; font-weight: 500;
+  }
+
+  /* ===========================================================
+   *【V】お手紙風・リボン付き
+   * =========================================================== */
+  .thumb-v .badge-soft { top: 40px; right: 40px; transform: rotate(6deg); }
+  .thumb-v .leaves {
+    position: absolute; z-index: 2; opacity: 0.9;
+  }
+  .thumb-v .l-tl { top: 40px; left: 40px; font-size: 42px; }
+  .thumb-v .l-bl { bottom: 40px; left: 40px; font-size: 42px; transform: rotate(-90deg); }
+  .thumb-v .l-br { bottom: 40px; right: 40px; font-size: 42px; transform: rotate(180deg); }
+
+  .thumb-v .ribbon-header {
+    position: absolute; top: 60px; left: 50%; transform: translateX(-50%);
+    font-family: "Klee One", serif; font-size: 24px; font-weight: 500;
+    color: #7a5a8a; letter-spacing: 4px; white-space: nowrap;
+  }
+  .thumb-v .ribbon-header::before,
+  .thumb-v .ribbon-header::after {
+    content: ""; display: inline-block;
+    width: 40px; height: 1px; background: #c8a0c0;
+    vertical-align: middle; margin: 0 16px;
+  }
+
+  .thumb-v .main-card {
+    position: absolute; top: 120px; left: 50%; transform: translateX(-50%);
+    background: linear-gradient(135deg, #fef8ec, #fef3ec);
+    padding: 30px 70px; border-radius: 20px; text-align: center;
+    box-shadow:
+      0 10px 30px rgba(150,100,180,0.2),
+      inset 0 0 0 2px rgba(216,168,120,0.4);
+    z-index: 3;
+  }
+  .thumb-v .main-card::before {
+    content: "❁"; position: absolute;
+    top: -22px; left: 50%; transform: translateX(-50%);
+    font-size: 32px; color: #d8a0b8;
+    background: #fef8ec; padding: 0 14px;
+    border-radius: 50%;
+  }
+  .thumb-v .main-card .l1 {
+    font-family: "Klee One", serif; font-size: 26px; font-weight: 500;
+    color: #8a5a6a; letter-spacing: 5px; margin-bottom: 16px;
+    white-space: nowrap;
+  }
+  .thumb-v .main-card .l2 {
+    font-family: "Shippori Mincho", serif; font-size: 64px; font-weight: 700;
+    color: #3a2a5a; letter-spacing: 10px; line-height: 1.1;
+    white-space: nowrap;
+  }
+  .thumb-v .main-card .l2 .ac {
+    color: #b85a8a;
+  }
+
+  .thumb-v .keywords-row {
+    position: absolute; top: 360px; left: 50%; transform: translateX(-50%);
+    display: flex; gap: 14px; align-items: center; z-index: 3;
+  }
+  .thumb-v .kw {
+    background: rgba(255,255,255,0.8);
+    padding: 8px 22px; border-radius: 50px;
+    font-family: "Shippori Mincho", serif; font-size: 22px; font-weight: 600;
+    color: #5a3a6a; letter-spacing: 3px; white-space: nowrap;
+    box-shadow: 0 3px 10px rgba(150,100,180,0.12);
+    border: 1px solid rgba(216,168,184,0.4);
+  }
+
+  .thumb-v .swans {
+    position: absolute; bottom: 100px; left: 50%; transform: translateX(-50%);
+    font-size: 120px;
+    filter: drop-shadow(0 0 30px rgba(255,255,255,0.7))
+            drop-shadow(0 8px 20px rgba(150,100,180,0.3));
+    z-index: 2;
+  }
+  .thumb-v .swans .swan-left { display: inline-block; transform: scaleX(-1); }
+  .thumb-v .swans .swan-right { display: inline-block; }
+
+  .thumb-v .author {
+    position: absolute; bottom: 38px; left: 50%; transform: translateX(-50%);
+    font-family: "Klee One", serif; color: #7a5a8a;
+    font-size: 17px; letter-spacing: 6px; font-weight: 500; z-index: 3;
+  }
+
+  /* ===========================================================
+   *【W】朝焼けの水辺型 - 優しい光
+   * =========================================================== */
+  .thumb-w .badge-soft { top: 44px; right: 44px; transform: rotate(6deg); }
+  .thumb-w .sun-glow {
+    position: absolute;
+    top: -80px; left: 50%; transform: translateX(-50%);
+    width: 500px; height: 500px;
+    border-radius: 50%;
+    background: radial-gradient(circle,
+      rgba(255, 230, 200, 0.6) 0%,
+      rgba(255, 210, 200, 0.3) 30%,
+      transparent 70%);
+    z-index: 1;
+  }
+  .thumb-w .butterflies {
+    position: absolute; z-index: 2;
+  }
+  .thumb-w .b1 { top: 100px; left: 110px; font-size: 36px; opacity: 0.85; }
+  .thumb-w .b2 { top: 210px; right: 190px; font-size: 28px; opacity: 0.8; }
+  .thumb-w .b3 { top: 380px; left: 90px; font-size: 30px; opacity: 0.85; }
+
+  .thumb-w .tagline-top {
+    position: absolute; top: 80px; left: 50%; transform: translateX(-50%);
+    font-family: "Klee One", serif; font-size: 26px; font-weight: 600;
+    color: #8a5a7a; letter-spacing: 6px; white-space: nowrap;
+    z-index: 3;
+  }
+  .thumb-w .tagline-top::before,
+  .thumb-w .tagline-top::after {
+    content: "❁"; color: #d8a0b8; margin: 0 12px; font-size: 18px;
+  }
+
+  .thumb-w .main-copy {
+    position: absolute; top: 140px; left: 50%; transform: translateX(-50%);
+    text-align: center; z-index: 3; white-space: nowrap;
+  }
+  .thumb-w .main-copy .l1 {
+    font-family: "Shippori Mincho", serif; font-size: 32px; font-weight: 500;
+    color: #6a4a7a; letter-spacing: 6px; margin-bottom: 18px;
+  }
+  .thumb-w .main-copy .l2 {
+    font-family: "Shippori Mincho", serif; font-size: 76px; font-weight: 700;
+    color: #3a2a5a; letter-spacing: 14px; line-height: 1.1;
+    text-shadow: 0 2px 12px rgba(255,255,255,0.7);
+  }
+  .thumb-w .main-copy .l2 .ac {
+    color: #b85a8a;
+  }
+
+  .thumb-w .moon {
+    position: absolute; top: 310px; left: 50%; transform: translateX(-50%);
+    width: 220px; height: 220px;
+    border-radius: 50%;
+    background: radial-gradient(circle,
+      rgba(255, 240, 220, 0.55) 0%,
+      rgba(255, 210, 200, 0.25) 50%,
+      transparent 80%);
+    z-index: 1;
+  }
+  .thumb-w .swans {
+    position: absolute; top: 320px; left: 50%; transform: translateX(-50%);
+    font-size: 150px;
+    filter: drop-shadow(0 0 40px rgba(255,240,220,0.6))
+            drop-shadow(0 0 20px rgba(255,255,255,0.5))
+            drop-shadow(0 10px 24px rgba(150,100,180,0.35));
+    z-index: 2;
+  }
+  .thumb-w .swans .swan-left { display: inline-block; transform: scaleX(-1); }
+  .thumb-w .swans .swan-right { display: inline-block; }
+  .thumb-w .ripple {
+    position: absolute; top: 485px; left: 50%; transform: translateX(-50%);
+    width: 440px; height: 14px;
+    background: radial-gradient(ellipse, rgba(255,255,255,0.6) 0%, transparent 70%);
+    border-radius: 50%; z-index: 1;
+  }
+
+  .thumb-w .kw-line {
+    position: absolute; bottom: 75px; left: 50%; transform: translateX(-50%);
+    font-family: "Shippori Mincho", serif; font-size: 24px; font-weight: 600;
+    color: #6a4a7a; letter-spacing: 6px; white-space: nowrap; z-index: 3;
+  }
+  .thumb-w .kw-line .dot {
+    color: #d8a0b8; margin: 0 14px; font-size: 16px;
+  }
+
+  .thumb-w .author {
+    position: absolute; bottom: 38px; left: 50%; transform: translateX(-50%);
+    font-family: "Klee One", serif; color: #8a5a7a;
+    font-size: 16px; letter-spacing: 6px; font-weight: 500; z-index: 3;
+  }
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <h1>🦢 表紙サムネ 4パターン（やさしい青紫）</h1>
+  <p>60代の女性が「頼んでみたい」と感じる、温かみと親しみやすさを大切にしました</p>
+</div>
+
+<div class="gallery">
+
+  <!-- 【T】やさしい朝空型 -->
+  <div class="item">
+    <div class="item-header">
+      <span class="item-tag">T ★やさしい朝空型</span>
+      <div class="item-title">【T】心のモヤモヤを、やさしくひもとく</div>
+      <div class="item-sub">淡い水色〜ラベンダー〜桜色のパステル。ハートの小粒で親しみやすく</div>
+    </div>
+    <div class="thumb-area">
+      <div class="thumb-preview-wrapper">
+        <div id="thumb-t" class="thumb thumb-t bg-soft-sky">
+          <div class="stars-soft"></div>
+          <div class="heart-sparkle hs1">♡</div>
+          <div class="heart-sparkle hs2">✦</div>
+          <div class="heart-sparkle hs3">✧</div>
+          <div class="heart-sparkle hs4">♡</div>
+          <div class="heart-sparkle hs5">✦</div>
+          <div class="badge-soft">
+            <div class="top">鑑定歴</div><div class="num">15</div><div class="bot">YEARS</div>
+          </div>
+          <div class="tagline"><span class="mark">❁</span>やさしく寄り添う、心の相談<span class="mark">❁</span></div>
+          <div class="main-copy">
+            <div class="l1">心のモヤモヤを、ひもとく</div>
+            <div class="l2">あなたの<span class="ac">本当の声</span>を視ます</div>
+          </div>
+          <div class="keywords-row">
+            <div class="kw">算命学</div>
+            <div class="kw-dot">❁</div>
+            <div class="kw">数秘術</div>
+            <div class="kw-dot">❁</div>
+            <div class="kw">過去世リーディング</div>
+          </div>
+          <div class="swans"><span class="swan-left">🦢</span><span class="swan-right">🦢</span></div>
+          <div class="author">
+            <div class="name">LIGHTWORK SWAN</div>
+            <div class="sub">ライトワーク スワン</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="download-area">
+      <button class="download-btn" data-target="thumb-t" data-name="T-やさしい朝空">📥 PNGダウンロード</button>
+      <div class="status" id="status-thumb-t"></div>
+    </div>
+  </div>
+
+  <!-- 【U】ほっこり手書き風 -->
+  <div class="item">
+    <div class="item-header">
+      <span class="item-tag">U ★手書き風・親近感型</span>
+      <div class="item-title">【U】お花に包まれた、やさしい時間</div>
+      <div class="item-sub">手書き風フォントとお花で親近感を最大に。おばあちゃんの手紙のような温かさ</div>
+    </div>
+    <div class="thumb-area">
+      <div class="thumb-preview-wrapper">
+        <div id="thumb-u" class="thumb thumb-u bg-soft-dawn">
+          <div class="stars-soft"></div>
+          <div class="flower f1">🌸</div>
+          <div class="flower f2">❁</div>
+          <div class="flower f3">🌷</div>
+          <div class="flower f4">🌸</div>
+          <div class="flower f5">❁</div>
+          <div class="badge-soft">
+            <div class="top">鑑定歴</div><div class="num">15</div><div class="bot">YEARS</div>
+          </div>
+          <div class="hand-note">やさしく寄り添う、心の相談</div>
+          <div class="main-copy">
+            <div class="l1">〜 お話しませんか、ゆっくりと 〜</div>
+            <div class="l2">あなたの<span class="ac">本当の声</span>を視ます</div>
+          </div>
+          <div class="swans"><span class="swan-left">🦢</span><span class="swan-right">🦢</span></div>
+          <div class="keywords-soft">
+            算命学<span class="dot">❁</span>数秘術<span class="dot">❁</span>過去世リーディング
+          </div>
+          <div class="author">LIGHTWORK SWAN</div>
+        </div>
+      </div>
+    </div>
+    <div class="download-area">
+      <button class="download-btn" data-target="thumb-u" data-name="U-手書き風">📥 PNGダウンロード</button>
+      <div class="status" id="status-thumb-u"></div>
+    </div>
+  </div>
+
+  <!-- 【V】お手紙カード型 -->
+  <div class="item">
+    <div class="item-header">
+      <span class="item-tag">V ★お手紙カード型</span>
+      <div class="item-title">【V】まるで心のお手紙のような佇まい</div>
+      <div class="item-sub">クリーム色のカードに金の縁取り。手紙を受け取ったような温かさ</div>
+    </div>
+    <div class="thumb-area">
+      <div class="thumb-preview-wrapper">
+        <div id="thumb-v" class="thumb thumb-v bg-water-lavender">
+          <div class="stars-soft"></div>
+          <div class="leaves l-tl">🌿</div>
+          <div class="badge-soft">
+            <div class="top">鑑定歴</div><div class="num">15</div><div class="bot">YEARS</div>
+          </div>
+          <div class="ribbon-header">〜 やさしく寄り添う、心の相談 〜</div>
+          <div class="main-card">
+            <div class="l1">心のモヤモヤを、やさしくひもとく</div>
+            <div class="l2">あなたの<span class="ac">本当の声</span>を視ます</div>
+          </div>
+          <div class="keywords-row">
+            <div class="kw">算命学</div>
+            <div class="kw">数秘術</div>
+            <div class="kw">過去世リーディング</div>
+          </div>
+          <div class="swans"><span class="swan-left">🦢</span><span class="swan-right">🦢</span></div>
+          <div class="author">〜 ライトワーク スワン 〜</div>
+        </div>
+      </div>
+    </div>
+    <div class="download-area">
+      <button class="download-btn" data-target="thumb-v" data-name="V-お手紙カード">📥 PNGダウンロード</button>
+      <div class="status" id="status-thumb-v"></div>
+    </div>
+  </div>
+
+  <!-- 【W】朝焼けの水辺型 -->
+  <div class="item">
+    <div class="item-header">
+      <span class="item-tag">W ★朝焼けの水辺型</span>
+      <div class="item-title">【W】朝焼けに照らされる、白鳥のいる水辺</div>
+      <div class="item-sub">ほのかに差す朝の光。蝶と花が舞う、物語のはじまりのような優しさ</div>
+    </div>
+    <div class="thumb-area">
+      <div class="thumb-preview-wrapper">
+        <div id="thumb-w" class="thumb thumb-w bg-misty-rose">
+          <div class="sun-glow"></div>
+          <div class="stars-soft"></div>
+          <div class="butterflies b1">🦋</div>
+          <div class="butterflies b2">❁</div>
+          <div class="butterflies b3">🦋</div>
+          <div class="badge-soft">
+            <div class="top">鑑定歴</div><div class="num">15</div><div class="bot">YEARS</div>
+          </div>
+          <div class="tagline-top">やさしく寄り添う、心の相談</div>
+          <div class="main-copy">
+            <div class="l1">〜 心のモヤモヤを、ひもとく 〜</div>
+            <div class="l2">あなたの<span class="ac">本当の声</span>を</div>
+          </div>
+          <div class="moon"></div>
+          <div class="swans"><span class="swan-left">🦢</span><span class="swan-right">🦢</span></div>
+          <div class="ripple"></div>
+          <div class="kw-line">
+            算命学<span class="dot">❁</span>数秘術<span class="dot">❁</span>過去世リーディング
+          </div>
+          <div class="author">LIGHTWORK SWAN</div>
+        </div>
+      </div>
+    </div>
+    <div class="download-area">
+      <button class="download-btn" data-target="thumb-w" data-name="W-朝焼けの水辺">📥 PNGダウンロード</button>
+      <div class="status" id="status-thumb-w"></div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  document.querySelectorAll('.download-btn').forEach(btn => {
+    btn.addEventListener('click', async () => {
+      const targetId = btn.dataset.target;
+      const fileName = btn.dataset.name || 'thumbnail';
+      const el = document.getElementById(targetId);
+      const status = document.getElementById('status-' + targetId);
+      if (!el) return;
+
+      btn.disabled = true;
+      status.textContent = '画像を生成しています...';
+      status.className = 'status';
+
+      try {
+        const originalTransform = el.style.transform;
+        el.style.transform = 'none';
+        await document.fonts.ready;
+        await new Promise(r => setTimeout(r, 300));
+
+        const dataUrl = await htmlToImage.toPng(el, {
+          width: 1200, height: 630, pixelRatio: 2, cacheBust: true,
+        });
+
+        el.style.transform = originalTransform;
+
+        const link = document.createElement('a');
+        link.download = `ライトワークSWAN_表紙_${fileName}.png`;
+        link.href = dataUrl;
+        link.click();
+
+        status.textContent = '✓ 保存しました！';
+        status.className = 'status success';
+      } catch (err) {
+        console.error(err);
+        status.textContent = '⚠ エラーが発生しました。';
+        status.className = 'status';
+      } finally {
+        btn.disabled = false;
+      }
+    });
+  });
+</script>
+
+</body>
+</html>
