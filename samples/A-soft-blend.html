@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sample A ソフト溶け込み | ライトワークSWAN</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;600;700;800&family=Klee+One:wght@400;600&family=Zen+Maru+Gothic:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    font-family: "Zen Maru Gothic", "Hiragino Sans", sans-serif;
+    background: #fbf8fc; color: #3a3060;
+    min-height: 100vh;
+  }
+  .sample-label {
+    position: fixed; top: 14px; left: 14px; z-index: 50;
+    background: rgba(255,255,255,0.9);
+    padding: 8px 18px; border-radius: 50px;
+    font-size: 13px; font-weight: 700; color: #7b4b9e;
+    letter-spacing: 2px; box-shadow: 0 4px 14px rgba(100,80,140,0.15);
+    font-family: "Klee One", serif;
+  }
+  .sample-label small { color: #8a7aa0; font-weight: 500; font-size: 11px; margin-left: 8px; }
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    background: url('../assets/bg-pale-watercolor.jpeg') center/cover no-repeat;
+    display: flex; align-items: center; justify-content: center;
+    padding: 120px 20px 80px; overflow: hidden;
+  }
+  .hero::before {
+    content:""; position:absolute; inset:0;
+    background: radial-gradient(ellipse 70% 70% at 50% 55%, rgba(255,255,255,0.25), transparent 70%);
+  }
+  .inner { position:relative; z-index:2; max-width:900px; text-align:center; }
+
+  /* ソフト溶け込み: 画像を大きめに配置、エッジを放射状にフェードし、multiply で色を重ねる */
+  .swan-wrap {
+    max-width: 520px;
+    margin: 0 auto 20px;
+    position: relative;
+  }
+  .swan-img {
+    width: 100%; height:auto; display:block;
+    mix-blend-mode: multiply;
+    -webkit-mask-image: radial-gradient(ellipse 75% 70% at 50% 50%, #000 48%, transparent 88%);
+            mask-image: radial-gradient(ellipse 75% 70% at 50% 50%, #000 48%, transparent 88%);
+    filter: saturate(0.9) contrast(0.95);
+  }
+
+  .tag {
+    display:inline-block;
+    font-family:"Klee One",serif; font-size:14px;
+    color:#b86e90; letter-spacing:4px; margin-bottom:14px;
+    font-weight:700; text-shadow:0 2px 8px rgba(255,255,255,0.95);
+  }
+  .tag::before,.tag::after{content:"❁";color:#d49eb8;margin:0 10px;}
+  .title {
+    font-family:"Zen Maru Gothic",serif;
+    font-size:clamp(30px,6vw,52px); font-weight:900;
+    color:#3a2e6e; letter-spacing:6px; line-height:1.2;
+    text-shadow:0 2px 12px rgba(255,255,255,0.85); margin-bottom:8px;
+  }
+  .title .small{font-size:0.6em;color:#7e70b0;letter-spacing:4px;}
+  .sub-en{
+    font-family:"Klee One",serif;
+    font-size:clamp(12px,2vw,15px);
+    letter-spacing:6px; color:#aea4d0; margin-bottom:22px;
+    text-shadow:0 1px 6px rgba(255,255,255,0.8);
+  }
+  .copy{
+    font-family:"Klee One","Zen Maru Gothic",serif;
+    font-size:clamp(17px,3vw,22px); font-weight:600;
+    color:#3a3060; letter-spacing:3px; line-height:1.7;
+    text-shadow:0 2px 10px rgba(255,255,255,0.9);
+  }
+  .copy .em{color:#b86e90; position:relative; font-weight:700;}
+  .copy .em::after{
+    content:""; position:absolute; left:-2px; right:-2px; bottom:3px;
+    height:7px; background:rgba(255,215,140,0.55); z-index:-1; border-radius:2px;
+  }
+</style>
+</head>
+<body>
+
+<div class="sample-label">A. ソフト溶け込み <small>フェードマスク + 乗算ブレンド</small></div>
+
+<section class="hero">
+  <div class="inner">
+    <div class="swan-wrap">
+      <img src="../assets/swans.jpeg" alt="白鳥" class="swan-img">
+    </div>
+    <div class="tag">やさしく寄り添う、心の相談</div>
+    <h1 class="title">ライトワーク<br><span class="small">SWAN</span></h1>
+    <div class="sub-en">LIGHTWORK SWAN</div>
+    <p class="copy">心の奥の<span class="em">"本当の声"</span>を、ひもときます</p>
+  </div>
+</section>
+
+</body>
+</html>

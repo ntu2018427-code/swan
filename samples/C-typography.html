@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sample C タイポグラフィ主役 | ライトワークSWAN</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;600;700;800&family=Klee+One:wght@400;600&family=Zen+Maru+Gothic:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:"Zen Maru Gothic","Hiragino Sans",sans-serif; background:#fbf8fc; color:#3a3060; min-height:100vh; }
+  .sample-label {
+    position:fixed; top:14px; left:14px; z-index:50;
+    background:rgba(255,255,255,0.9); padding:8px 18px; border-radius:50px;
+    font-size:13px; font-weight:700; color:#7b4b9e; letter-spacing:2px;
+    box-shadow:0 4px 14px rgba(100,80,140,0.15); font-family:"Klee One",serif;
+  }
+  .sample-label small{color:#8a7aa0;font-weight:500;font-size:11px;margin-left:8px;}
+  .hero {
+    position:relative; min-height:100vh;
+    background:url('../assets/bg-pale-watercolor.jpeg') center/cover no-repeat;
+    display:flex; align-items:center; justify-content:center;
+    padding:120px 20px 80px; overflow:hidden;
+  }
+  .hero::before{
+    content:""; position:absolute; inset:0;
+    background:radial-gradient(ellipse 70% 70% at 50% 55%, rgba(255,255,255,0.28), transparent 70%);
+  }
+  .inner{position:relative;z-index:2;max-width:900px;text-align:center;}
+
+  .swan-motif {
+    font-size: clamp(44px, 8vw, 80px);
+    line-height: 1;
+    margin-bottom: 20px;
+    filter: drop-shadow(0 4px 10px rgba(120,95,170,0.2));
+    letter-spacing: 10px;
+  }
+  .swan-motif .l { display:inline-block; transform: scaleX(-1); }
+
+  .tag {
+    display:inline-block; font-family:"Klee One",serif; font-size:14px;
+    color:#b86e90; letter-spacing:4px; margin-bottom:16px; font-weight:700;
+    text-shadow:0 2px 8px rgba(255,255,255,0.95);
+  }
+  .tag::before,.tag::after{content:"❁";color:#d49eb8;margin:0 10px;}
+  .title{
+    font-family:"Shippori Mincho","Zen Maru Gothic",serif;
+    font-size:clamp(36px, 7vw, 64px); font-weight:700;
+    color:#3a2e6e; letter-spacing:8px; line-height:1.15;
+    text-shadow:0 2px 12px rgba(255,255,255,0.85); margin-bottom:12px;
+  }
+  .title .small{font-size:0.55em;color:#7e70b0;letter-spacing:6px;font-weight:500;}
+  .sub-en{
+    font-family:"Klee One",serif; font-size:clamp(12px,2.2vw,16px);
+    letter-spacing:8px; color:#aea4d0; margin-bottom:28px;
+    text-shadow:0 1px 6px rgba(255,255,255,0.8);
+  }
+  .divider{
+    display:flex; align-items:center; justify-content:center;
+    gap:16px; margin:0 auto 28px; color:#d0b078; max-width:340px;
+  }
+  .divider .line{flex:1; height:1px; background:linear-gradient(90deg,transparent,rgba(208,176,120,0.55),transparent);}
+  .divider .star{font-size:16px;}
+  .copy{
+    font-family:"Shippori Mincho","Zen Maru Gothic",serif;
+    font-size:clamp(18px,3.2vw,26px); font-weight:500;
+    color:#3a3060; letter-spacing:4px; line-height:1.8;
+    text-shadow:0 2px 10px rgba(255,255,255,0.9);
+  }
+  .copy .em{color:#b86e90;position:relative;font-weight:700;}
+  .copy .em::after{
+    content:""; position:absolute; left:-2px; right:-2px; bottom:3px;
+    height:7px; background:rgba(255,215,140,0.55); z-index:-1; border-radius:2px;
+  }
+</style>
+</head>
+<body>
+
+<div class="sample-label">C. タイポグラフィ主役 <small>白鳥画像なし、文字で魅せる</small></div>
+
+<section class="hero">
+  <div class="inner">
+    <div class="swan-motif"><span class="l">🦢</span><span>🦢</span></div>
+    <div class="tag">やさしく寄り添う、心の相談</div>
+    <h1 class="title">ライトワーク<br><span class="small">SWAN</span></h1>
+    <div class="sub-en">LIGHTWORK SWAN</div>
+    <div class="divider"><span class="line"></span><span class="star">✦</span><span class="line"></span></div>
+    <p class="copy">心の奥の<span class="em">"本当の声"</span>を、<br>ひもときます</p>
+  </div>
+</section>
+
+</body>
+</html>

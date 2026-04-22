@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>デザイン案ギャラリー | ライトワークSWAN</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Klee+One:wght@400;600&family=Zen+Maru+Gothic:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    font-family:"Zen Maru Gothic","Hiragino Sans",sans-serif;
+    background: #f5f0fa;
+    color: #3a3060;
+    padding: 60px 20px 100px;
+    line-height: 1.8;
+  }
+  .head{ max-width:1100px; margin:0 auto 40px; text-align:center; }
+  .head h1{
+    font-family:"Klee One",serif;
+    font-size: clamp(22px,4vw,30px);
+    color:#6a4a8a; letter-spacing:4px; margin-bottom:10px;
+  }
+  .head p{ font-size:14px; color:#7a6a9a; }
+  .grid{
+    max-width:1100px; margin:0 auto;
+    display:grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 28px;
+  }
+  .card{
+    background:white; border-radius:20px; overflow:hidden;
+    box-shadow: 0 12px 40px rgba(120,95,170,0.12);
+    border: 1px solid #ece4f4;
+    transition: transform 0.25s, box-shadow 0.25s;
+  }
+  .card:hover{
+    transform: translateY(-6px);
+    box-shadow: 0 20px 50px rgba(120,95,170,0.22);
+  }
+  .card iframe{
+    width:100%; height: 260px; border:0; display:block;
+    pointer-events: none;  /* クリックは親へ */
+    background:#fbf8fc;
+  }
+  .card-body{ padding:22px 24px 24px; }
+  .card-tag{
+    display:inline-block; font-size:11px;
+    padding:3px 12px; border-radius:50px;
+    background:#f5e8f0; color:#b86e90;
+    letter-spacing:2px; margin-bottom:10px; font-weight:700;
+  }
+  .card-title{
+    font-size:18px; color:#3a2e6e; font-weight:700;
+    margin-bottom:8px; letter-spacing:2px;
+  }
+  .card-desc{
+    font-size:13px; color:#6a6090; line-height:1.9; margin-bottom:14px;
+  }
+  .card-btn{
+    display:inline-block; width:100%;
+    text-align:center; padding:12px; border-radius:50px;
+    background: linear-gradient(135deg, #8a7cc8, #b0a0d8);
+    color:white; text-decoration:none;
+    font-size:13px; font-weight:700; letter-spacing:3px;
+  }
+  .note{
+    max-width:720px; margin:50px auto 0; padding:22px 26px;
+    background:white; border-radius:16px;
+    border:1px solid #ece4f4;
+    font-size:13px; color:#6a6090; line-height:2;
+    text-align:center;
+  }
+</style>
+</head>
+<body>
+
+<div class="head">
+  <h1>🦢 白鳥 × 背景 デザイン案</h1>
+  <p>白鳥と水彩背景の馴染み方を、4パターンで比較できます</p>
+</div>
+
+<div class="grid">
+
+  <a class="card" href="A-soft-blend.html" style="text-decoration:none;color:inherit;">
+    <iframe src="A-soft-blend.html" scrolling="no"></iframe>
+    <div class="card-body">
+      <span class="card-tag">A</span>
+      <h2 class="card-title">ソフト溶け込み</h2>
+      <p class="card-desc">
+        現在の白鳥画像を活かしつつ、エッジを放射状にぼかして、乗算ブレンドで水彩の色味と馴染ませます。画像の四角さが消えて、空に浮かんでいるような印象に。
+      </p>
+      <span class="card-btn">このデザインを見る ▸</span>
+    </div>
+  </a>
+
+  <a class="card" href="B-silhouette.html" style="text-decoration:none;color:inherit;">
+    <iframe src="B-silhouette.html" scrolling="no"></iframe>
+    <div class="card-body">
+      <span class="card-tag">B</span>
+      <h2 class="card-title">シルエット線画</h2>
+      <p class="card-desc">
+        白鳥を淡い紫のSVGイラストで描き下ろし。背景となじむパステルの色味で統一感を出し、上品で神秘的な雰囲気に。
+      </p>
+      <span class="card-btn">このデザインを見る ▸</span>
+    </div>
+  </a>
+
+  <a class="card" href="C-typography.html" style="text-decoration:none;color:inherit;">
+    <iframe src="C-typography.html" scrolling="no"></iframe>
+    <div class="card-body">
+      <span class="card-tag">C</span>
+      <h2 class="card-title">タイポグラフィ主役</h2>
+      <p class="card-desc">
+        白鳥画像はあえて使わず、背景の水彩を主役に。明朝体の美しい文字と絵文字の白鳥で、洗練された静けさを表現。
+      </p>
+      <span class="card-btn">このデザインを見る ▸</span>
+    </div>
+  </a>
+
+  <a class="card" href="D-small-stamp.html" style="text-decoration:none;color:inherit;">
+    <iframe src="D-small-stamp.html" scrolling="no"></iframe>
+    <div class="card-body">
+      <span class="card-tag">D</span>
+      <h2 class="card-title">小さなスタンプ</h2>
+      <p class="card-desc">
+        白鳥画像を小さな円形スタンプにして、主役はタイトル文字に。切手やシールのような可愛さを添えつつ、水彩の背景を活かします。
+      </p>
+      <span class="card-btn">このデザインを見る ▸</span>
+    </div>
+  </a>
+
+</div>
+
+<div class="note">
+  どれがお好みですか？「A がいい」「B を少し調整して」など、気軽に教えてください。<br>
+  複数案のミックス（例：B の白鳥シルエット × C の明朝タイトル）もできます。
+</div>
+
+</body>
+</html>

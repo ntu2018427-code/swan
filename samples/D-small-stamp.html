@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sample D 小さなスタンプ | ライトワークSWAN</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;600;700;800&family=Klee+One:wght@400;600&family=Zen+Maru+Gothic:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:"Zen Maru Gothic","Hiragino Sans",sans-serif; background:#fbf8fc; color:#3a3060; min-height:100vh; }
+  .sample-label {
+    position:fixed; top:14px; left:14px; z-index:50;
+    background:rgba(255,255,255,0.9); padding:8px 18px; border-radius:50px;
+    font-size:13px; font-weight:700; color:#7b4b9e; letter-spacing:2px;
+    box-shadow:0 4px 14px rgba(100,80,140,0.15); font-family:"Klee One",serif;
+  }
+  .sample-label small{color:#8a7aa0;font-weight:500;font-size:11px;margin-left:8px;}
+  .hero {
+    position:relative; min-height:100vh;
+    background:url('../assets/bg-pale-watercolor.jpeg') center/cover no-repeat;
+    display:flex; align-items:center; justify-content:center;
+    padding:120px 20px 80px; overflow:hidden;
+  }
+  .hero::before{
+    content:""; position:absolute; inset:0;
+    background:radial-gradient(ellipse 60% 70% at 50% 55%, rgba(255,255,255,0.28), transparent 70%);
+  }
+  .inner{position:relative;z-index:2;max-width:780px;text-align:center;}
+
+  /* 円形の白鳥スタンプ（小さめ・控えめ） */
+  .swan-stamp {
+    width: 150px; height: 150px; border-radius: 50%;
+    overflow: hidden; margin: 0 auto 24px;
+    border: 6px solid rgba(255,255,255,0.88);
+    box-shadow: 0 10px 30px rgba(120,95,170,0.2),
+                0 0 0 1px rgba(200,180,220,0.3);
+    position: relative;
+  }
+  .swan-stamp::after {
+    content:""; position:absolute; inset:0; border-radius:50%;
+    background: radial-gradient(circle at 30% 25%, rgba(255,255,255,0.35), transparent 55%);
+    pointer-events: none;
+  }
+  .swan-stamp img {
+    width:100%; height:100%; object-fit:cover;
+    filter: saturate(0.85) contrast(0.98);
+  }
+
+  .tag {
+    display:inline-block; font-family:"Klee One",serif; font-size:14px;
+    color:#b86e90; letter-spacing:4px; margin-bottom:14px; font-weight:700;
+    text-shadow:0 2px 8px rgba(255,255,255,0.95);
+  }
+  .tag::before,.tag::after{content:"❁";color:#d49eb8;margin:0 10px;}
+  .title{
+    font-family:"Zen Maru Gothic",serif; font-size:clamp(34px,6.5vw,56px);
+    font-weight:900; color:#3a2e6e; letter-spacing:7px; line-height:1.18;
+    text-shadow:0 2px 12px rgba(255,255,255,0.85); margin-bottom:8px;
+  }
+  .title .small{font-size:0.6em;color:#7e70b0;letter-spacing:5px;}
+  .sub-en{
+    font-family:"Klee One",serif; font-size:clamp(12px,2vw,15px);
+    letter-spacing:6px; color:#aea4d0; margin-bottom:22px;
+    text-shadow:0 1px 6px rgba(255,255,255,0.8);
+  }
+  .copy{
+    font-family:"Klee One","Zen Maru Gothic",serif; font-size:clamp(17px,3vw,22px);
+    font-weight:600; color:#3a3060; letter-spacing:3px; line-height:1.7;
+    text-shadow:0 2px 10px rgba(255,255,255,0.9);
+  }
+  .copy .em{color:#b86e90;position:relative;font-weight:700;}
+  .copy .em::after{
+    content:""; position:absolute; left:-2px; right:-2px; bottom:3px;
+    height:7px; background:rgba(255,215,140,0.55); z-index:-1; border-radius:2px;
+  }
+</style>
+</head>
+<body>
+
+<div class="sample-label">D. 小さなスタンプ <small>白鳥画像を丸く小さく、主役は文字</small></div>
+
+<section class="hero">
+  <div class="inner">
+    <div class="swan-stamp">
+      <img src="../assets/swans.jpeg" alt="白鳥">
+    </div>
+    <div class="tag">やさしく寄り添う、心の相談</div>
+    <h1 class="title">ライトワーク<br><span class="small">SWAN</span></h1>
+    <div class="sub-en">LIGHTWORK SWAN</div>
+    <p class="copy">心の奥の<span class="em">"本当の声"</span>を、ひもときます</p>
+  </div>
+</section>
+
+</body>
+</html>
