@@ -15,22 +15,22 @@
 ruby rt { font-size: 0.55em; letter-spacing: 1px; }
 
 :root {
-  /* 星空パレット（淡め） */
-  --navy:       #2e3a6a;   /* 柔らかいネイビー */
-  --navy-mid:   #4a4090;   /* ミッドパープル */
-  --lavender:   #8880c0;   /* ラベンダー */
-  --star-gold:  #c8a850;   /* 星のゴールド */
-  --star-pale:  #e8dca8;   /* 淡い星色 */
+  /* 星空パレット（ピンク寄り・淡め） */
+  --navy:       #6a2a50;   /* ディープローズ */
+  --navy-mid:   #9a3870;   /* ミッドピンク */
+  --lavender:   #c07898;   /* ソフトピンク */
+  --star-gold:  #e8b8c8;   /* 星のピンクゴールド */
+  --star-pale:  #f5dce8;   /* 淡いピンク星色 */
   --moon:       #f2e6b8;   /* 月の色 */
-  --cream:      #f5f2ee;   /* クリーム白 */
-  --cream-dark: #ece8f4;   /* ラベンダーがかったクリーム */
-  --text-deep:  #1e2550;   /* ネイビーテキスト */
-  --text-mid:   #4a4878;   /* パープルテキスト */
-  --text-soft:  #8880b0;   /* ソフトラベンダーテキスト */
-  --accent:     #7a68b8;   /* アクセント紫 */
-  --accent-warm:#b08840;   /* アクセントゴールド */
-  --border:     rgba(100,90,180,0.15);
-  --card-bg:    rgba(248,246,255,0.94);
+  --cream:      #fdf2f7;   /* ピンクがかったクリーム */
+  --cream-dark: #f5e6ef;   /* ピンク淡クリーム */
+  --text-deep:  #3a1830;   /* ディープローズテキスト */
+  --text-mid:   #7a3860;   /* ミッドピンクテキスト */
+  --text-soft:  #b07890;   /* ソフトピンクテキスト */
+  --accent:     #b04878;   /* ローズアクセント */
+  --accent-warm:#c08050;   /* ゴールドアクセント */
+  --border:     rgba(180,80,120,0.15);
+  --card-bg:    rgba(255,246,251,0.94);
 }
 
 html { scroll-behavior: smooth; }
@@ -136,15 +136,15 @@ nav, section, footer { position: relative; z-index: 1; }
     url('./bg-04-cosmic.jpeg') center center / cover no-repeat;
 }
 
-/* 左〜下グラデーション帯（テキスト読みやすく） */
+/* 左〜下グラデーション帯（テキスト読みやすく・ピンク） */
 .hero-overlay {
   display: block;
   position: absolute; inset: 0;
   background: linear-gradient(to right,
-    rgba(240,237,255,0.95) 0%,
-    rgba(240,237,255,0.88) 26%,
-    rgba(240,237,255,0.18) 50%,
-    transparent 64%
+    rgba(255,235,245,0.97) 0%,
+    rgba(255,235,245,0.90) 28%,
+    rgba(255,235,245,0.18) 52%,
+    transparent 66%
   );
   z-index: 2;
 }
@@ -179,10 +179,16 @@ nav, section, footer { position: relative; z-index: 1; }
   position: absolute;
   top: 50%; left: 16%;
   transform: translateY(-50%);
-  z-index: 2;
+  z-index: 3;
   width: 36%;
   max-width: 340px;
   text-align: left;
+  background: rgba(255,235,245,0.72);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-radius: 20px;
+  padding: 28px 32px;
+  border: 1px solid rgba(255,200,225,0.6);
 }
 
 @media(max-width:680px){
@@ -192,10 +198,10 @@ nav, section, footer { position: relative; z-index: 1; }
   }
   .hero-overlay {
     background: linear-gradient(to top,
-      rgba(240,237,255,0.97) 0%,
-      rgba(240,237,255,0.88) 18%,
-      rgba(240,237,255,0.04) 42%,
-      transparent 58%
+      rgba(255,235,245,0.98) 0%,
+      rgba(255,235,245,0.92) 20%,
+      rgba(255,235,245,0.04) 44%,
+      transparent 60%
     );
     z-index: 2;
   }
@@ -207,6 +213,12 @@ nav, section, footer { position: relative; z-index: 1; }
     width: 92%;
     max-width: none;
     text-align: center;
+    background: rgba(255,235,245,0.80);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-radius: 20px;
+    padding: 22px 24px;
+    border: 1px solid rgba(255,200,225,0.5);
   }
   .hero-sub-copy {
     font-size: 13px;
@@ -382,8 +394,12 @@ nav, section, footer { position: relative; z-index: 1; }
 }
 .cta-overlay {
   position: absolute; inset: 0;
-  background: rgba(240,237,255,0.40);
-  backdrop-filter: blur(1px);
+  background: linear-gradient(160deg,
+    rgba(120,30,70,0.72) 0%,
+    rgba(80,20,55,0.80) 50%,
+    rgba(100,25,65,0.75) 100%
+  );
+  backdrop-filter: blur(2px);
 }
 .cta-inner { position: relative; z-index: 2; max-width: 720px; margin: 0 auto; }
 .cta-title {
