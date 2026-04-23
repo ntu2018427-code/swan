@@ -142,17 +142,27 @@ nav, section, footer { position: relative; z-index: 1; }
 }
 
 @media(max-width:680px){
+  .hero-photo-bg {
+    background:
+      url('./assets/hero-bg.jpeg') center 30%/cover no-repeat,
+      linear-gradient(180deg, #bcd8ee 0%, #d0e8f2 40%, #c0d8a8 80%);
+  }
   .hero-overlay {
-    background: linear-gradient(to bottom,
-      rgba(249,245,236,0.95) 0%,
-      rgba(249,245,236,0.7) 45%,
-      transparent 70%
+    background: linear-gradient(to top,
+      rgba(249,245,236,0.98) 0%,
+      rgba(249,245,236,0.92) 28%,
+      rgba(249,245,236,0.3) 52%,
+      transparent 68%
     );
   }
   .hero-inner {
-    top: 76px; left: 50%;
+    top: auto;
+    bottom: 48px;
+    left: 50%;
     transform: translateX(-50%);
-    width: 88%; max-width: none; text-align: center;
+    width: 90%;
+    max-width: none;
+    text-align: center;
   }
 }
 
