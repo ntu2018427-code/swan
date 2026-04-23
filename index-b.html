@@ -144,15 +144,15 @@ nav, section, footer { position: relative; z-index: 1; }
 @media(max-width:680px){
   .hero-photo-bg {
     background:
-      url('./assets/hero-bg.jpeg') center 50%/cover no-repeat,
-      linear-gradient(180deg, #bcd8ee 0%, #d0e8f2 40%, #c0d8a8 80%);
+      url('./assets/hero-bg.jpeg') center top / 200% auto no-repeat,
+      linear-gradient(180deg, #bcd8ee 0%, #d0e8f2 45%, #c8ddb0 80%);
   }
   .hero-overlay {
     background: linear-gradient(to top,
       rgba(249,245,236,0.98) 0%,
-      rgba(249,245,236,0.90) 22%,
-      rgba(249,245,236,0.08) 40%,
-      transparent 56%
+      rgba(249,245,236,0.92) 20%,
+      rgba(249,245,236,0.06) 42%,
+      transparent 58%
     );
   }
   .hero-inner {
@@ -164,14 +164,12 @@ nav, section, footer { position: relative; z-index: 1; }
     max-width: none;
     text-align: center;
   }
-  /* サブコピーを見やすく */
   .hero-sub-copy {
     font-size: 13px;
     color: #3a5828;
     letter-spacing: 2px;
     margin-bottom: 10px;
   }
-  /* タイトル：最初のbrを消して2行に整える */
   .hero-main-copy {
     font-size: 30px;
   }
