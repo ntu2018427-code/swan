@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>コピー比較 | ライトワークSWAN</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;600;700;800&family=Klee+One:wght@400;600&family=Zen+Maru+Gothic:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+ruby rt { font-size: 0.55em; letter-spacing: 1px; }
+
+#starfield {
+  position: fixed; inset: 0;
+  z-index: 0; pointer-events: none;
+}
+h1, .cards { position: relative; z-index: 1; }
+
+body {
+  font-family: "Zen Maru Gothic","Hiragino Sans",sans-serif;
+  background: #f0ebf8;
+  color: #3a2e5c;
+  padding: 40px 20px 60px;
+}
+
+h1 {
+  text-align: center;
+  font-family: "Klee One", serif;
+  font-size: 14px;
+  letter-spacing: 4px;
+  color: #9a8eb8;
+  margin-bottom: 32px;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+@media(max-width: 680px) {
+  .cards { grid-template-columns: 1fr; }
+}
+
+.option {
+  background: white;
+  border-radius: 28px;
+  overflow: hidden;
+  box-shadow: 0 8px 32px rgba(100,80,150,0.12);
+  border: 1px solid rgba(146,120,200,0.15);
+}
+
+.option-label {
+  text-align: center;
+  font-family: "Klee One", serif;
+  font-size: 12px;
+  letter-spacing: 4px;
+  padding: 14px;
+  font-weight: 700;
+}
+.option-a .option-label { background: #ede6f8; color: #7258b0; }
+.option-b .option-label { background: #f5e8f0; color: #b06880; }
+
+/* ミニヒーロー */
+.mini-hero {
+  padding: 44px 32px 40px;
+  text-align: center;
+  background:
+    radial-gradient(ellipse 80% 70% at 50% 40%, #ede6f8 0%, #f7f3fb 70%);
+  border-bottom: 1px solid rgba(146,120,200,0.1);
+}
+
+.photo-wrap {
+  width: 110px; height: 110px;
+  border-radius: 50%;
+  margin: 0 auto 22px;
+  position: relative;
+}
+.photo-ring {
+  position: absolute; inset: -4px; border-radius: 50%;
+  background: conic-gradient(
+    #c8a86a 0deg, #f5e8f0 80deg,
+    #c98aaa 160deg, #ede6f8 240deg,
+    #9278c8 310deg, #c8a86a 360deg
+  );
+  animation: spin 12s linear infinite;
+  opacity: 0.7;
+}
+@keyframes spin { from{ transform: rotate(0deg); } to{ transform: rotate(360deg); } }
+.photo-inner {
+  position: relative; z-index: 1;
+  width: 100%; height: 100%;
+  border-radius: 50%; overflow: hidden;
+  border: 4px solid white;
+  box-shadow: 0 6px 20px rgba(100,80,150,0.15);
+}
+.photo-inner img {
+  width: 100%; height: 100%; object-fit: cover; display: block;
+}
+
+.main-copy {
+  font-family: "Shippori Mincho", serif;
+  font-size: clamp(20px, 3.5vw, 26px);
+  font-weight: 700;
+  color: #3a2e5c;
+  letter-spacing: 4px;
+  line-height: 1.75;
+  margin-bottom: 14px;
+}
+.option-a .main-copy .soft { color: #9278c8; }
+.option-b .main-copy .soft { color: #c98aaa; }
+
+.sub-copy {
+  display: inline-block;
+  font-family: "Shippori Mincho", serif;
+  font-size: clamp(13px, 2vw, 16px);
+  font-weight: 600;
+  color: #7258b0;
+  letter-spacing: 2px;
+  line-height: 1.9;
+  margin-bottom: 16px;
+  padding: 10px 22px;
+  background: rgba(146,120,200,0.07);
+  border-top: 1px solid rgba(146,120,200,0.3);
+  border-bottom: 1px solid rgba(146,120,200,0.3);
+  position: relative;
+}
+.sub-copy::before,
+.sub-copy::after {
+  content: "✦";
+  font-size: 9px;
+  color: #c8a86a;
+  position: absolute;
+  top: 50%; transform: translateY(-50%);
+  opacity: 0.7;
+}
+.sub-copy::before { left: 6px; }
+.sub-copy::after  { right: 6px; }
+
+.brand {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-family: "Klee One", serif;
+  font-size: 11px; letter-spacing: 4px;
+  color: #9a8eb8;
+  margin-bottom: 22px;
+}
+.brand::before, .brand::after {
+  content: ""; display: block;
+  width: 20px; height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(146,120,200,0.35), transparent);
+}
+
+.cta-btn {
+  display: inline-block;
+  background: linear-gradient(135deg, #9278c8, #b09ae0);
+  color: white;
+  padding: 12px 32px;
+  border-radius: 50px;
+  text-decoration: none;
+  font-size: 13px; font-weight: 700;
+  letter-spacing: 3px;
+  box-shadow: 0 6px 20px rgba(146,120,200,0.28);
+}
+
+.open-link {
+  display: block;
+  text-align: center;
+  padding: 16px;
+  font-family: "Klee One", serif;
+  font-size: 12px;
+  letter-spacing: 3px;
+  color: #9a8eb8;
+  text-decoration: none;
+  transition: color 0.2s;
+  border-top: 1px solid rgba(146,120,200,0.1);
+}
+.open-link:hover { color: #7258b0; }
+</style>
+</head>
+<body>
+
+<canvas id="starfield"></canvas>
+
+<h1>— コピー 比較 —</h1>
+
+<div class="cards">
+
+  <!-- A案 -->
+  <div class="option option-a">
+    <div class="option-label">A 案</div>
+    <div class="mini-hero">
+      <div class="photo-wrap">
+        <div class="photo-ring"></div>
+        <div class="photo-inner">
+          <img src="./assets/swans.jpeg" alt="SWAN">
+        </div>
+      </div>
+      <p class="sub-copy">うまく言葉にできなくて、いい。</p>
+      <h2 class="main-copy">
+        あなたの魂が、<br>すでに<span class="soft">答えを知っています。</span>
+      </h2>
+      <div class="brand">🦢 ライトワーク<ruby>SWAN<rt>スワン</rt></ruby></div><br>
+      <span class="cta-btn">鑑定のお申し込み ▸</span>
+    </div>
+    <a class="open-link" href="./index-a.html" target="_blank">全ページを見る →</a>
+  </div>
+
+  <!-- B案 -->
+  <div class="option option-b">
+    <div class="option-label">B 案</div>
+    <div class="mini-hero">
+      <div class="photo-wrap">
+        <div class="photo-ring"></div>
+        <div class="photo-inner">
+          <img src="./assets/swans.jpeg" alt="SWAN">
+        </div>
+      </div>
+      <p class="sub-copy">魂の光を、一緒に取り戻しましょう。</p>
+      <h2 class="main-copy">
+        あなたが、あなたに<br><span class="soft">帰れるように。</span>
+      </h2>
+      <div class="brand">🦢 ライトワーク<ruby>SWAN<rt>スワン</rt></ruby></div><br>
+      <span class="cta-btn">鑑定のお申し込み ▸</span>
+    </div>
+    <a class="open-link" href="./index-b.html" target="_blank">全ページを見る →</a>
+  </div>
+
+</div>
+
+<script>
+(function(){
+  const canvas = document.getElementById('starfield');
+  const ctx = canvas.getContext('2d');
+  const COLORS = [[146,120,200],[200,168,106],[201,138,170],[180,160,220]];
+  let stars = [];
+  function resize(){ canvas.width=window.innerWidth; canvas.height=window.innerHeight; }
+  function initStars(){
+    stars=[];
+    const count=Math.floor((canvas.width*canvas.height)/5000);
+    for(let i=0;i<count;i++){
+      const c=COLORS[Math.floor(Math.random()*COLORS.length)];
+      stars.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height,
+        r:Math.random()*1.8+0.4,alpha:Math.random()*0.5+0.15,
+        speed:Math.random()*0.012+0.004,phase:Math.random()*Math.PI*2,
+        color:c,sparkle:Math.random()<0.18});
+    }
+  }
+  function drawSparkle(x,y,r,alpha,color){
+    const arms=r*3.5;ctx.save();ctx.globalAlpha=alpha*0.9;
+    ctx.strokeStyle=`rgb(${color[0]},${color[1]},${color[2]})`;ctx.lineWidth=0.7;
+    ctx.beginPath();
+    ctx.moveTo(x-arms,y);ctx.lineTo(x+arms,y);
+    ctx.moveTo(x,y-arms);ctx.lineTo(x,y+arms);
+    ctx.moveTo(x-arms*0.6,y-arms*0.6);ctx.lineTo(x+arms*0.6,y+arms*0.6);
+    ctx.moveTo(x+arms*0.6,y-arms*0.6);ctx.lineTo(x-arms*0.6,y+arms*0.6);
+    ctx.stroke();ctx.restore();
+  }
+  let frame=0;
+  function draw(){
+    ctx.clearRect(0,0,canvas.width,canvas.height);frame++;
+    for(const s of stars){
+      const a=s.alpha*(0.5+0.5*Math.sin(s.phase+frame*s.speed));
+      const [r,g,b]=s.color;
+      if(s.sparkle) drawSparkle(s.x,s.y,s.r,a,s.color);
+      ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
+      ctx.fillStyle=`rgba(${r},${g},${b},${a})`;ctx.fill();
+    }
+    requestAnimationFrame(draw);
+  }
+  resize();initStars();draw();
+  window.addEventListener('resize',()=>{resize();initStars();});
+})();
+</script>
+
+</body>
+</html>
