@@ -156,6 +156,55 @@ h1 {
 .card-a .open-btn:active { background: #f5f0fc; }
 .card-b .open-btn { color: #3d6b3a; background: white; }
 .card-b .open-btn:active { background: #f0f5ee; }
+.card-c .card-label { background: #f5ecd8; color: #a07030; }
+.card-c .open-btn { color: #a07030; background: white; }
+.card-c .open-btn:active { background: #fdf5e8; }
+
+/* ── C案プレビュー（ゴールド・旅テーマ） ── */
+.preview-c {
+  position: relative;
+  height: 200px;
+  overflow: hidden;
+  background: url('./assets/hero-bg.jpeg') center 45% / cover no-repeat;
+}
+.preview-c::before {
+  content: "";
+  position: absolute; inset: 0;
+  background: linear-gradient(to right,
+    rgba(253,246,236,0.97) 0%,
+    rgba(253,246,236,0.90) 38%,
+    rgba(253,246,236,0.35) 60%,
+    transparent 76%
+  );
+}
+.preview-c .pc-text {
+  position: absolute; top: 50%; left: 20px;
+  transform: translateY(-50%);
+  z-index: 2;
+}
+.preview-c .pc-sub {
+  font-family: "Klee One", serif;
+  font-size: 10px; letter-spacing: 1px; color: #a07030;
+  margin-bottom: 6px;
+}
+.preview-c .pc-main {
+  font-family: "Shippori Mincho", serif;
+  font-size: 18px; font-weight: 800;
+  color: #3a2010; letter-spacing: 3px; line-height: 1.6;
+  margin-bottom: 8px;
+}
+.preview-c .pc-main .soft { color: #c86840; }
+.preview-c .pc-brand {
+  font-family: "Klee One", serif;
+  font-size: 9px; letter-spacing: 2px; color: #a08050;
+  margin-bottom: 10px;
+}
+.preview-c .pc-btn {
+  display: inline-block;
+  background: #b07830; color: white;
+  padding: 6px 14px; border-radius: 50px;
+  font-size: 9px; font-weight: 700; letter-spacing: 1px;
+}
 </style>
 </head>
 <body>
@@ -190,6 +239,20 @@ h1 {
       </div>
     </div>
     <a class="open-btn" href="./index-b.html" target="_blank">B案を全部見る →</a>
+  </div>
+
+  <!-- C案 -->
+  <div class="card card-c">
+    <div class="card-label">C 案</div>
+    <div class="preview-c">
+      <div class="pc-text">
+        <div class="pc-sub">あなたの本質を、やさしくひもときます。</div>
+        <div class="pc-main">自分を、好きになる<br><span class="soft">旅へ。</span></div>
+        <div class="pc-brand">🦢 ライトワークSWAN</div>
+        <span class="pc-btn">鑑定のお申し込み ▸</span>
+      </div>
+    </div>
+    <a class="open-btn" href="./index-c.html" target="_blank">C案を全部見る →</a>
   </div>
 
 </div>
