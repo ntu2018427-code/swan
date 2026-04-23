@@ -129,20 +129,11 @@ nav, section, footer { position: relative; z-index: 1; }
   overflow: hidden;
 }
 
-/* 星空背景（CSS グラデーション） */
+/* 星空背景（水彩画像） */
 .hero-photo-bg {
   position: absolute; inset: 0;
   background:
-    /* 星雲パープル */
-    radial-gradient(ellipse 70% 55% at 65% 55%, rgba(100,80,180,0.28) 0%, transparent 60%),
-    /* 星雲ピンク */
-    radial-gradient(ellipse 45% 35% at 78% 38%, rgba(160,100,170,0.18) 0%, transparent 50%),
-    /* 星雲ブルー */
-    radial-gradient(ellipse 55% 40% at 50% 70%, rgba(60,90,180,0.22) 0%, transparent 55%),
-    /* ゴールドの光条 */
-    radial-gradient(ellipse 80% 30% at 60% 55%, rgba(200,160,60,0.10) 0%, transparent 65%),
-    /* 夜空ベース */
-    linear-gradient(165deg, #1e2550 0%, #2a2070 28%, #1a1845 55%, #2a2555 80%, #1e2248 100%);
+    url('./assets/star-bg.jpeg') center center / cover no-repeat;
 }
 
 /* 左〜下グラデーション帯（テキスト読みやすく） */
@@ -197,10 +188,7 @@ nav, section, footer { position: relative; z-index: 1; }
 @media(max-width:680px){
   .hero-photo-bg {
     background:
-      radial-gradient(ellipse 80% 50% at 70% 40%, rgba(100,80,180,0.30) 0%, transparent 65%),
-      radial-gradient(ellipse 50% 40% at 82% 28%, rgba(160,100,170,0.20) 0%, transparent 55%),
-      radial-gradient(ellipse 60% 50% at 50% 75%, rgba(60,90,180,0.22) 0%, transparent 60%),
-      linear-gradient(180deg, #1e2550 0%, #2a2070 40%, #1a1845 100%);
+      url('./assets/star-bg.jpeg') center center / cover no-repeat;
   }
   .hero-overlay {
     background: linear-gradient(to top,
@@ -390,11 +378,7 @@ nav, section, footer { position: relative; z-index: 1; }
 }
 .cta-bg {
   position: absolute; inset: 0;
-  background:
-    radial-gradient(ellipse 70% 60% at 55% 55%, rgba(100,80,180,0.35) 0%, transparent 65%),
-    radial-gradient(ellipse 50% 40% at 80% 30%, rgba(160,100,180,0.22) 0%, transparent 55%),
-    radial-gradient(ellipse 60% 50% at 30% 70%, rgba(60,80,180,0.20) 0%, transparent 60%),
-    linear-gradient(160deg, #1e2550 0%, #2a2070 35%, #1a1845 70%, #22204a 100%);
+  background: url('./assets/star-bg.jpeg') center center / cover no-repeat;
 }
 .cta-overlay {
   position: absolute; inset: 0;
